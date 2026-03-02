@@ -1,64 +1,164 @@
 [build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
-name = "py_template"
-description = "Template Python repository"
-dynamic = ["version"]
-readme = { file = "README.rst", content-type = "text/x-rst" }
-license = { file = "LICENSE.rst", content-type = "text/plain" }
+name = "isoc"
+version = "1.0.0"
+description = "Download and easily manipulate isochrones from Padova and Mist databases"
+readme = "README.md"
+license = {text = "MIT"}
 authors = [
-  { name = "Jeff Jennings", email = "jjennings@flatironinstitute.org" },
+    {name = "xx"}
+]
+maintainers = [
+    {name = "xx"}
+]
+keywords = [
+    "astronomy",
+    "astrophysics",
+    "isochrones",
+    "stellar evolution",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Astronomy",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Typing :: Typed",
 ]
 requires-python = ">=3.10"
-dependencies = ["numpy>=1.24"]
+dependencies = [
+    "numpy>=2.0.0",
+    "astropy>=7.0.0",
+    "matplotlib>=3.3.0",
+    "scipy>=1.7.0",
+    "requests>=2.26.0",
+    "pyyaml>=6.0",
+]
 
 [project.optional-dependencies]
-test = [
-    "pytest",
-    "coverage",
-    "coverage-badge",
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=3.0.0",
+    "jupyter>=1.0.0",
+    "notebook>=6.4.0",
+    "ipykernel>=6.0.0",
+    "black>=22.0.0",
+    "ruff>=0.1.0",
 ]
-docs = [
-    "sphinx",
-    "sphinx-automodapi",
-    "sphinx_rtd_theme",
-    "sphinxcontrib-fulltoc",
-    "nbsphinx",
-    "jupyter_client",
-    "ipykernel",
+all = [
+    "isoc[dev]",
 ]
-coding_standards = [
-    "ruff",
-]
-type_checking = [
-    "mypy",
-]
-dev = ["py_template[test, docs, coding_standards]"]
 
-[tool.setuptools]
-zip-safe = false
-include-package-data = true
+[project.urls]
+Homepage = "https://github.com/CCA-Software-Group/isoc"
+Documentation = "https://github.com/CCA-Software-Group/isoc#readme"
+Repository = "https://github.com/CCA-Software-Group/isoc"
+Issues = "https://github.com/xx/CCA-Software-Group/issues"
 
-[tool.setuptools.packages.find]
+[tool.hatch.build.targets.wheel]
+packages = ["isoc"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/isoc",
+    "/examples",
+    "/README.md",
+    "/LICENSE",
+]
 
 [tool.pytest.ini_options]
-testpaths = [
-  "test",
-  "docs",
+testpaths = ["isoc/tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+addopts = [
+    "-v",
+    "--tb=short",
+    "--strict-markers",
 ]
-
-[tool.mypy]
-exclude = [
-  "docs",
-]
-explicit_package_bases = "True"
 
 [tool.coverage.run]
+source = ["isoc"]
 omit = [
- "py_template/__init*",
- "*/py_template/__init*",
- "test/*",
- "*/test/*",
+    "*/tests/*",
+    "*/__pycache__/*",
 ]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "@abstractmethod",
+]
+
+[tool.black]
+line-length = 100
+target-version = ["py310", "py311", "py312", "py313"]
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.venv
+  | \.eggs
+  | \.tox
+  | build
+  | dist
+  | __pycache__
+)/
+'''
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+]
+ignore = [
+    "E501",  # line too long (handled by black)
+    "B008",
+    "C901",
+]
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401"]
+
+[tool.ruff.isort]
+known-first-party = ["isoc"]
+
+[tool.mypy]
+python_version = "3.13"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+check_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+
+[[tool.mypy.overrides]]
+module = [
+    "scipy.*",
+    "matplotlib.*",
+]
+ignore_missing_imports = true
