@@ -7,14 +7,13 @@
 import datetime
 
 # -- Project information -----------------------------------------------------
-
 # The full version, including alpha/beta/rc tags
-from py_template import __version__
+from isoc import __version__
 
 release = __version__
 
-project = "py_template"
-author = "Jeff Jennings"
+project = "isoc"
+author = "CCA Software Group"
 copyright = f"{datetime.datetime.now().year}, {author}"  # noqa: A001
 
 # -- General configuration ---------------------------------------------------
@@ -35,6 +34,7 @@ extensions = [
     "sphinx_automodapi.automodapi",
     "sphinx_automodapi.smart_resolver",
     "sphinx_rtd_theme",
+    "nbsphinx",
 ]
 
 # Add any paths that contain templates here, relative to this directory.

@@ -9,10 +9,10 @@ description = "Download and easily manipulate isochrones from Padova and Mist da
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
-    {name = "xx"}
+    {name = "CCA Software Group", email = ""}
 ]
 maintainers = [
-    {name = "xx"}
+    {name = "CCA Software Group", email = ""}
 ]
 keywords = [
     "astronomy",
@@ -26,22 +26,26 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Topic :: Scientific/Engineering :: Astronomy",
     "Topic :: Scientific/Engineering :: Physics",
     "Typing :: Typed",
 ]
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dependencies = [
     "numpy>=2.0.0",
     "astropy>=7.0.0",
+    "beautifulsoup4>=4.12.0",
+    "ezpadova",
     "matplotlib>=3.3.0",
     "scipy>=1.7.0",
     "requests>=2.26.0",
     "pyyaml>=6.0",
+    "pydantic>=2.12.0",
+    "pandas>=3.0.0",
 ]
 
 [project.optional-dependencies]
@@ -54,15 +58,21 @@ dev = [
     "black>=22.0.0",
     "ruff>=0.1.0",
 ]
+docs = [
+    "sphinx>=7.0.0",
+    "sphinx-rtd-theme>=1.0.0",
+    "sphinx-automodapi>=0.14.0",
+    "nbsphinx>=0.9.0",
+]
 all = [
-    "isoc[dev]",
+    "isoc[dev,docs]",
 ]
 
 [project.urls]
 Homepage = "https://github.com/CCA-Software-Group/isoc"
 Documentation = "https://github.com/CCA-Software-Group/isoc#readme"
 Repository = "https://github.com/CCA-Software-Group/isoc"
-Issues = "https://github.com/xx/CCA-Software-Group/issues"
+Issues = "https://github.com/CCA-Software-Group/isoc/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["isoc"]
@@ -76,14 +86,18 @@ include = [
 ]
 
 [tool.pytest.ini_options]
-testpaths = ["isoc/tests"]
-python_files = "test_*.py"
+testpaths = ["test"]
+python_files = ["test_*.py", "tests.py"]
 python_classes = "Test*"
 python_functions = "test_*"
 addopts = [
     "-v",
     "--tb=short",
     "--strict-markers",
+]
+filterwarnings = [
+    # ezpadova makes requests to stev.oapd.inaf.it with verify=False; not fixable upstream
+    "ignore::urllib3.exceptions.InsecureRequestWarning",
 ]
 
 [tool.coverage.run]
@@ -106,7 +120,7 @@ exclude_lines = [
 
 [tool.black]
 line-length = 100
-target-version = ["py310", "py311", "py312", "py313"]
+target-version = ["py311", "py312", "py313", "py314"]
 include = '\.pyi?$'
 exclude = '''
 /(
@@ -123,7 +137,7 @@ exclude = '''
 [tool.ruff]
 line-length = 100
 target-version = "py313"
-select = [
+lint.select = [
     "E",   # pycodestyle errors
     "W",   # pycodestyle warnings
     "F",   # pyflakes
@@ -132,16 +146,16 @@ select = [
     "C4",  # flake8-comprehensions
     "UP",  # pyupgrade
 ]
-ignore = [
+lint.ignore = [
     "E501",  # line too long (handled by black)
     "B008",
     "C901",
 ]
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]
 
-[tool.ruff.isort]
+[tool.ruff.lint.isort]
 known-first-party = ["isoc"]
 
 [tool.mypy]
@@ -155,6 +169,7 @@ no_implicit_optional = true
 warn_redundant_casts = true
 warn_unused_ignores = true
 warn_no_return = true
+exclude = ["test/*", "isoc/mist_config.py", ]
 
 [[tool.mypy.overrides]]
 module = [
@@ -162,3 +177,6 @@ module = [
     "matplotlib.*",
 ]
 ignore_missing_imports = true
+
+[tool.uv.sources]
+ezpadova = { git = "https://github.com/mfouesneau/ezpadova.git", branch = "master" }
