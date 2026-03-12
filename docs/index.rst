@@ -1,17 +1,30 @@
 Documentation
 =============
 
-Welcome to the `py_template` docs!
+Welcome to the docs for `isoc`, a Python package for querying and retrieving 
+isochrones from the MIST/MESA and Padova/PARSEC databases (or from local files
+obtained from these databases). It has a simple user interface and relies on 
+`ezpadova <https://github.com/mfouesneau/ezpadova/tree/master>`_ as a backend for 
+queries to the Padova PARSEC database, and a custom backend for queries to the MIST database.
 
-See the 'getting started' guide for steps on how to make your own Python repo using this template and considerations for building your own package. 
+Install `isoc` with *pip*:
+.. code-block:: bash
 
-The API has example entries for the function and class in `example_module.py`.
+    pip install isoc
+
+or *uv*:
+.. code-block:: bash
+
+    uv pip install isoc
+
+See the :doc:`overview tutorial <demo>` for a quick and simple overview of how to use the package.
+Or see the API for more detail. If you have any questions or suggestions, please open an issue.
 
 .. toctree:: 
    :maxdepth: 1
    :caption: Tutorials
 
-    Getting started guide <getting_started>
+    Overview <demo>
 
 .. toctree:: 
    :maxdepth: 1
@@ -19,4 +32,4 @@ The API has example entries for the function and class in `example_module.py`.
 
     API <py_API>
     Index <genindex>
-    GitHub repo <https://github.com/CCA-Software-Group/py_template>
+    GitHub repo <https://github.com/CCA-Software-Group/isoc>
