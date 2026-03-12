@@ -1,14 +1,9 @@
 """
-isoc - Unified package for downloading Mist and Padova isochrones
-
-This package provides a unified object-oriented interface to download stellar
-isochrones from Mist/MESA and Padova/PARSEC websites.
-
-All data is stored as astropy Tables for seamless integration with the
-astronomy ecosystem.
+isoc - Download and process MIST/MESA and Padova/PARSEC isochrones
 """
 
-from .isochrone import Isochrone
+from .isochrone import Isochrone, Photometry
+from .plot import plot_color_magnitude, plot_isochrone
 
 __version__ = "0.1.0"
-__all__ = ["Isochrone"]
+__all__ = ["Isochrone", "Photometry", "plot_isochrone", "plot_color_magnitude"]
