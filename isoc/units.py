@@ -1,30 +1,7 @@
-from typing import Dict, Tuple, Union
-import numpy as np
+
 import astropy.units as u
-from astropy.units import Quantity
 
-# Canonical property names to column names per database
-_COLUMN_ALIASES = {
-    "padova": {
-        "log_Teff": "logTe",
-        "log_L":    "logL",
-        "log_g":    "logg",
-        "mass":     "Mass",
-        "log_age":  "logAge",
-        "metallicity": "MH",
-    },
-    "mist": {
-        "log_Teff": "log_Teff",
-        "log_L":    "log_L",
-        "log_g":    "log_g",
-        "mass":     "star_mass",
-        "log_age":  "log10_isochrone_age_yr",
-        "metallicity": "FeH_value",
-    },
-}
-
-PADOVA_COLUMN_UNITS: Dict[str, u.UnitBase] = {
-    # Fundamental stellar parameters
+PADOVA_COLUMN_UNITS: dict[str, u.UnitBase] = {
     "Zini": u.dimensionless_unscaled,   # initial metal fraction
     "MH": u.dex,                        # [M/H]
     "logAge": u.dex(u.yr),              # log10(age/yr)
@@ -59,12 +36,10 @@ PADOVA_COLUMN_UNITS: Dict[str, u.UnitBase] = {
     "loggLp": u.dex(u.cm / u.s**2),     # log g (alternative)
 }
 
-MIST_COLUMN_UNITS: Dict[str, u.UnitBase] = {
-    # Identifiers / age
+MIST_COLUMN_UNITS: dict[str, u.UnitBase] = {
     "EEP": u.dimensionless_unscaled,                # equivalent evolutionary point
     "log10_isochrone_age_yr": u.dex(u.yr),           # log10(age/yr)
     "phase": u.dimensionless_unscaled,               # evolution phase label
-    # Masses
     "initial_mass": u.Msun,
     "star_mass": u.Msun,
     "star_mdot": u.Msun / u.yr,                      # mass-loss rate
@@ -72,19 +47,17 @@ MIST_COLUMN_UNITS: Dict[str, u.UnitBase] = {
     "c_core_mass": u.Msun,
     "o_core_mass": u.Msun,
     "mass_conv_core": u.Msun,
-    # Luminosities (all log10 of solar)
     "log_L": u.dex(u.Lsun),
     "log_L_div_Ledd": u.dex,
     "log_LH": u.dex(u.Lsun),
     "log_LHe": u.dex(u.Lsun),
     "log_LZ": u.dex(u.Lsun),
     "log_abs_Lgrav": u.dex(u.Lsun),
-    # Temperature / radius / gravity
     "log_Teff": u.dex(u.K),
     "log_R": u.dex(u.Rsun),
     "log_g": u.dex(u.cm / u.s**2),
     "log_surf_cell_z": u.dex,
-    # Rotation
+    # rotation
     "surf_avg_omega": u.rad / u.s,
     "surf_avg_v_rot": u.km / u.s,
     "surf_avg_omega_crit": u.rad / u.s,
@@ -96,12 +69,12 @@ MIST_COLUMN_UNITS: Dict[str, u.UnitBase] = {
     "surf_r_equatorial_div_r": u.dimensionless_unscaled,
     "surf_r_polar_div_r": u.dimensionless_unscaled,
     "total_angular_momentum": u.g * u.cm**2 / u.s,
-    # Gravity darkening
+    # darkening
     "grav_dark_L_polar": u.Lsun,
     "grav_dark_Teff_polar": u.K,
     "grav_dark_L_equatorial": u.Lsun,
     "grav_dark_Teff_equatorial": u.K,
-    # Surface abundances (mass fractions — dimensionless)
+    # surface abundances
     "surf_num_c12_div_num_o16": u.dimensionless_unscaled,
     "surface_h1": u.dimensionless_unscaled,
     "surface_h2": u.dimensionless_unscaled,
@@ -154,13 +127,13 @@ MIST_COLUMN_UNITS: Dict[str, u.UnitBase] = {
     "surface_ca40": u.dimensionless_unscaled,
     "surface_ti48": u.dimensionless_unscaled,
     "surface_fe56": u.dimensionless_unscaled,
-    # Centre thermodynamics
+    # thermodynamics
     "log_center_T": u.dex(u.K),
     "log_center_Rho": u.dex(u.g / u.cm**3),
     "center_degeneracy": u.dimensionless_unscaled,
     "center_omega": u.rad / u.s,
     "center_gamma": u.dimensionless_unscaled,
-    # Central abundances (mass fractions)
+    # abundances
     "center_h1": u.dimensionless_unscaled,
     "center_h2": u.dimensionless_unscaled,
     "center_he3": u.dimensionless_unscaled,
@@ -212,7 +185,7 @@ MIST_COLUMN_UNITS: Dict[str, u.UnitBase] = {
     "center_ca40": u.dimensionless_unscaled,
     "center_ti48": u.dimensionless_unscaled,
     "center_fe56": u.dimensionless_unscaled,
-    # Nuclear burning (log luminosities)
+    # nuclear burning
     "pp": u.dex(u.Lsun),
     "cno": u.dex(u.Lsun),
     "tri_alfa": u.dex(u.Lsun),
@@ -220,13 +193,13 @@ MIST_COLUMN_UNITS: Dict[str, u.UnitBase] = {
     "burn_n": u.dex(u.Lsun),
     "burn_o": u.dex(u.Lsun),
     "c12_c12": u.dex(u.Lsun),
-    # Asteroseismology
+    # asteroseismology
     "apsidal_constant_k2": u.dimensionless_unscaled,
     "delta_nu": u.uHz,
     "delta_Pg": u.s,
     "nu_max": u.uHz,
     "acoustic_cutoff": u.uHz,
-    # Misc / convection
+    # misc and convection
     "max_conv_vel_div_csound": u.dimensionless_unscaled,
     "max_gradT_div_grada": u.dimensionless_unscaled,
     "gradT_excess_alpha": u.dimensionless_unscaled,
@@ -245,7 +218,7 @@ MIST_COLUMN_UNITS: Dict[str, u.UnitBase] = {
 }
 
 
-def _get_column_units(database: str) -> Dict[str, u.UnitBase]:
+def _get_column_units(database: str) -> dict[str, u.UnitBase]:
     """Return the column-units dict for the given database."""
     if database == "padova":
         return PADOVA_COLUMN_UNITS
@@ -254,7 +227,7 @@ def _get_column_units(database: str) -> Dict[str, u.UnitBase]:
     raise ValueError(f"Unknown database {database!r}")
 
 
-def _get_unit(colname: str, column_units: Dict[str, u.UnitBase]) -> u.UnitBase:
+def _get_unit(colname: str, column_units: dict[str, u.UnitBase]) -> u.UnitBase:
     """Return the unit for a given column name.
 
     Known columns get their physical unit; photometric filter columns
@@ -266,12 +239,3 @@ def _get_unit(colname: str, column_units: Dict[str, u.UnitBase]) -> u.UnitBase:
     if colname.endswith("mag"):
         return u.mag
     return u.dimensionless_unscaled
-
-
-def _is_photometry_column(colname: str, column_units: Dict[str, u.UnitBase]) -> bool:
-    """Return True if *colname* is a photometric magnitude column.
-
-    A column is considered photometric if it is not in the known
-    intrinsic-parameter mapping and its name ends with ``"mag"``.
-    """
-    return colname not in column_units and colname.endswith("mag")
