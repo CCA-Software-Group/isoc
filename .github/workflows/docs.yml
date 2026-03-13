@@ -33,6 +33,7 @@ jobs:
         run: |
           sudo apt-get install pandoc
           pip install setuptools --upgrade
+          pip install git+https://github.com/mfouesneau/ezpadova.git
           pip install .[test,docs]
 
       - name: Make docs

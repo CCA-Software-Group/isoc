@@ -12,7 +12,10 @@ jobs:
     
     strategy:
       matrix:
-        python-version: ['3.11', '3.12', '3.13', '3.14']
+        # the tests need to confirm that querying the databases works (as that's the
+        # purpose of the package), but to limit the number of queries, just test on 
+        # a single version
+        python-version: ['3.13']
 
     steps:
     - name: Check out code 
@@ -29,7 +32,8 @@ jobs:
     - name: Install package and dependencies
       run: |
         pip install setuptools --upgrade
-        pip install .[test] 
+        pip install git+https://github.com/mfouesneau/ezpadova.git
+        pip install .[test]
 
     - name: Run unit tests
       run: |
