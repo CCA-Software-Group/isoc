@@ -11,7 +11,7 @@ Install ``isoc`` with *pip*:
 
 .. code-block:: bash
 
-    pip install isoc
+    pip install isoc-astro
 
 See the :doc:`quickstart tutorial <demo>` for a simple overview of how to use the package.
 Or see the API for more detail. If you have any questions or suggestions, please 
