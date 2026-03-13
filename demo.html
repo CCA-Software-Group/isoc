@@ -438,6 +438,7 @@ async function _nbDownload(name) {
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># avoid need to add `print` to all but the last call in a cell
 from IPython.core.interactiveshell import InteractiveShell
+
 InteractiveShell.ast_node_interactivity = &quot;all&quot;
 </pre></div>
 </div>
@@ -1398,7 +1399,7 @@ plot_isochrone(ip, x=&quot;log_Teff&quot;, y=&quot;log_L&quot;, ax=ax,
 ax.set_xlim(4.0, 3.3)
 ax.set_ylim(-4.5, 4.5)
 ax.legend(loc=&#39;lower left&#39;)
-ax.set_title(f&quot;H-R diagram: 1 Gyr, solar metallicity&quot;);
+ax.set_title(&quot;H-R diagram: 1 Gyr, solar metallicity&quot;);
 </pre></div>
 </div>
 </div>
@@ -1490,6 +1491,7 @@ ax.set_title(&quot;Padova — age grid&quot;);
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from isoc.plot import plot_color_magnitude
+
 fig, ax = plot_color_magnitude(ip, band1=&quot;Bmag&quot;, band2=&quot;Vmag&quot;, mag=&quot;Bmag&quot;, marker=&#39;.&#39;, c=&#39;k&#39;, ls=&#39;none&#39;)
 </pre></div>
 </div>
