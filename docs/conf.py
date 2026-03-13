@@ -72,10 +72,7 @@ html_theme_options = {
             "type": "fontawesome",
         },
     ],
-    # Show h2+ headings in the right-sidebar "On This Page" TOC.
-    "secondary_sidebar_items": {
-        "**": ["page-toc"],
-    },
+    "secondary_sidebar_items": [],
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
