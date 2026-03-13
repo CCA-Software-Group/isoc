@@ -1,8 +1,8 @@
 isoc
 ----
 
-[![Tests](https://github.com/CCA-Software-Group/isoc/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/CCA-Software-Group/isoc/actions/workflows/tests.yml)
 <!-- [![Coverage](https://cca-software-group.github.io/isoc/coverage/badge.svg)](https://cca-software-group.github.io/py_template/isoc/index.html) -->
+[![Tests](https://github.com/CCA-Software-Group/isoc/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/CCA-Software-Group/isoc/actions/workflows/tests.yml)
 [![Docs](https://github.com/CCA-Software-Group/isoc/actions/workflows/docs.yml/badge.svg)](https://cca-software-group.github.io/isoc/)
 
 `isoc` is a Python package for querying and retrieving 
