@@ -7,10 +7,12 @@ obtained from these databases). It has a simple user interface and relies on
 `ezpadova <https://github.com/mfouesneau/ezpadova/tree/master>`_ as a backend for 
 queries to the Padova PARSEC database, and a custom backend for queries to the MIST database.
 
-Install ``isoc`` with *pip*:
+Install `isoc` with *pip*, after first installing `ezpadova` (a dependency that is not 
+on PyPI and so must be installed separately):
 
 .. code-block:: bash
 
+    pip install git+https://github.com/mfouesneau/ezpadova.git
     pip install isoc-astro
 
 See the :doc:`quickstart tutorial <demo>` for a simple overview of how to use the package.

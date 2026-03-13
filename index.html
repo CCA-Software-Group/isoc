@@ -346,8 +346,10 @@ isochrones from the MIST/MESA and Padova/PARSEC databases (or from local files
 obtained from these databases). It has a simple user interface and relies on
 <a class="reference external" href="https://github.com/mfouesneau/ezpadova/tree/master">ezpadova</a> as a backend for
 queries to the Padova PARSEC database, and a custom backend for queries to the MIST database.</p>
-<p>Install <code class="docutils literal notranslate"><span class="pre">isoc</span></code> with <em>pip</em>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>isoc-astro
+<p>Install <a class="reference internal" href="py_API.html#module-isoc" title="isoc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isoc</span></code></a> with <em>pip</em>, after first installing <code class="xref py py-obj docutils literal notranslate"><span class="pre">ezpadova</span></code> (a dependency that is not
+on PyPI and so must be installed separately):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/mfouesneau/ezpadova.git
+pip<span class="w"> </span>install<span class="w"> </span>isoc-astro
 </pre></div>
 </div>
 <p>See the <a class="reference internal" href="demo.html"><span class="doc">quickstart tutorial</span></a> for a simple overview of how to use the package.
