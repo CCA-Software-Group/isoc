@@ -36,13 +36,6 @@ isoc.mist_config
    :members:
    :undoc-members:
 
-isoc.padova_config
-------------------
-
-.. automodule:: isoc.padova_config
-   :members:
-   :undoc-members:
-
 isoc.file_io
 ------------------
 

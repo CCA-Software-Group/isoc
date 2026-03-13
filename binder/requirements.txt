@@ -1,0 +1,4 @@
+# ezpadova is not on PyPI; install from source before `pip install .` runs.
+# Binder (repo2docker) installs this file first, so the git version is already
+# present when it processes pyproject.toml.
+git+https://github.com/mfouesneau/ezpadova.git

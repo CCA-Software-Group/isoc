@@ -33,8 +33,8 @@ extensions = [
     "sphinx.ext.mathjax",
     "sphinx_automodapi.automodapi",
     "sphinx_automodapi.smart_resolver",
-    "sphinx_rtd_theme",
     "nbsphinx",
+    "sphinx_thebe",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -45,9 +45,6 @@ templates_path = ["_templates"]
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
-# The suffix(es) of source filenames.
-# You can specify multiple suffix as a list of string:
-source_suffix = ".rst"
 
 # The master toctree document.
 master_doc = "index"
@@ -64,13 +61,29 @@ intersphinx_mapping = {"python": ("https://docs.python.org/", None)}
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = "sphinx_rtd_theme"
+html_theme = "pydata_sphinx_theme"
+
+html_theme_options = {
+    "icon_links": [
+        {
+            "name": "GitHub",
+            "url": "https://github.com/CCA-Software-Group/isoc",
+            "icon": "fa-brands fa-github",
+            "type": "fontawesome",
+        },
+    ],
+    # Show h2+ headings in the right-sidebar "On This Page" TOC.
+    "secondary_sidebar_items": {
+        "**": ["page-toc"],
+    },
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-# html_static_path = ["_static"]
 html_static_path = ["_static"]
+html_css_files = ["custom.css"]
+
 
 # By default, when rendering docstrings for classes, sphinx.ext.autodoc will
 # make docs with the class-level docstring and the class-method docstrings,
@@ -82,3 +95,48 @@ html_static_path = ["_static"]
 autoclass_content = "both"
 
 # -- Other options ----------------------------------------------------------
+
+# -- Thebe (interactive notebooks) ------------------------------------------
+# Connects the "Run interactively" button to Binder via sphinx-thebe.
+thebe_config = {
+    "repository_url": "https://github.com/CCA-Software-Group/isoc",
+    "repository_branch": "main",
+}
+
+# Add icon buttons at the top of every notebook page:
+#   ▶  run interactively via Thebe/Binder
+#   ⬇  download the raw .ipynb file from GitHub
+nbsphinx_prolog = r"""
+.. raw:: html
+
+   <script>
+   async function _nbDownload(name) {
+       const url = 'https://raw.githubusercontent.com/CCA-Software-Group/isoc/main/docs/' + name + '.ipynb';
+       try {
+           const r = await fetch(url);
+           const blob = await r.blob();
+           const a = document.createElement('a');
+           a.href = URL.createObjectURL(blob);
+           a.download = name + '.ipynb';
+           document.body.appendChild(a);
+           a.click();
+           document.body.removeChild(a);
+           URL.revokeObjectURL(a.href);
+       } catch (_) { window.open(url); }
+   }
+   </script>
+   <div class="nb-toolbar">
+     <button class="thebe-launch-button"
+             onclick="initThebe()"
+             title="Run notebook interactively (via Binder)">
+       <i class="fa-solid fa-play" aria-hidden="true"></i>
+       <span>Run interactively</span>
+     </button>
+     <button class="nb-download-link"
+             onclick="_nbDownload('{{ env.docname.split('/')[-1] }}')"
+             title="Download notebook (.ipynb)">
+       <i class="fa-solid fa-download" aria-hidden="true"></i>
+       <span>Download notebook</span>
+     </button>
+   </div>
+"""

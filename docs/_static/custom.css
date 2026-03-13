@@ -1,11 +1,48 @@
-.wy-side-nav-search, .wy-nav-top {
-    background: #0CCF88;
-  }
-
-.wy-menu > .caption > span.caption-text {
-color: #0CCF88;
-}
-
+/* Hide input/output prompt labels ([ ]: / [1]: ) */
 .nbinput .prompt, .nboutput .prompt {
     display: none;
+}
+
+/* Notebook output text: magenta */
+.nboutput .output_area pre,
+.nboutput pre {
+    color: #cc0077;
+}
+
+/* Extra vertical space between a cell's output and the next input cell */
+.nboutput {
+    margin-bottom: 1.5rem;
+}
+
+/* ---------- notebook toolbar (run + download buttons) ---------- */
+.nb-toolbar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.nb-toolbar button,
+.nb-toolbar .nb-download-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 0.25rem;
+    border: 1px solid var(--pst-color-border, #ccc);
+    background: var(--pst-color-surface, #fff);
+    color: var(--pst-color-text-base, #333);
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    transition: background 0.15s, color 0.15s;
+}
+
+.nb-toolbar button:hover,
+.nb-toolbar .nb-download-link:hover {
+    background: var(--pst-color-primary, #0066cc);
+    color: #fff;
+    border-color: var(--pst-color-primary, #0066cc);
+    text-decoration: none;
 }
