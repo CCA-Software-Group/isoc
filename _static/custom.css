@@ -1,5 +1,5 @@
 /* Allow content to fill more of the window (theme default caps at 60em) */
-.bd-article-container {
+.bd-main .bd-content .bd-article-container {
     max-width: 90em;
 }
 
