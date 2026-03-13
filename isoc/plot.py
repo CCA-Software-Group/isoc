@@ -21,6 +21,7 @@ def plot_isochrone(
     iso_labels: Sequence[str] | None = None,
     x: str = "log_Teff",
     y: str = "log_L",
+    fig: Figure | None = None,
     ax: Axes | None = None,
     invert_x: bool = True,
     cmap: str = "viridis",
@@ -39,8 +40,12 @@ def plot_isochrone(
         Property or column names for the horizontal and vertical axes.
         Recognised shortcuts: ``"log_Teff"``, ``"log_L"``, ``"log_g"``,
         ``"mass"``, or any column name in ``iso.data``.
+    fig : matplotlib Figure, optional
+        Existing figure to draw on.  A new axes is added to it when *ax*
+        is ``None``.  Ignored if *ax* is provided.
     ax : matplotlib Axes, optional
-        Existing axes to draw on.  A new figure is created if *None*.
+        Existing axes to draw on.  Takes priority over *fig*.  A new
+        figure is created if both are ``None``.
     invert_x : bool
         If *True* the x-axis is inverted (conventional for T_eff).
     cmap : str
@@ -54,7 +59,7 @@ def plot_isochrone(
     -------
     fig, ax : Figure, Axes
     """
-    fig, ax = _get_fig_ax(ax)
+    fig, ax = _get_fig_ax(fig, ax)
 
     if isinstance(iso, Isochrone):
         isos: Sequence[Isochrone] = [iso]
@@ -92,6 +97,7 @@ def plot_color_magnitude(
     band1: str,
     band2: str,
     mag: str | None = None,
+    fig: Figure | None = None,
     ax: Axes | None = None,
     invert_y: bool = True,
     **kwargs,
@@ -109,8 +115,12 @@ def plot_color_magnitude(
         Band names passed to :meth:`Photometry.get_color`.
     mag : str, optional
         Band name for the y-axis magnitude.  Defaults to *band1*.
+    fig : matplotlib Figure, optional
+        Existing figure to draw on.  A new axes is added to it when *ax*
+        is ``None``.  Ignored if *ax* is provided.
     ax : matplotlib Axes, optional
-        Existing axes to draw on.
+        Existing axes to draw on.  Takes priority over *fig*.  A new
+        figure is created if both are ``None``.
     invert_y : bool
         If *True* the y-axis is inverted (brighter up).
     **kwargs
@@ -120,7 +130,7 @@ def plot_color_magnitude(
     -------
     fig, ax : Figure, Axes
     """
-    fig, ax = _get_fig_ax(ax)
+    fig, ax = _get_fig_ax(fig, ax)
 
     color = iso.photometry.get_color(band1, band2)
     if mag is None:
@@ -144,10 +154,22 @@ def plot_color_magnitude(
 
 
 
-def _get_fig_ax(ax: Axes | None = None) -> tuple[Figure, Axes]:
-    """Return *(fig, ax)*, creating a new figure if *ax* is ``None``."""
+def _get_fig_ax(
+    fig: Figure | None = None,
+    ax: Axes | None = None,
+) -> tuple[Figure, Axes]:
+    """Return *(fig, ax)*.
+
+    Priority: *ax* > *fig* > create new figure.
+
+    * If *ax* is given, return ``(ax.figure, ax)``.
+    * If only *fig* is given, add a new subplot to it.
+    * If neither is given, create a new figure with a single axes.
+    """
     if ax is not None:
         return ax.figure, ax
+    if fig is not None:
+        return fig, fig.add_subplot()
     return plt.subplots()
 
 def _to_array(val) -> np.ndarray:

@@ -761,11 +761,11 @@ class Isochrone:
             if max_age <= 10.3:
                 age_yr = None
                 logage = age
-                print(f"Inferring log10 age scale based on age values {age}.")
+                print(f"Inferred log10 age scale based on age values {age}.")
             else:
                 age_yr = age
                 logage = None
-                print(f"Inferring linear age scale based on age values {age}.")
+                print(f"Inferred linear age scale based on age values {age}.")
 
         kw = dict(
             age_yr=age_yr,
