@@ -72,8 +72,14 @@ html_theme_options = {
             "type": "fontawesome",
         },
     ],
-    "secondary_sidebar_items": [],
+    # Show h2+ headings in the right-sidebar "On This Page" TOC.
+    "secondary_sidebar_items": {
+        "**": ["page-toc"],
+    },
 }
+
+# Remove the left navigation sidebar; use the top navbar instead.
+html_sidebars = {"**": []}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
