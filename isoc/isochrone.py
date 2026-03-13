@@ -463,7 +463,7 @@ class _IsochroneIndex:
 
         elif isinstance(key, str):
             # try exact label match first
-            for _mask, label in groups:
+            for mask, label in groups:
                 if label == key:
                     break
             else:
