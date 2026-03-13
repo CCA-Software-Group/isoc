@@ -7,7 +7,9 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write  # required for Trusted Publishing (OIDC)
 
     steps:
       - name: Check out repo
@@ -16,28 +18,13 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: 3.13
+          python-version: "3.13"
 
-      - name: Display Python version
-        run: python -c "import sys; print(sys.version)"
+      - name: Install build dependencies
+        run: pip install --upgrade pip build
 
-      - name: Install dependencies
-        run: |
-          pip install --upgrade pip
-          pip install setuptools wheel twine
-          pip install pep517 --user
+      - name: Build source distribution and wheel
+        run: python -m build
 
-      - name: Install package
-        run: |
-          pip install git+https://github.com/mfouesneau/ezpadova.git
-          pip install .
-
-      - name: Build binary wheel and source tarball
-        run: |
-          python -m pep517.build --source --binary --out-dir dist/ .
-
-      - name: Publish distribution to PyPI
+      - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          user: __token__
-          password: ${{ secrets.pypi_password }}
