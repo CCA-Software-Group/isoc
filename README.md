@@ -14,6 +14,7 @@ queries to the Padova PARSEC database, and a custom backend for queries to the M
 See the [docs](https://cca-software-group.github.io/isoc/) for a short overview of how to use the package, as well as the
 API. If you have any questions or suggestions, please open an issue.
 
-Install `isoc` with *pip*:
+Install `isoc` with *pip*, after first installing `ezpadova` (a dependency that is not on PyPI and so must be installed separately):
 
+    pip install git+https://github.com/mfouesneau/ezpadova.git
     pip install isoc-astro
