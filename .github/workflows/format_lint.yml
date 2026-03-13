@@ -1,6 +1,6 @@
 name: Coding standards
 on: 
-  push:
+  # push:
   workflow_dispatch:
 
 jobs:
@@ -23,6 +23,7 @@ jobs:
       - name: Install package and dependencies
         run: | 
           pip install setuptools --upgrade
+          pip install git+https://github.com/mfouesneau/ezpadova.git
           pip install .[coding_standards]
 
       - name: Run `ruff` linter / formatter

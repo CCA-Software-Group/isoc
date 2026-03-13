@@ -29,6 +29,7 @@ jobs:
 
       - name: Install package
         run: |
+          pip install git+https://github.com/mfouesneau/ezpadova.git
           pip install .
 
       - name: Build binary wheel and source tarball

@@ -19,7 +19,9 @@ jobs:
           python-version: '3.13'
 
       - name: Install package
-        run: pip install .
+        run: |
+          pip install git+https://github.com/mfouesneau/ezpadova.git
+          pip install .
 
       - name: Update MIST config
         run: python -c "from isoc.mist_config import update_config; update_config()"

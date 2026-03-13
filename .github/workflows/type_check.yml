@@ -22,6 +22,7 @@ jobs:
       - name: Install package and dependencies
         run: | 
           pip install setuptools --upgrade
+          pip install git+https://github.com/mfouesneau/ezpadova.git
           pip install .[type_checking]
 
       - name: Run `mypy` type checker

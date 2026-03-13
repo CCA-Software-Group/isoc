@@ -33,7 +33,7 @@ jobs:
       run: |
         pip install setuptools --upgrade
         pip install git+https://github.com/mfouesneau/ezpadova.git
-        pip install .[test]
+        pip install .[dev]
 
     - name: Run unit tests
       run: |
