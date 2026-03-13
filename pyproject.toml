@@ -9,10 +9,10 @@ description = "Download and easily manipulate isochrones from Padova and Mist da
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
-    {name = "CCA Software Group"}
+    {name = "CCA Software Group", email="jjennings@flatironinstitute.org"}
 ]
 maintainers = [
-    {name = "CCA Software Group"}
+    {name = "CCA Software Group", email="jjennings@flatironinstitute.org"}
 ]
 keywords = [
     "astronomy",
