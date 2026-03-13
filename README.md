@@ -19,6 +19,3 @@ Install `isoc` with *pip*:
 .. code-block:: bash
 
     pip install isoc-astro
-
-See the [docs](https://cca-software-group.github.io/isoc/) for a short overview of how to use the package, as well as the
-API. If you have any questions or suggestions, please open an issue.
