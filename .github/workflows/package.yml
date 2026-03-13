@@ -21,13 +21,16 @@ jobs:
           python-version: "3.13"
 
       - name: Install build dependencies
-        run: pip install --upgrade pip build
+        run: pip install --upgrade pip build twine
 
       - name: Build source distribution and wheel
         run: python -m build
 
+      - name: Check dist metadata
+        run: twine check dist/*
+
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
+          attestations: false
           verbose: true
-          print-hash: true
