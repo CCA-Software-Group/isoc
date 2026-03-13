@@ -1,0 +1,1644 @@
+
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>isoc.isochrone &#8212; isoc 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=517f35c4" />
+    <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=01f34227"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/isoc/isochrone';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">isoc 0.1.0 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../demo.html">
+     Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../py_API.html">
+     API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../genindex.html">
+     Index
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/CCA-Software-Group/isoc">
+     GitHub repo
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/CCA-Software-Group/isoc" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../demo.html">
+     Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../py_API.html">
+     API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../genindex.html">
+     Index
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/CCA-Software-Group/isoc">
+     GitHub repo
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/CCA-Software-Group/isoc" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">isoc.isochrone</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for isoc.isochrone</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Query and process Padova/PARSEC or MIST/MESA isochrone databases to get isochrones</span>
+<span class="sd">and associated photometry as astropy QTable objects with physical units.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Literal</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">ezpadova</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">astropy</span><span class="w"> </span><span class="kn">import</span> <span class="n">units</span> <span class="k">as</span> <span class="n">u</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">astropy.table</span><span class="w"> </span><span class="kn">import</span> <span class="n">QTable</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">validate_call</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">mist</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.file_io</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_isochrone</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.mist_config</span><span class="w"> </span><span class="kn">import</span> <span class="n">configuration</span> <span class="k">as</span> <span class="n">_mist_cfg</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.padova</span><span class="w"> </span><span class="kn">import</span> <span class="n">_get_padova_photometry_columns</span><span class="p">,</span> <span class="n">_get_parsec_json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.units</span><span class="w"> </span><span class="kn">import</span> <span class="n">_get_column_units</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">_COLUMN_ALIASES</span><span class="p">,</span> <span class="n">_clean_header_text</span><span class="p">,</span> <span class="n">_dataframe_to_qtable</span><span class="p">,</span> <span class="n">_DisplayStr</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">_PhotometryTables</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Dict subclass returned by `Photometry.data` that also exposes ``.columns``.</span>
+
+<span class="sd">    Supports both system access (``data[&quot;Roman&quot;]``) and column access</span>
+<span class="sd">    (``data[&quot;Ymag&quot;]``), matching the ``Isochrone.data[&quot;col&quot;]`` pattern.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tables</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">photometry</span><span class="p">:</span> <span class="s2">&quot;Photometry&quot;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">tables</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_photometry</span> <span class="o">=</span> <span class="n">photometry</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="n">tbl</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_photometry</span><span class="o">.</span><span class="n">_resolve_column</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">tbl</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">columns</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Column names per system — ``{system_full_name: [col1, col2, ...], ...}``.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">tbl</span><span class="o">.</span><span class="n">colnames</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">tbl</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+
+<div class="viewcode-block" id="Photometry">
+<a class="viewcode-back" href="../../py_API.html#isoc.Photometry">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Photometry</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for photometric magnitude columns.</span>
+
+<span class="sd">    Photometry data is stored in `~astropy.table.QTable` instances,</span>
+<span class="sd">    one for each photometric system queried.</span>
+
+<span class="sd">    Each band is accessible as a named attribute.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    isochrone : Isochrone</span>
+<span class="sd">        The parent Isochrone instance, used to access metadata.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">isochrone</span><span class="p">:</span> <span class="s2">&quot;Isochrone&quot;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_isochrone</span> <span class="o">=</span> <span class="n">isochrone</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tables</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">QTable</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>  
+        <span class="bp">self</span><span class="o">.</span><span class="n">_systems</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>    
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_PhotometryTables&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Per-system photometry tables.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        _PhotometryTables</span>
+<span class="sd">            ``{system_full_name: QTable, ...}`` — also exposes ``.columns``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_PhotometryTables</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tables</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">systems</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Photometric systems currently loaded.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            ``{short_key: full_name, ...}``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_systems</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">available_systems</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;All photometric systems available for querying.</span>
+
+<span class="sd">        For Padova, systems are parsed from ``ezpadova``&#39;s ``parsec.json``</span>
+<span class="sd">        (the ``photsys_file`` dictionary).  For MIST, systems are parsed</span>
+<span class="sd">        from ``isoc``&#39;s ``mist_config.json`` (the ``output`` dictionary).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            ``{system_value: description, ...}``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_isochrone</span><span class="o">.</span><span class="n">database</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">db</span> <span class="o">==</span> <span class="s2">&quot;mist&quot;</span><span class="p">):</span>
+            <span class="n">pairs</span> <span class="o">=</span> <span class="n">_mist_cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="p">[])</span>
+            <span class="k">return</span> <span class="p">{</span><span class="n">value</span><span class="p">:</span> <span class="n">description</span> <span class="k">for</span> <span class="n">description</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">}</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cfg</span> <span class="o">=</span> <span class="n">_get_parsec_json</span><span class="p">()</span>
+            <span class="n">photsys</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;photsys_file&quot;</span><span class="p">,</span> <span class="p">{})</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">photsys</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">sub_key</span><span class="p">,</span> <span class="n">sub_val</span> <span class="ow">in</span> <span class="n">val</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sub_val</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">sub_val</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+                            <span class="n">desc</span> <span class="o">=</span> <span class="n">sub_val</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sub_val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">sub_val</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                            <span class="n">result</span><span class="p">[</span><span class="n">sub_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">desc</span>
+                        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sub_val</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                            <span class="n">result</span><span class="p">[</span><span class="n">sub_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">sub_val</span>
+                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">desc</span> <span class="o">=</span> <span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="n">result</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">desc</span>
+            <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_system_full_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">short_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the full system name for *short_key*, with spaces replaced by underscores.&quot;&quot;&quot;</span>
+        <span class="n">systems</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">available_systems</span>
+        <span class="n">desc</span> <span class="o">=</span> <span class="n">systems</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">short_key</span><span class="p">,</span> <span class="n">short_key</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">desc</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Photometry.get_color">
+<a class="viewcode-back" href="../../py_API.html#isoc.Photometry.get_color">[docs]</a>
+    <span class="nd">@validate_call</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">band1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">band2</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute a color index by subtracting two magnitude columns.</span>
+
+<span class="sd">        The resulting color column is added to the table that contains</span>
+<span class="sd">        *band1*.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        band1, band2 : str</span>
+<span class="sd">            Names of the two magnitude columns.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        color : `~astropy.units.Quantity`</span>
+<span class="sd">            The ``band1 − band2`` color array.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tbl1</span><span class="p">,</span> <span class="n">col1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_column</span><span class="p">(</span><span class="n">band1</span><span class="p">)</span>
+        <span class="n">tbl2</span><span class="p">,</span> <span class="n">col2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_column</span><span class="p">(</span><span class="n">band2</span><span class="p">)</span>
+        <span class="n">color_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">band1</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">band2</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="k">if</span> <span class="n">color_name</span> <span class="ow">in</span> <span class="n">tbl1</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Color &#39;</span><span class="si">{</span><span class="n">color_name</span><span class="si">}</span><span class="s2">&#39; already exists in photometry data.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">tbl1</span><span class="p">[</span><span class="n">color_name</span><span class="p">]</span>
+
+        <span class="n">color</span> <span class="o">=</span> <span class="n">tbl1</span><span class="p">[</span><span class="n">col1</span><span class="p">]</span> <span class="o">-</span> <span class="n">tbl2</span><span class="p">[</span><span class="n">col2</span><span class="p">]</span>
+        <span class="n">tbl1</span><span class="p">[</span><span class="n">color_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">color</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">color_name</span><span class="si">}</span><span class="s2"> column added to photometry table.&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">color</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">columns</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Column names per system.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            ``{system_full_name: [col1, col2, ...], ...}``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_resolve_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Resolve a band name to ``(QTable, column_name)``.</span>
+
+<span class="sd">        Searches all loaded system tables.  If the name is ambiguous</span>
+<span class="sd">        across systems, raises a ``ValueError``.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple of (QTable, str)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">matches</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">tbl</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tables</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">tbl</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
+                <span class="n">matches</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">tbl</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">matches</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">systems</span> <span class="o">=</span> <span class="p">[</span><span class="n">sn</span> <span class="k">for</span> <span class="n">sn</span><span class="p">,</span> <span class="n">tbl</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tables</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">tbl</span><span class="o">.</span><span class="n">colnames</span><span class="p">]</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Ambiguous band name &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; found in multiple systems: &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">systems</span><span class="si">}</span><span class="s2">. Access it via iso.photometry.data[&#39;</span><span class="si">{</span><span class="n">systems</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;][&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;].&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Band &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; not found in any photometry table. &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Available columns: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="c1"># def __getattr__(self, name: str):</span>
+    <span class="c1">#     if name.startswith(&quot;_&quot;):</span>
+    <span class="c1">#         raise AttributeError(name)</span>
+    <span class="c1">#     if &quot;_tables&quot; in self.__dict__:</span>
+    <span class="c1">#         try:</span>
+    <span class="c1">#             tbl, col = self._resolve_column(name)</span>
+    <span class="c1">#             return tbl[col]</span>
+    <span class="c1">#         except (KeyError, ValueError):</span>
+    <span class="c1">#             pass</span>
+    <span class="c1">#     raise AttributeError(</span>
+    <span class="c1">#         f&quot;&#39;{type(self).__name__}&#39; object has no attribute &#39;{name}&#39;&quot;</span>
+    <span class="c1">#     )</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Access a photometry system by name or a band column by name.</span>
+
+<span class="sd">        If *key* matches a loaded system name, the corresponding</span>
+<span class="sd">        ``~astropy.table.QTable`` is returned, allowing chained access</span>
+<span class="sd">        (e.g. ``iso.photometry[&quot;Euclid_VIS+NISP_(ABmags)&quot;][&quot;Ymag&quot;]``).</span>
+
+<span class="sd">        Otherwise *key* is treated as a band column name and resolved</span>
+<span class="sd">        across all systems.  A ``ValueError`` is raised if the name is</span>
+<span class="sd">        ambiguous (present in more than one system).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tables</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tables</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="n">tbl</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_column</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">tbl</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">n_systems</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tables</span><span class="p">)</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">tbl</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tables</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">tbl</span><span class="o">.</span><span class="n">colnames</span><span class="p">)</span><span class="si">}</span><span class="s2"> bands)&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;Photometry: </span><span class="si">{</span><span class="n">n_systems</span><span class="si">}</span><span class="s2"> system(s): </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">info</span><span class="p">)</span><span class="si">}</span><span class="s2">&gt;&quot;</span>
+
+<div class="viewcode-block" id="Photometry.add_photometry">
+<a class="viewcode-back" href="../../py_API.html#isoc.Photometry.add_photometry">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_photometry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system_names</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Query one or more additional photometric systems and add them.</span>
+
+<span class="sd">        Re-uses the query parameters from the parent :class:`Isochrone`,</span>
+<span class="sd">        changing only the photometric system.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        system_names : str or list[str]</span>
+<span class="sd">            One or more photometric system identifiers (short key or</span>
+<span class="sd">            long description).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">iso</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_isochrone</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="n">iso</span><span class="o">.</span><span class="n">database</span>
+        <span class="n">qp</span> <span class="o">=</span> <span class="n">iso</span><span class="o">.</span><span class="n">query_parameters</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">qp</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Cannot add photometric systems: the parent Isochrone &quot;</span>
+                <span class="s2">&quot;has no stored query parameters (e.g. loaded from file).&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">system_names</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">system_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">system_names</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">system_names</span><span class="p">:</span>
+            <span class="n">resolved</span> <span class="o">=</span> <span class="n">Isochrone</span><span class="o">.</span><span class="n">_resolve_photometry_system</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">db</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">resolved</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot resolve photometric system: </span><span class="si">{</span><span class="n">name</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="n">full_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_system_full_name</span><span class="p">(</span><span class="n">resolved</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">full_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tables</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;System &#39;</span><span class="si">{</span><span class="n">full_name</span><span class="si">}</span><span class="s2">&#39; is already loaded, skipping.&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Querying </span><span class="si">{</span><span class="n">db</span><span class="si">}</span><span class="s2"> for photometric system &#39;</span><span class="si">{</span><span class="n">resolved</span><span class="si">}</span><span class="s2">&#39;...&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">db</span> <span class="o">==</span> <span class="s2">&quot;mist&quot;</span><span class="p">:</span>
+                <span class="n">phot_df</span> <span class="o">=</span> <span class="n">mist</span><span class="o">.</span><span class="n">get_isochrones</span><span class="p">(</span>
+                    <span class="n">age</span><span class="o">=</span><span class="n">qp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;age&quot;</span><span class="p">),</span>
+                    <span class="n">FeH</span><span class="o">=</span><span class="n">qp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;FeH&quot;</span><span class="p">),</span>
+                    <span class="n">alphaFe</span><span class="o">=</span><span class="n">qp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;alphaFe&quot;</span><span class="p">),</span>
+                    <span class="n">v_div_vcrit</span><span class="o">=</span><span class="n">qp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;v_div_vcrit&quot;</span><span class="p">),</span>
+                    <span class="n">output</span><span class="o">=</span><span class="n">resolved</span><span class="p">,</span>
+                    <span class="n">extinction_Av</span><span class="o">=</span><span class="n">qp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;extinction_Av&quot;</span><span class="p">),</span>
+                    <span class="n">version</span><span class="o">=</span><span class="n">qp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;version&quot;</span><span class="p">),</span>
+                    <span class="n">photometry_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="p">)</span>
+
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">phot_df</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="ow">and</span> <span class="n">phot_df</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WARNING: No photometry columns returned for &#39;</span><span class="si">{</span><span class="n">resolved</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+                    <span class="k">continue</span>
+
+                <span class="n">column_units</span> <span class="o">=</span> <span class="n">_get_column_units</span><span class="p">(</span><span class="s2">&quot;mist&quot;</span><span class="p">)</span>
+                <span class="n">phot_qt</span> <span class="o">=</span> <span class="n">_dataframe_to_qtable</span><span class="p">(</span><span class="n">phot_df</span><span class="p">,</span> <span class="n">column_units</span><span class="p">,</span> <span class="n">database</span><span class="o">=</span><span class="s2">&quot;mist&quot;</span><span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">new_result</span> <span class="o">=</span> <span class="n">ezpadova</span><span class="o">.</span><span class="n">get_isochrones</span><span class="p">(</span>
+                    <span class="n">age_yr</span><span class="o">=</span><span class="n">qp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;age_yr&quot;</span><span class="p">),</span>
+                    <span class="n">Z</span><span class="o">=</span><span class="n">qp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Z&quot;</span><span class="p">),</span>
+                    <span class="n">logage</span><span class="o">=</span><span class="n">qp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;logage&quot;</span><span class="p">),</span>
+                    <span class="n">MH</span><span class="o">=</span><span class="n">qp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;MH&quot;</span><span class="p">),</span>
+                    <span class="n">photsys_file</span><span class="o">=</span><span class="n">resolved</span><span class="p">,</span>
+                    <span class="n">return_df</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="p">)</span>
+
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">new_result</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">new_result</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_result</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Query returned an empty file - there may be an &quot;</span>
+                    <span class="s2">&quot;issue with the Padova/PARSEC server.&quot;</span><span class="p">)</span>
+                <span class="n">new_result</span> <span class="o">=</span> <span class="n">ezpadova</span><span class="o">.</span><span class="n">parsec</span><span class="o">.</span><span class="n">parse_result</span><span class="p">(</span><span class="n">new_result</span><span class="p">)</span>
+
+                <span class="n">new_phot_names</span> <span class="o">=</span> <span class="n">_get_padova_photometry_columns</span><span class="p">(</span><span class="n">new_result</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">new_phot_names</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WARNING: No photometry columns returned for &#39;</span><span class="si">{</span><span class="n">resolved</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+                    <span class="k">continue</span>
+
+                <span class="n">column_units</span> <span class="o">=</span> <span class="n">_get_column_units</span><span class="p">(</span><span class="s2">&quot;padova&quot;</span><span class="p">)</span>
+                <span class="n">phot_qt</span> <span class="o">=</span> <span class="n">_dataframe_to_qtable</span><span class="p">(</span>
+                    <span class="n">new_result</span><span class="p">[</span><span class="n">new_phot_names</span><span class="p">],</span> <span class="n">column_units</span><span class="p">,</span> <span class="n">database</span><span class="o">=</span><span class="s2">&quot;padova&quot;</span>
+                <span class="p">)</span>
+
+            <span class="c1"># validate row count against the first existing table</span>
+            <span class="k">for</span> <span class="n">existing_tbl</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tables</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">phot_qt</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">existing_tbl</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;Row count mismatch: existing photometry has &quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">existing_tbl</span><span class="p">)</span><span class="si">}</span><span class="s2"> rows but &#39;</span><span class="si">{</span><span class="n">resolved</span><span class="si">}</span><span class="s2">&#39; returned &quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">phot_qt</span><span class="p">)</span><span class="si">}</span><span class="s2"> rows.&quot;</span>
+                    <span class="p">)</span>
+                <span class="k">break</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_tables</span><span class="p">[</span><span class="n">full_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">phot_qt</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_systems</span><span class="p">[</span><span class="n">resolved</span><span class="p">]</span> <span class="o">=</span> <span class="n">full_name</span>
+
+            <span class="c1"># store per-system comment</span>
+            <span class="n">comment</span> <span class="o">=</span> <span class="n">phot_qt</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;comment&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="n">phot_qt</span><span class="o">.</span><span class="n">meta</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;comment_</span><span class="si">{</span><span class="n">resolved</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">comment</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Added system &#39;</span><span class="si">{</span><span class="n">full_name</span><span class="si">}</span><span class="s2">&#39; with </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">phot_qt</span><span class="o">.</span><span class="n">colnames</span><span class="p">)</span><span class="si">}</span><span class="s2"> columns: &quot;</span>
+                  <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">phot_qt</span><span class="o">.</span><span class="n">colnames</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">header</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Header metadata for each photometric system.&quot;&quot;&quot;</span>
+        <span class="n">sections</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">short_key</span><span class="p">,</span> <span class="n">full_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_systems</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">title</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;PHOTOMETRY.</span><span class="si">{</span><span class="n">short_key</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">tbl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tables</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">full_name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">tbl</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">sections</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+            <span class="n">raw</span> <span class="o">=</span> <span class="n">tbl</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;comment_</span><span class="si">{</span><span class="n">short_key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">raw</span><span class="p">:</span>
+                <span class="n">raw</span> <span class="o">=</span> <span class="n">tbl</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;comment&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">raw</span><span class="p">:</span>
+                <span class="n">sections</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">raw</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">sections</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">sections</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_DisplayStr</span><span class="p">(</span><span class="s2">&quot;No photometry header available.&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_DisplayStr</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sections</span><span class="p">))</span></div>
+
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">_IsochroneIndex</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Indexer returned by ``Isochrone.isochrone``.</span>
+
+<span class="sd">    Supports integer indexing (``iso.isochrone[0]``) and</span>
+<span class="sd">    ``&#39;field=value&#39;`` string indexing (``iso.isochrone[&#39;log_age=9&#39;]``).</span>
+<span class="sd">    Each item returned is a new :class:`Isochrone` containing only the</span>
+<span class="sd">    rows that belong to that individual isochrone.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">isochrone</span><span class="p">:</span> <span class="s2">&quot;Isochrone&quot;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_iso</span> <span class="o">=</span> <span class="n">isochrone</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_to_float_array</span><span class="p">(</span><span class="n">col</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Strip astropy units and return a float64 numpy array.&quot;&quot;&quot;</span>
+        <span class="n">arr</span> <span class="o">=</span> <span class="n">col</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">):</span>
+            <span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">value</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_unique_groups</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return ordered list of ``(mask, label)`` for each unique isochrone.</span>
+
+<span class="sd">        Groups are formed by the unique combinations of log_age and</span>
+<span class="sd">        initial metallicity.  The ``metallicity`` alias is not</span>
+<span class="sd">        used because it resolves to the evolving [Fe/H];</span>
+<span class="sd">        instead initial-metallicity columns are used</span>
+<span class="sd">        (``[Fe/H]_init`` for MIST, ``Z`` / ``MH`` for Padova), which are</span>
+<span class="sd">        constant for all stars on a single isochrone.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">iso</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_iso</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">iso</span><span class="o">.</span><span class="n">_data</span>
+
+        <span class="n">key_cols</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># age (always the primary grouping column)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">key_cols</span><span class="p">[</span><span class="s2">&quot;log_age&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_float_array</span><span class="p">(</span><span class="n">iso</span><span class="o">.</span><span class="n">_resolve_alias</span><span class="p">(</span><span class="s2">&quot;log_age&quot;</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="c1"># initial metallicity — constant per isochrone, unlike</span>
+        <span class="c1"># [Fe/H] (MIST) or Z (Padova) columns.  Preference order:</span>
+        <span class="c1">#   MIST: [Fe/H]_init &gt; [a/Fe]_init</span>
+        <span class="c1">#   Padova: Zini &gt; MH</span>
+        <span class="k">for</span> <span class="n">cand</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;[Fe/H]_init&quot;</span><span class="p">,</span> <span class="s2">&quot;Zini&quot;</span><span class="p">,</span> <span class="s2">&quot;MH&quot;</span><span class="p">,</span> <span class="s2">&quot;[a/Fe]_init&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">cand</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
+                <span class="n">vals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_float_array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">cand</span><span class="p">])</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span> <span class="mi">8</span><span class="p">)))</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">key_cols</span><span class="p">[</span><span class="n">cand</span><span class="p">]</span> <span class="o">=</span> <span class="n">vals</span>
+                <span class="k">break</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">key_cols</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">),</span> <span class="s2">&quot;0&quot;</span><span class="p">)]</span>
+
+        <span class="n">names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">key_cols</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">arrays</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">key_cols</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+        <span class="c1"># collect unique combinations in original row order</span>
+        <span class="n">seen</span><span class="p">:</span> <span class="nb">set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="n">unique_combos</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">arrays</span><span class="p">):</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">row</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+                <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+                <span class="n">unique_combos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">row</span><span class="p">))</span>
+
+        <span class="n">groups</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">combo</span> <span class="ow">in</span> <span class="n">unique_combos</span><span class="p">:</span>
+            <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">arr</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">arrays</span><span class="p">,</span> <span class="n">combo</span><span class="p">):</span>
+                <span class="n">mask</span> <span class="o">&amp;=</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">.6g</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">combo</span><span class="p">))</span>
+            <span class="n">groups</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">mask</span><span class="p">,</span> <span class="n">label</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">groups</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unique_groups</span><span class="p">())</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">mask</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unique_groups</span><span class="p">():</span>
+            <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">_iso</span><span class="o">.</span><span class="n">_subset</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">labels</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Labels for each isochrone, e.g. ``[&#39;log_age=9&#39;, &#39;log_age=9.5&#39;]``.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">label</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unique_groups</span><span class="p">()]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="n">groups</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unique_groups</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">groups</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="o">-</span><span class="n">n</span> <span class="ow">or</span> <span class="n">key</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;isochrone index </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> out of range for </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> isochrone(s)&quot;</span>
+                <span class="p">)</span>
+            <span class="n">mask</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">groups</span><span class="p">[</span><span class="n">key</span> <span class="o">%</span> <span class="n">n</span><span class="p">]</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="c1"># try exact label match first</span>
+            <span class="k">for</span> <span class="n">mask</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
+                    <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">mask</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_field_key</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;isochrone index must be int or str, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">!r}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_iso</span><span class="o">.</span><span class="n">_subset</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_parse_field_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse ``&#39;field=value&#39;`` and return a boolean row mask.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s2">&quot;=&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">key</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Cannot parse isochrone key </span><span class="si">{</span><span class="n">key</span><span class="si">!r}</span><span class="s2">. &quot;</span>
+                <span class="s2">&quot;Expected integer index or &#39;field=value&#39; string.&quot;</span>
+            <span class="p">)</span>
+        <span class="n">field</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">val_str</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)</span>
+        <span class="n">field</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">val_str</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+
+        <span class="n">iso</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_iso</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">col_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_float_array</span><span class="p">(</span><span class="n">iso</span><span class="o">.</span><span class="n">_resolve_alias</span><span class="p">(</span><span class="n">field</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">iso</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
+                <span class="n">col_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_float_array</span><span class="p">(</span><span class="n">iso</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">field</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Unknown field </span><span class="si">{</span><span class="n">field</span><span class="si">!r}</span><span class="s2">. &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;Use a column name from: </span><span class="si">{</span><span class="n">iso</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">colnames</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="p">)</span>
+
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">col_values</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">mask</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;No rows found with </span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s2">. &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Available values: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">col_values</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">mask</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">groups</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unique_groups</span><span class="p">()</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">label</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">]</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;IsochroneIndex: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">groups</span><span class="p">)</span><span class="si">}</span><span class="s2"> isochrone(s): </span><span class="si">{</span><span class="n">labels</span><span class="si">}</span><span class="s2">&gt;&quot;</span>
+
+
+<div class="viewcode-block" id="Isochrone">
+<a class="viewcode-back" href="../../py_API.html#isoc.Isochrone">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Isochrone</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Wrapper that stores isochrone data from either the</span>
+<span class="sd">    PARSEC/Padova or MIST/MESA service as an `~astropy.table.QTable`</span>
+<span class="sd">    with units.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    database : str</span>
+<span class="sd">        Backend that produced the data: ``&quot;padova&quot;`` or ``&quot;mist&quot;``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">database</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;padova&quot;</span><span class="p">,</span> <span class="s2">&quot;mist&quot;</span><span class="p">],</span> <span class="n">data</span><span class="p">:</span> <span class="n">QTable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_database</span> <span class="o">=</span> <span class="n">database</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">data</span> <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">QTable</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_column_units</span> <span class="o">=</span> <span class="n">_get_column_units</span><span class="p">(</span><span class="n">database</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_photometry</span> <span class="o">=</span> <span class="n">Photometry</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_query_parameters</span> <span class="o">=</span> <span class="p">{}</span>
+
+<div class="viewcode-block" id="Isochrone.default_values">
+<a class="viewcode-back" href="../../py_API.html#isoc.Isochrone.default_values">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">default_values</span><span class="p">(</span><span class="n">database</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;padova&quot;</span><span class="p">,</span> <span class="s2">&quot;mist&quot;</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the default query parameters.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            A copy of the default query parameters.</span>
+<span class="sd">            The `aliases` key maps the parameter name expected by the web server to the</span>
+<span class="sd">            generalized arg names in :meth:`from_padova` or :meth:`from_mist`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">database</span> <span class="o">==</span> <span class="s2">&quot;mist&quot;</span><span class="p">:</span>
+            <span class="n">defaults</span> <span class="o">=</span> <span class="n">_mist_cfg</span><span class="p">[</span><span class="s1">&#39;defaults&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;_aliases&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;FeH_value&#39;</span><span class="p">:</span> <span class="s1">&#39;metallicity&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;afe&#39;</span><span class="p">:</span> <span class="s1">&#39;abundance&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;output&#39;</span><span class="p">:</span> <span class="s1">&#39;photometry&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Av_value&#39;</span><span class="p">:</span> <span class="s1">&#39;extinction&#39;</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ezc</span> <span class="o">=</span> <span class="n">ezpadova</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">configuration</span>
+            <span class="n">defaults</span> <span class="o">=</span> <span class="n">ezc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;defaults&#39;</span><span class="p">,</span> <span class="p">{})</span>
+
+            <span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;_aliases&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;age_yr&#39;</span><span class="p">:</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;logage&#39;</span><span class="p">:</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Z&#39;</span><span class="p">:</span> <span class="s1">&#39;metallicity_type&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;MH&#39;</span><span class="p">:</span> <span class="s1">&#39;metallicity_type&#39;</span><span class="p">,</span>
+            <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">defaults</span></div>
+
+
+<div class="viewcode-block" id="Isochrone.parameter_descriptions">
+<a class="viewcode-back" href="../../py_API.html#isoc.Isochrone.parameter_descriptions">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parameter_descriptions</span><span class="p">(</span><span class="n">database</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;padova&quot;</span><span class="p">,</span> <span class="s2">&quot;mist&quot;</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get descriptions for each query parameter.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">database</span> <span class="o">==</span> <span class="s2">&quot;mist&quot;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;See https://mist.science/interp_isos.html and https://www.mist.science/resources.html&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;See https://stev.oapd.inaf.it/cgi-bin/cmd, https://github.com/mfouesneau/ezpadova/blob/master/src/ezpadova/parsec.md and https://stev.oapd.inaf.it/cmd_3.9/help.html&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Isochrone.from_mist">
+<a class="viewcode-back" href="../../py_API.html#isoc.Isochrone.from_mist">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_mist</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">age</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">metallicity</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">abundance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">v_div_vcrit</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">photometry</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">extinction</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">version</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;MIST1&quot;</span><span class="p">,</span> <span class="s2">&quot;MIST2&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">from_file</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Isochrone&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Query the MIST/MESA service and return an :class:`Isochrone`.</span>
+
+<span class="sd">        Any parameters passed as ``None`` will use the MIST defaults </span>
+<span class="sd">        (see `Isochrone.default_values`).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        age : float, tuple of (low, high, step), list or None</span>
+<span class="sd">            Age in years or log10(years). A single float queries one isochrone; a tuple of </span>
+<span class="sd">            length 3 sets a min, max and step size to query over the corresponding age grid, </span>
+<span class="sd">            and a list queries over an age grid.</span>
+<span class="sd">        metallicity : float or None</span>
+<span class="sd">             [Fe/H] metallicity value.</span>
+<span class="sd">        abundance : float or None</span>
+<span class="sd">            [alpha/Fe] abundance ratio.</span>
+<span class="sd">        v_div_vcrit : float or None</span>
+<span class="sd">            Initial rotation velocity v/v_crit.</span>
+<span class="sd">        photometry : str or None</span>
+<span class="sd">            The name of a photometric system to retrieve synthetic photometry for.</span>
+<span class="sd">            If None, MIST output is set to &quot;theory&quot;.</span>
+<span class="sd">        extinction : float or None</span>
+<span class="sd">            Extinction A_V to apply to photometry.  Has no effect if *photometry* is </span>
+<span class="sd">            ``None``.</span>
+<span class="sd">        version : str or None</span>
+<span class="sd">            MIST version to query.</span>
+<span class="sd">        from_file : str or None</span>
+<span class="sd">            If provided, load isochrone data from a file instead of querying the MIST service.</span>
+<span class="sd">        **kwargs</span>
+<span class="sd">            Additional keyword arguments forwarded to the MIST query.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Isochrone</span>
+<span class="sd">            An Isochrone object containing the queried data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># resolve photometry system (short key or long description)</span>
+        <span class="n">photometry</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_resolve_photometry_system</span><span class="p">(</span><span class="n">photometry</span><span class="p">,</span> <span class="s2">&quot;mist&quot;</span><span class="p">)</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">mist</span><span class="o">.</span><span class="n">get_isochrones</span><span class="p">(</span>
+            <span class="n">age</span><span class="o">=</span><span class="n">age</span><span class="p">,</span>
+            <span class="n">FeH</span><span class="o">=</span><span class="n">metallicity</span><span class="p">,</span>
+            <span class="n">alphaFe</span><span class="o">=</span><span class="n">abundance</span><span class="p">,</span>
+            <span class="n">v_div_vcrit</span><span class="o">=</span><span class="n">v_div_vcrit</span><span class="p">,</span>
+            <span class="n">output</span><span class="o">=</span><span class="n">photometry</span><span class="p">,</span>
+            <span class="n">extinction_Av</span><span class="o">=</span><span class="n">extinction</span><span class="p">,</span>
+            <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span>
+            <span class="n">from_file</span><span class="o">=</span><span class="n">from_file</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># get_isochrones returns either a tuple (theory_df, phot_df, phot_cols)</span>
+        <span class="c1"># when the server sent a multi-file zip, or a single DataFrame.</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">theory_df</span><span class="p">,</span> <span class="n">phot_df</span><span class="p">,</span> <span class="n">phot_cols</span> <span class="o">=</span> <span class="n">result</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">theory_df</span> <span class="o">=</span> <span class="n">result</span>
+            <span class="n">phot_df</span><span class="p">,</span> <span class="n">phot_cols</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(),</span> <span class="p">[]</span>
+
+        <span class="n">column_units</span> <span class="o">=</span> <span class="n">_get_column_units</span><span class="p">(</span><span class="s2">&quot;mist&quot;</span><span class="p">)</span>
+        <span class="n">theory_qt</span> <span class="o">=</span> <span class="n">_dataframe_to_qtable</span><span class="p">(</span><span class="n">theory_df</span><span class="p">,</span> <span class="n">column_units</span><span class="p">,</span> <span class="n">database</span><span class="o">=</span><span class="s2">&quot;mist&quot;</span><span class="p">)</span>
+        <span class="n">iso</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">theory_qt</span><span class="p">,</span> <span class="n">database</span><span class="o">=</span><span class="s2">&quot;mist&quot;</span><span class="p">)</span>
+
+        <span class="n">iso</span><span class="o">.</span><span class="n">_query_parameters</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="n">age</span><span class="p">,</span>
+            <span class="s2">&quot;FeH&quot;</span><span class="p">:</span> <span class="n">metallicity</span><span class="p">,</span>
+            <span class="s2">&quot;alphaFe&quot;</span><span class="p">:</span> <span class="n">abundance</span><span class="p">,</span>
+            <span class="s2">&quot;v_div_vcrit&quot;</span><span class="p">:</span> <span class="n">v_div_vcrit</span><span class="p">,</span>
+            <span class="s2">&quot;output_option&quot;</span><span class="p">:</span> <span class="s2">&quot;photometry&quot;</span> <span class="k">if</span> <span class="n">photometry</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">&quot;theory&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="n">photometry</span> <span class="k">if</span> <span class="n">photometry</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s2">&quot;extinction_Av&quot;</span><span class="p">:</span> <span class="n">extinction</span><span class="p">,</span>
+            <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">version</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="c1"># put photometry in own table</span>
+        <span class="k">if</span> <span class="n">phot_cols</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">phot_df</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="n">phot_qt</span> <span class="o">=</span> <span class="n">_dataframe_to_qtable</span><span class="p">(</span><span class="n">phot_df</span><span class="p">,</span> <span class="n">column_units</span><span class="p">,</span> <span class="n">database</span><span class="o">=</span><span class="s2">&quot;mist&quot;</span><span class="p">)</span>
+
+            <span class="c1"># record which system these columns belong to</span>
+            <span class="n">system_key</span> <span class="o">=</span> <span class="p">(</span><span class="n">iso</span><span class="o">.</span><span class="n">_query_parameters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;output&quot;</span><span class="p">)</span>
+                          <span class="ow">or</span> <span class="n">phot_df</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;photometry_system&quot;</span><span class="p">)</span>
+                          <span class="ow">or</span> <span class="s2">&quot;unknown&quot;</span><span class="p">)</span>
+            <span class="n">full_name</span> <span class="o">=</span> <span class="n">iso</span><span class="o">.</span><span class="n">_photometry</span><span class="o">.</span><span class="n">_system_full_name</span><span class="p">(</span><span class="n">system_key</span><span class="p">)</span>
+
+            <span class="n">iso</span><span class="o">.</span><span class="n">_photometry</span><span class="o">.</span><span class="n">_tables</span><span class="p">[</span><span class="n">full_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">phot_qt</span>
+            <span class="n">iso</span><span class="o">.</span><span class="n">_photometry</span><span class="o">.</span><span class="n">_systems</span><span class="p">[</span><span class="n">system_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">full_name</span>
+
+            <span class="c1"># store per-system comment in photometry meta</span>
+            <span class="n">comment</span> <span class="o">=</span> <span class="n">phot_qt</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;comment&quot;</span><span class="p">,</span> <span class="n">theory_qt</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;comment&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+            <span class="n">phot_qt</span><span class="o">.</span><span class="n">meta</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;comment_</span><span class="si">{</span><span class="n">system_key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_clean_header_text</span><span class="p">(</span><span class="n">comment</span><span class="p">,</span> <span class="s2">&quot;mist&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">iso</span></div>
+
+
+<div class="viewcode-block" id="Isochrone.from_padova">
+<a class="viewcode-back" href="../../py_API.html#isoc.Isochrone.from_padova">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_padova</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">age</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">metallicity</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">metallicity_type</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span> <span class="s2">&quot;MH&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">photometry</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">from_file</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Isochrone&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Query the Padova/PARSEC service and return an :class:`Isochrone`.</span>
+
+<span class="sd">        Any parameters passed as None will use the Padova/PARSEC defaults </span>
+<span class="sd">        (see `Isochrone.default_values`).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        age : tuple of (low, high, step) or float or None</span>
+<span class="sd">            Age in years or log10(years). A single float queries one isochrone; a tuple of </span>
+<span class="sd">            length 3 sets a min, max and step size to query over the corresponding age grid, </span>
+<span class="sd">            and a list queries over an age grid.</span>
+<span class="sd">        metallicity : tuple of (low, high, step) or float or None</span>
+<span class="sd">            Metallicity value. Interpreted as Z or [M/H] depending on metallicity_type.</span>
+<span class="sd">        metallicity_type : str or None</span>
+<span class="sd">            Whether the metallicity parameter is interpreted as &quot;Z&quot; or &quot;MH&quot; ([M/H]).</span>
+<span class="sd">        photometry : str or None</span>
+<span class="sd">            The name of a photometric system to retrieve synthetic photometry for.</span>
+<span class="sd">        from_file : str or None</span>
+<span class="sd">            If provided, load isochrone data from a file instead of querying the Padova service.</span>
+<span class="sd">        **kwargs</span>
+<span class="sd">            Additional keyword arguments forwarded to the Padova query.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Isochrone</span>
+<span class="sd">            An Isochrone object containing the queried data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">from_file</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;from_file&#39; is not None. Loading isochrone data from file: </span><span class="si">{</span><span class="n">from_file</span><span class="si">}</span><span class="s2"> &quot;</span> \
+                  <span class="s2">&quot;rather than performing a query.&quot;</span><span class="p">)</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">load_isochrone</span><span class="p">(</span><span class="n">from_file</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">ezpadova</span><span class="o">.</span><span class="n">parsec</span><span class="o">.</span><span class="n">parse_result</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_padova_post_processing</span><span class="p">(</span><span class="n">result</span><span class="o">=</span><span class="n">result</span><span class="p">,</span> <span class="n">query_parameters</span><span class="o">=</span><span class="p">{})</span>
+
+        <span class="k">if</span> <span class="n">metallicity</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">metallicity_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">MH</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">ezc</span> <span class="o">=</span> <span class="n">ezpadova</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="s1">&#39;defaults&#39;</span><span class="p">]</span>
+            <span class="n">Z</span> <span class="o">=</span> <span class="p">(</span><span class="n">ezc</span><span class="p">[</span><span class="s1">&#39;isoc_zlow&#39;</span><span class="p">],</span> <span class="n">ezc</span><span class="p">[</span><span class="s1">&#39;isoc_zupp&#39;</span><span class="p">],</span> <span class="n">ezc</span><span class="p">[</span><span class="s1">&#39;isoc_dz&#39;</span><span class="p">])</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Both &#39;metallicity&#39; and &#39;metallicity_type&#39; are None. &quot;</span> \
+            <span class="sa">f</span><span class="s2">&quot;Using default Padova metallicity grid, Z: </span><span class="si">{</span><span class="n">Z</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">metallicity</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">metallicity_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">metallicity</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">metallicity_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;If &#39;metallicity&#39; is specified, &#39;metallicity_type&#39; must &quot;</span> \
+            <span class="s2">&quot;also be specified, and vice versa.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">metallicity</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+                <span class="n">metallicity</span> <span class="o">=</span> <span class="p">(</span><span class="n">metallicity</span><span class="p">,</span> <span class="n">metallicity</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">metallicity_type</span> <span class="o">==</span> <span class="s2">&quot;Z&quot;</span><span class="p">:</span>
+                <span class="n">Z</span> <span class="o">=</span> <span class="n">metallicity</span>
+                <span class="n">MH</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">Z</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="n">MH</span> <span class="o">=</span> <span class="n">metallicity</span>
+
+        <span class="k">if</span> <span class="n">age</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">logage</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">ezc</span> <span class="o">=</span> <span class="n">ezpadova</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="s1">&#39;defaults&#39;</span><span class="p">]</span>
+            <span class="n">age_yr</span> <span class="o">=</span> <span class="p">(</span><span class="n">ezc</span><span class="p">[</span><span class="s1">&#39;isoc_agelow&#39;</span><span class="p">],</span> <span class="n">ezc</span><span class="p">[</span><span class="s1">&#39;isoc_ageupp&#39;</span><span class="p">],</span> <span class="n">ezc</span><span class="p">[</span><span class="s1">&#39;isoc_dage&#39;</span><span class="p">])</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;age&#39; is None. Using default Padova age grid: </span><span class="si">{</span><span class="n">age_yr</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="c1"># infer linear or log scale: log10(14.4 Gyr) = 10.3</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">age</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+                <span class="n">max_age</span> <span class="o">=</span> <span class="n">age</span>
+                <span class="n">age</span> <span class="o">=</span> <span class="p">(</span><span class="n">age</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">age</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+                <span class="n">max_age</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">age</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">max_age</span> <span class="o">&lt;=</span> <span class="mf">10.3</span><span class="p">:</span>
+                <span class="n">age_yr</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="n">logage</span> <span class="o">=</span> <span class="n">age</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Inferred log10 age scale based on age values </span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">age_yr</span> <span class="o">=</span> <span class="n">age</span>
+                <span class="n">logage</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Inferred linear age scale based on age values </span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+        <span class="n">kw</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">age_yr</span><span class="o">=</span><span class="n">age_yr</span><span class="p">,</span>
+            <span class="n">Z</span><span class="o">=</span><span class="n">Z</span><span class="p">,</span>
+            <span class="n">logage</span><span class="o">=</span><span class="n">logage</span><span class="p">,</span>
+            <span class="n">MH</span><span class="o">=</span><span class="n">MH</span><span class="p">,</span>
+            <span class="n">return_df</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">photometry</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&#39;photometry&#39; is None. Using default ezpadova photometric system.&quot;</span><span class="p">)</span> 
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># resolve photometry system (short key or long description)</span>
+            <span class="n">photometry</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_resolve_photometry_system</span><span class="p">(</span><span class="n">photometry</span><span class="p">,</span> <span class="s2">&quot;padova&quot;</span><span class="p">)</span>
+            <span class="n">kw</span><span class="p">[</span><span class="s2">&quot;photsys_file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">photometry</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">ezpadova</span><span class="o">.</span><span class="n">get_isochrones</span><span class="p">(</span><span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">result</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Query returned an empty file - there may be an &quot;</span> \
+            <span class="s2">&quot;issue with the Padova/PARSEC server.&quot;</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">ezpadova</span><span class="o">.</span><span class="n">parsec</span><span class="o">.</span><span class="n">parse_result</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+        <span class="n">query_parameters</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;age_yr&#39;</span><span class="p">:</span> <span class="n">age_yr</span><span class="p">,</span>
+            <span class="s1">&#39;logage&#39;</span><span class="p">:</span> <span class="n">logage</span><span class="p">,</span>
+            <span class="s1">&#39;Z&#39;</span><span class="p">:</span> <span class="n">Z</span><span class="p">,</span>
+            <span class="s1">&#39;MH&#39;</span><span class="p">:</span> <span class="n">MH</span><span class="p">,</span>
+            <span class="s1">&#39;photsys_file&#39;</span><span class="p">:</span> <span class="n">photometry</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;User-supplied query parameters (as seen by ezpadova):</span><span class="se">\n\t</span><span class="si">{</span><span class="n">query_parameters</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">iso</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_padova_post_processing</span><span class="p">(</span><span class="n">result</span><span class="o">=</span><span class="n">result</span><span class="p">,</span> <span class="n">query_parameters</span><span class="o">=</span><span class="n">query_parameters</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;All query parameters (including defaults for those not specified):</span><span class="se">\n\t</span><span class="si">{</span><span class="n">iso</span><span class="o">.</span><span class="n">query_parameters</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">iso</span></div>
+
+
+<div class="viewcode-block" id="Isochrone.query_ezpadova">
+<a class="viewcode-back" href="../../py_API.html#isoc.Isochrone.query_ezpadova">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">query_ezpadova</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">age_yr</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">Z</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">logage</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">MH</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">default_ranges</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Isochrone&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Query the Padova/PARSEC service and return an :class:`Isochrone`.&quot;&quot;&quot;</span>
+
+        <span class="c1"># resolve photometry system (short key or long description)</span>
+        <span class="k">if</span> <span class="s1">&#39;photsys_file&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">and</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;photsys_file&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;photsys_file&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_resolve_photometry_system</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;photsys_file&#39;</span><span class="p">],</span> <span class="s2">&quot;padova&quot;</span><span class="p">)</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">ezpadova</span><span class="o">.</span><span class="n">get_isochrones</span><span class="p">(</span>
+            <span class="n">age_yr</span><span class="o">=</span><span class="n">age_yr</span><span class="p">,</span>
+            <span class="n">Z</span><span class="o">=</span><span class="n">Z</span><span class="p">,</span>
+            <span class="n">logage</span><span class="o">=</span><span class="n">logage</span><span class="p">,</span>
+            <span class="n">MH</span><span class="o">=</span><span class="n">MH</span><span class="p">,</span>
+            <span class="n">default_ranges</span><span class="o">=</span><span class="n">default_ranges</span><span class="p">,</span>
+            <span class="n">return_df</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">result</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Query returned an empty file - there may be an &quot;</span> \
+            <span class="s2">&quot;issue with the Padova/PARSEC server.&quot;</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">ezpadova</span><span class="o">.</span><span class="n">parsec</span><span class="o">.</span><span class="n">parse_result</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+        <span class="n">query_parameters</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;age_yr&#39;</span><span class="p">:</span> <span class="n">age_yr</span><span class="p">,</span>
+            <span class="s1">&#39;logage&#39;</span><span class="p">:</span> <span class="n">logage</span><span class="p">,</span>
+            <span class="s1">&#39;Z&#39;</span><span class="p">:</span> <span class="n">Z</span><span class="p">,</span>
+            <span class="s1">&#39;MH&#39;</span><span class="p">:</span> <span class="n">MH</span><span class="p">,</span>
+            <span class="s1">&#39;photsys_file&#39;</span><span class="p">:</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;photsys_file&#39;</span><span class="p">),</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;User-supplied query parameters (as seen by ezpadova):</span><span class="se">\n\t</span><span class="si">{</span><span class="n">query_parameters</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">iso</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_padova_post_processing</span><span class="p">(</span><span class="n">result</span><span class="o">=</span><span class="n">result</span><span class="p">,</span> <span class="n">query_parameters</span><span class="o">=</span><span class="n">query_parameters</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;All query parameters (including defaults for those not specified by user):</span><span class="se">\n\t</span><span class="si">{</span><span class="n">iso</span><span class="o">.</span><span class="n">query_parameters</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">iso</span></div>
+
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_padova_post_processing</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">query_parameters</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Isochrone&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Post-processing for Padova queries.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        result : pd.DataFrame</span>
+<span class="sd">            The DataFrame returned by ``ezpadova.get_isochrones``.</span>
+<span class="sd">        query_parameters : dict</span>
+<span class="sd">            The resolved query parameters.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Isochrone</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ezc</span> <span class="o">=</span> <span class="n">ezpadova</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="s1">&#39;defaults&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">ezc</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">query_parameters</span><span class="p">:</span>
+                <span class="n">query_parameters</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+
+        <span class="n">column_units</span> <span class="o">=</span> <span class="n">_get_column_units</span><span class="p">(</span><span class="s2">&quot;padova&quot;</span><span class="p">)</span>
+        <span class="n">qt</span> <span class="o">=</span> <span class="n">_dataframe_to_qtable</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">column_units</span><span class="p">,</span> <span class="n">database</span><span class="o">=</span><span class="s2">&quot;padova&quot;</span><span class="p">)</span>
+        <span class="n">iso</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">qt</span><span class="p">,</span> <span class="n">database</span><span class="o">=</span><span class="s2">&quot;padova&quot;</span><span class="p">)</span>
+        <span class="n">iso</span><span class="o">.</span><span class="n">_query_parameters</span> <span class="o">=</span> <span class="n">query_parameters</span>
+        <span class="n">iso</span><span class="o">.</span><span class="n">_split_padova_photometry</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">iso</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_split_padova_photometry</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Move photometry columns from ``_data`` into ``_photometry``.&quot;&quot;&quot;</span>
+        <span class="n">phot_names</span> <span class="o">=</span> <span class="n">_get_padova_photometry_columns</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">colnames</span><span class="p">)</span>
+        <span class="n">phot_table</span> <span class="o">=</span> <span class="n">QTable</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">phot_names</span><span class="p">:</span>
+            <span class="n">phot_table</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">remove_column</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+
+        <span class="c1"># record which system these columns belong to</span>
+        <span class="n">system_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_parameters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;photsys_file&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;unknown&quot;</span>
+        <span class="n">full_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_photometry</span><span class="o">.</span><span class="n">_system_full_name</span><span class="p">(</span><span class="n">system_key</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_photometry</span><span class="o">.</span><span class="n">_tables</span><span class="p">[</span><span class="n">full_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">phot_table</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_photometry</span><span class="o">.</span><span class="n">_systems</span><span class="p">[</span><span class="n">system_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">full_name</span>
+
+        <span class="c1"># store per-system comment in photometry meta</span>
+        <span class="n">comment</span> <span class="o">=</span> <span class="n">_clean_header_text</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;comment&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_database</span><span class="p">)</span>
+        <span class="n">phot_table</span><span class="o">.</span><span class="n">meta</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;comment_</span><span class="si">{</span><span class="n">system_key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">comment</span>
+
+<div class="viewcode-block" id="Isochrone.get_photometry_system_title">
+<a class="viewcode-back" href="../../py_API.html#isoc.Isochrone.get_photometry_system_title">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_photometry_system_title</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Look up the human-readable title for the queried photometric system.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_database</span> <span class="o">==</span> <span class="s2">&quot;mist&quot;</span><span class="p">:</span>
+            <span class="n">system_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_parameters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">system_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_parameters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;photsys_file&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">system_key</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">systems</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_photometry</span><span class="o">.</span><span class="n">available_systems</span>
+        <span class="k">return</span> <span class="n">systems</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">system_key</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
+
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_resolve_photometry_system</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">database</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;padova&quot;</span><span class="p">,</span> <span class="s2">&quot;mist&quot;</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Resolve a photometric system name to the short key expected by the server.</span>
+
+<span class="sd">        *name* may be the short key (e.g. ``&quot;UBVRIplus&quot;`` or ``&quot;ubvrijhk&quot;``)</span>
+<span class="sd">        or the long human-readable description (e.g.</span>
+<span class="sd">        ``&quot;UBVRIJHK (cf. Maiz-Apellaniz 2006 + Bessell 1990)&quot;``).</span>
+<span class="sd">        Returns the short key, or *None* if *name* is *None*.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name : str or None</span>
+<span class="sd">            Photometric system identifier (short or long form).</span>
+<span class="sd">        database : ``&quot;padova&quot;`` or ``&quot;mist&quot;``</span>
+<span class="sd">            Which backend&#39;s system list to search.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str or None</span>
+<span class="sd">            The short key recognised by the server.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If *name* is not recognised.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="c1"># build a temporary Photometry to access available_systems</span>
+        <span class="c1"># without requiring a full Isochrone instance.</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">database</span><span class="o">=</span><span class="n">database</span><span class="p">)</span>
+        <span class="n">systems</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">.</span><span class="n">photometry</span><span class="o">.</span><span class="n">available_systems</span>
+
+        <span class="c1"># direct match on short key (case-sensitive)</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">systems</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">name</span>
+
+        <span class="c1"># match on description (case-insensitive)</span>
+        <span class="n">name_lower</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">desc</span> <span class="ow">in</span> <span class="n">systems</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">desc</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">desc</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="n">name_lower</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">key</span>
+
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Photometric system &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; not recognised for database &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">database</span><span class="si">}</span><span class="s2">&#39;. Use Isochrone.photometry.available_systems &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;to see available systems.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">database</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Backend that produced this data (``&quot;padova&quot;`` or ``&quot;mist&quot;``).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_database</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QTable</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Isochrone data (excluding photometry) as an `~astropy.table.QTable`.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">photometry</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Photometry</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Photometric magnitude columns as a :class:`Photometry` object.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_photometry</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">columns</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;List of column names.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">columns</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">n_isochrones</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Number of isochrones in the data.&quot;&quot;&quot;</span>
+        <span class="n">ages</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_alias</span><span class="p">(</span><span class="s2">&quot;log_age&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">ages</span><span class="p">))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">isochrone</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_IsochroneIndex&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Index individual isochrones within a multi-isochrone table.</span>
+
+<span class="sd">        Supports integer and ``&#39;field=value&#39;`` string keys.  Each item</span>
+<span class="sd">        is a new :class:`Isochrone` containing only the rows for that</span>
+<span class="sd">        individual isochrone.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; iso.isochrone[-1]                    </span>
+<span class="sd">        &gt;&gt;&gt; iso.isochrone[&#39;log_age=9&#39;]          # MIST</span>
+<span class="sd">        &gt;&gt;&gt; iso.isochrone[&#39;logAge=9&#39;]           # Padova</span>
+<span class="sd">        &gt;&gt;&gt; iso.isochrone[&#39;[Fe/H]_init=0.015&#39;]  # MIST: initial metallicity        </span>
+<span class="sd">        &gt;&gt;&gt; iso.isochrone[&#39;Zini=0.015&#39;]         # Padova: initial metallicity</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_IsochroneIndex</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_subset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mask</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Isochrone&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a new Isochrone containing only the rows selected by *mask*.&quot;&quot;&quot;</span>
+        <span class="n">new_iso</span> <span class="o">=</span> <span class="n">Isochrone</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="n">Isochrone</span><span class="p">)</span>
+        <span class="n">new_iso</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+        <span class="n">new_iso</span><span class="o">.</span><span class="n">_database</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_database</span>
+        <span class="n">new_iso</span><span class="o">.</span><span class="n">_query_parameters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_parameters</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">new_iso</span><span class="o">.</span><span class="n">_photometry</span> <span class="o">=</span> <span class="n">Photometry</span><span class="p">(</span><span class="n">new_iso</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">full_name</span><span class="p">,</span> <span class="n">tbl</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_photometry</span><span class="o">.</span><span class="n">_tables</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">new_iso</span><span class="o">.</span><span class="n">_photometry</span><span class="o">.</span><span class="n">_tables</span><span class="p">[</span><span class="n">full_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">tbl</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+        <span class="n">new_iso</span><span class="o">.</span><span class="n">_photometry</span><span class="o">.</span><span class="n">_systems</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_photometry</span><span class="o">.</span><span class="n">_systems</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">new_iso</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">log_Teff</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;log10(Teff [K]) column.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_alias</span><span class="p">(</span><span class="s2">&quot;log_Teff&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">log_L</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;log10(L [L_Sun]) column.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_alias</span><span class="p">(</span><span class="s2">&quot;log_L&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">log_g</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;log10(g [cm s^-2]) column.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_alias</span><span class="p">(</span><span class="s2">&quot;log_g&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">initial_mass</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Stellar mass column [M_Sun].&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_alias</span><span class="p">(</span><span class="s2">&quot;initial_mass&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mass</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Stellar mass column [M_Sun].&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_alias</span><span class="p">(</span><span class="s2">&quot;mass&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">log_age</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;log10(age / [yr]) column.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_alias</span><span class="p">(</span><span class="s2">&quot;log_age&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">initial_metallicity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initial metallicity column.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_alias</span><span class="p">(</span><span class="s2">&quot;initial_metallicity&quot;</span><span class="p">)</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">metallicity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Metallicity column.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_alias</span><span class="p">(</span><span class="s2">&quot;metallicity&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">metallicity_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Whether the metallicity column is ``&quot;Z&quot;``, ``&quot;MH&quot;`` ([M/H]), or ``&quot;FeH&quot;`` ([Fe/H]).&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_database</span> <span class="o">==</span> <span class="s2">&quot;mist&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;FeH&quot;</span>
+
+        <span class="n">qp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_parameters</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">qp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;MH&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s2">&quot;MH&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Z&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">query_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The resolved query parameters used to retrieve this isochrone.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            A copy of the query parameters sent to the webform.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_parameters</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">header</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Header metadata from the original isochrone file/query.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_DisplayStr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;comment&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_resolve_alias</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">generic_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Resolve a generic property name to a data column and return it.</span>
+
+<span class="sd">        Checks the database-specific column alias table first, then</span>
+<span class="sd">        falls back to the config-level ``_aliases`` dict.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        generic_name : str</span>
+<span class="sd">            Generic name like ``&quot;metallicity&quot;``, ``&quot;log_Teff&quot;``, etc.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        astropy QTable Column</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">col_aliases</span> <span class="o">=</span> <span class="n">_COLUMN_ALIASES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_database</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="n">col_name</span> <span class="o">=</span> <span class="n">col_aliases</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">generic_name</span><span class="p">)</span>
+
+        <span class="c1"># 0. dynamic resolution for metallicity</span>
+        <span class="k">if</span> <span class="n">generic_name</span> <span class="o">==</span> <span class="s2">&quot;metallicity&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_database</span> <span class="o">==</span> <span class="s2">&quot;mist&quot;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="s2">&quot;[Fe/H]&quot;</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_database</span> <span class="o">==</span> <span class="s2">&quot;padova&quot;</span><span class="p">:</span>
+                <span class="n">qp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_parameters</span>
+                <span class="k">if</span> <span class="n">qp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;MH&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="s2">&quot;MH&quot;</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="s2">&quot;Z&quot;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">generic_name</span> <span class="o">==</span> <span class="s2">&quot;initial_metallicity&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_database</span> <span class="o">==</span> <span class="s2">&quot;mist&quot;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="s2">&quot;[Fe/H]_init&quot;</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_database</span> <span class="o">==</span> <span class="s2">&quot;padova&quot;</span><span class="p">:</span>
+                <span class="n">qp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_parameters</span>
+                <span class="k">if</span> <span class="n">qp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;MH&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="s2">&quot;MH&quot;</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="s2">&quot;Zini&quot;</span><span class="p">]</span>
+
+        <span class="c1"># 1. check hard-coded column aliases for this database</span>
+        <span class="k">if</span> <span class="n">col_name</span> <span class="ow">and</span> <span class="n">col_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">col_name</span><span class="p">]</span>
+
+        <span class="c1"># 2. fall back to config-level aliases (query param names)</span>
+        <span class="n">aliases</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_parameters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;_aliases&quot;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="n">actual</span> <span class="o">=</span> <span class="n">aliases</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">generic_name</span><span class="p">,</span> <span class="n">generic_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">actual</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">actual</span><span class="p">]</span>
+
+        <span class="c1"># 3. try the generic name directly</span>
+        <span class="k">if</span> <span class="n">generic_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">generic_name</span><span class="p">]</span>
+
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Cannot resolve &#39;</span><span class="si">{</span><span class="n">generic_name</span><span class="si">}</span><span class="s2">&#39; for database &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_database</span><span class="si">}</span><span class="s2">&#39;. Tried column names: &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="p">[</span><span class="n">col_name</span><span class="p">,</span><span class="w"> </span><span class="n">actual</span><span class="p">,</span><span class="w"> </span><span class="n">generic_name</span><span class="p">]</span><span class="si">}</span><span class="s2">. &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Available columns: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">colnames</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+
+    <span class="c1"># def __getattr__(self, name: str):</span>
+    <span class="c1">#     if name.startswith(&quot;_&quot;):</span>
+    <span class="c1">#         raise AttributeError(name)</span>
+    <span class="c1">#     if &quot;_data&quot; in self.__dict__ and name in self._data.colnames:</span>
+    <span class="c1">#         return self._data[name]</span>
+    <span class="c1">#     raise AttributeError(</span>
+    <span class="c1">#         f&quot;&#39;{type(self).__name__}&#39; object has no attribute &#39;{name}&#39;&quot;</span>
+    <span class="c1">#     )</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">nrows</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">)</span>
+        <span class="n">ncols</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">colnames</span><span class="p">)</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Isochrone(database=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_database</span><span class="si">}</span><span class="s2">): </span><span class="si">{</span><span class="n">nrows</span><span class="si">}</span><span class="s2"> rows x </span><span class="si">{</span><span class="n">ncols</span><span class="si">}</span><span class="s2"> columns&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># apply validate_call after the class is fully defined so that</span>
+<span class="c1"># the &quot;Isochrone&quot; forward reference can be resolved.</span>
+<span class="n">Isochrone</span><span class="o">.</span><span class="n">from_mist</span> <span class="o">=</span> <span class="nb">classmethod</span><span class="p">(</span><span class="n">validate_call</span><span class="p">(</span><span class="n">Isochrone</span><span class="o">.</span><span class="n">from_mist</span><span class="o">.</span><span class="vm">__func__</span><span class="p">))</span>
+<span class="n">Isochrone</span><span class="o">.</span><span class="n">from_padova</span> <span class="o">=</span> <span class="nb">classmethod</span><span class="p">(</span><span class="n">validate_call</span><span class="p">(</span><span class="n">Isochrone</span><span class="o">.</span><span class="n">from_padova</span><span class="o">.</span><span class="vm">__func__</span><span class="p">))</span>
+<span class="n">Isochrone</span><span class="o">.</span><span class="n">query_ezpadova</span> <span class="o">=</span> <span class="nb">classmethod</span><span class="p">(</span><span class="n">validate_call</span><span class="p">(</span><span class="n">Isochrone</span><span class="o">.</span><span class="n">query_ezpadova</span><span class="o">.</span><span class="vm">__func__</span><span class="p">))</span>
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, CCA Software Group.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

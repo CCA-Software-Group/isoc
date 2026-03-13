@@ -1,0 +1,1929 @@
+
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Using isoc for isochrone retrieval &#8212; isoc 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css?v=2aa19091" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=517f35c4" />
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=01f34227"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'demo';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API Reference" href="py_API.html" />
+    <link rel="prev" title="Documentation" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">isoc 0.1.0 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+     Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="py_API.html">
+     API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="genindex.html">
+     Index
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/CCA-Software-Group/isoc">
+     GitHub repo
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/CCA-Software-Group/isoc" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+     Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="py_API.html">
+     API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="genindex.html">
+     Index
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/CCA-Software-Group/isoc">
+     GitHub repo
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/CCA-Software-Group/isoc" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"></div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Using <code class="docutils literal notranslate"><span class="pre">isoc</span></code> for isochrone retrieval</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <script>
+async function _nbDownload(name) {
+    const url = 'https://raw.githubusercontent.com/CCA-Software-Group/isoc/main/docs/' + name + '.ipynb';
+    try {
+        const r = await fetch(url);
+        const blob = await r.blob();
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = name + '.ipynb';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(a.href);
+    } catch (_) { window.open(url); }
+}
+</script>
+<div class="nb-toolbar">
+  <button class="thebe-launch-button"
+          onclick="initThebe()"
+          title="Run notebook interactively (via Binder)">
+    <i class="fa-solid fa-play" aria-hidden="true"></i>
+    <span>Run interactively</span>
+  </button>
+  <button class="nb-download-link"
+          onclick="_nbDownload('demo')"
+          title="Download notebook (.ipynb)">
+    <i class="fa-solid fa-download" aria-hidden="true"></i>
+    <span>Download notebook</span>
+  </button>
+</div><section id="Using-isoc-for-isochrone-retrieval">
+<h1>Using <code class="docutils literal notranslate"><span class="pre">isoc</span></code> for isochrone retrieval<a class="headerlink" href="#Using-isoc-for-isochrone-retrieval" title="Link to this heading">#</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">isoc</span></code> queries and processes stellar isochrone data from the <a class="reference external" href="https://stev.oapd.inaf.it/cgi-bin/cmd">Padova/PARSEC</a> and the <a class="reference external" href="https://mist.science/interp_isos.html">MIST/MESA</a> databases. In effect it fills out the relevant webform for you and returns the result not as a text file but as an <code class="docutils literal notranslate"><span class="pre">Isochrone</span></code> object that stores all data in <a class="reference external" href="https://docs.astropy.org/en/stable/table/index.html">astropy tables</a> with physical units. <code class="docutils literal notranslate"><span class="pre">Isochrone</span></code> has two main properties - <code class="docutils literal notranslate"><span class="pre">data</span></code> and
+<code class="docutils literal notranslate"><span class="pre">photometry</span></code> - as well as secondary properties for quick access to data columns such as <code class="docutils literal notranslate"><span class="pre">log_age</span></code>, <code class="docutils literal notranslate"><span class="pre">mass</span></code> and <code class="docutils literal notranslate"><span class="pre">metallicity</span></code>.</p>
+<p>This tutorial is divided into sections:</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#1.-Querying"><span class="std std-ref">Querying</span></a> — getting an <code class="docutils literal notranslate"><span class="pre">Isochrone</span></code></p></li>
+<li><p><a class="reference internal" href="#2.-Data"><span class="std std-ref">Data</span></a> — data tables and useful shorthands in <code class="docutils literal notranslate"><span class="pre">Isochrone</span></code></p></li>
+<li><p><a class="reference internal" href="#3.-Photometry"><span class="std std-ref">Photometry</span></a> — accessing photometric systems in <code class="docutils literal notranslate"><span class="pre">Isochrone</span></code></p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#3.1-Computing-colors"><span class="std std-ref">3.1: Computing colors</span></a></p></li>
+<li><p><a class="reference internal" href="#3.2-Adding-multiple-photometric-systems-to-data"><span class="std std-ref">3.2: Adding multiple photometric systems to a dataset</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#4.-Plotting"><span class="std std-ref">Plotting</span></a> — a few basic examples, including:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#4.1:-Comparing-Padova/PARSEC-and-MIST/MESA-isochrones-on-an-H-R-diagram"><span class="std std-ref">4.1: Comparing Padova/PARSEC and MIST/MESA isochrones on an H-R diagram</span></a></p></li>
+<li><p><a class="reference internal" href="#4.2:-Plotting-over-a-grid-of-ages"><span class="std std-ref">4.2: Plotting over a grid of ages or metallicities</span></a></p></li>
+<li><p><a class="reference internal" href="#4.3:-Color-magnitude-diagram"><span class="std std-ref">4.3: A color-magnitude diagram</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#5.-Parameter-help"><span class="std std-ref">Parameter help</span></a> — for <code class="docutils literal notranslate"><span class="pre">Isochrone.from_mist</span></code> and <code class="docutils literal notranslate"><span class="pre">Isochrone.from_padova</span></code></p></li>
+</ol>
+<section id="1.-Querying">
+<h2>1. Querying<a class="headerlink" href="#1.-Querying" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># avoid need to add `print` to all but the last call in a cell
+from IPython.core.interactiveshell import InteractiveShell
+InteractiveShell.ast_node_interactivity = &quot;all&quot;
+</pre></div>
+</div>
+</div>
+<p>Query the MIST/MESA and Padova/PARSEC databases with <code class="docutils literal notranslate"><span class="pre">Isochrone.from_mist</span></code> and <code class="docutils literal notranslate"><span class="pre">Isochrone.from_padova</span></code>, like this:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from isoc.isochrone import Isochrone
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>im = Isochrone.from_mist(
+    age=1e9,
+    metallicity=0.0,
+    photometry=&quot;JWST NIRCAM&quot;,
+    )
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Inferred linear age scale based on age values 1000000000.0.
+Querying https://mist.science/iso_form.php
+Query parameters sent to the MIST server:
+        version=MIST2
+        v_div_vcrit=vvcrit0.4
+        FeH_value=0.0
+        alpha_value=p0
+        age_type=single
+        age_scale=linear
+        age_value=1000000000.0
+        age_range_low=5
+        age_range_high=10.3
+        age_range_delta=0.05
+        output_option=photometry
+        output=JWST
+        Av_value=0
+Downloading data from https://mist.science/output/MIST_iso_69b35d1f4b060.zip
+Zip archive contains: [&#39;MIST_iso_69b35d1f4b060.iso&#39;, &#39;MIST_iso_69b35d1f4b060.iso.JWST&#39;]
+Parsing theory file: MIST_iso_69b35d1f4b060.iso
+Parsing photometry file: MIST_iso_69b35d1f4b060.iso.JWST
+  Moving theory column &#39;[Fe/H]_init&#39; from photometry file to theory table.
+  Moving theory column &#39;[Fe/H]&#39; from photometry file to theory table.
+Theory file has 172 columns, photometry file has 40 columns, identified 29 photometry-only columns: [&#39;NIRCAM_F070W&#39;, &#39;NIRCAM_F090W&#39;, &#39;NIRCAM_F115W&#39;, &#39;NIRCAM_F140W&#39;, &#39;NIRCAM_F150W&#39;, &#39;NIRCAM_F150W2&#39;, &#39;NIRCAM_F162M&#39;, &#39;NIRCAM_F164N&#39;, &#39;NIRCAM_F182M&#39;, &#39;NIRCAM_F187N&#39;, &#39;NIRCAM_F200W&#39;, &#39;NIRCAM_F210M&#39;, &#39;NIRCAM_F212N&#39;, &#39;NIRCAM_F250M&#39;, &#39;NIRCAM_F277W&#39;, &#39;NIRCAM_F300M&#39;, &#39;NIRCAM_F322W2&#39;, &#39;NIRCAM_F323N&#39;, &#39;NIRCAM_F335M&#39;, &#39;NIRCAM_F356W&#39;, &#39;NIRCAM_F360M&#39;, &#39;NIRCAM_F405N&#39;, &#39;NIRCAM_F410M&#39;, &#39;NIRCAM_F430M&#39;, &#39;NIRCAM_F444W&#39;, &#39;NIRCAM_F460M&#39;, &#39;NIRCAM_F466N&#39;, &#39;NIRCAM_F470W&#39;, &#39;NIRCAM_F480W&#39;]
+</pre></div></div>
+</div>
+<p>Or for Padova/PARSEC:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># age=9 is interpreted as log10(age/yr) = 9
+# Z=0.0207 is solar metallicity
+ip = Isochrone.from_padova(
+    age=9,
+    metallicity=0.0207,
+    metallicity_type=&quot;Z&quot;,
+    photometry=&quot;Euclid VIS+NISP (ABmags)&quot;,
+    )
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Inferred log10 age scale based on age values (9.0, 9.0, 0.0).
+Downloading parsec.json from https://raw.githubusercontent.com/mfouesneau/ezpadova/master/src/ezpadova/parsec.json
+
+
+Querying http://stev.oapd.inaf.it/cgi-bin/cmd...
+Retrieving data...
+Downloading data...http://stev.oapd.inaf.it/tmp/output997402856898.dat
+User-supplied query parameters (as seen by ezpadova):
+        {&#39;age_yr&#39;: None, &#39;logage&#39;: (9.0, 9.0, 0.0), &#39;Z&#39;: (0.0207, 0.0207, 0.0), &#39;MH&#39;: None, &#39;photsys_file&#39;: &#39;euclid_nisp&#39;}
+All query parameters (including defaults for those not specified):
+        {&#39;age_yr&#39;: None, &#39;logage&#39;: (9.0, 9.0, 0.0), &#39;Z&#39;: (0.0207, 0.0207, 0.0), &#39;MH&#39;: None, &#39;photsys_file&#39;: &#39;euclid_nisp&#39;, &#39;cmd_version&#39;: &#39;3.8&#39;, &#39;track_omegai&#39;: &#39;0.00&#39;, &#39;track_parsec&#39;: &#39;parsec_CAF09_v1.2S&#39;, &#39;track_colibri&#39;: &#39;parsec_CAF09_v1.2S_S_LMC_08_web&#39;, &#39;track_postagb&#39;: &#39;no&#39;, &#39;n_inTPC&#39;: &#39;10&#39;, &#39;eta_reimers&#39;: &#39;0.2&#39;, &#39;kind_interp&#39;: &#39;1&#39;, &#39;kind_postagb&#39;: &#39;-1&#39;, &#39;photsys_version&#39;: &#39;YBCnewVega&#39;, &#39;dust_sourceM&#39;: &#39;dpmod60alox40&#39;, &#39;dust_sourceC&#39;: &#39;AMCSIC15&#39;, &#39;kind_mag&#39;: &#39;2&#39;, &#39;kind_dust&#39;: &#39;0&#39;, &#39;extinction_av&#39;: &#39;0.0&#39;, &#39;extinction_coeff&#39;: &#39;constant&#39;, &#39;extinction_curve&#39;: &#39;cardelli&#39;, &#39;kind_LPV&#39;: &#39;3&#39;, &#39;imf_file&#39;: &#39;tab_imf/imf_kroupa_orig.dat&#39;, &#39;isoc_isagelog&#39;: &#39;0&#39;, &#39;isoc_agelow&#39;: &#39;1.0e9&#39;, &#39;isoc_ageupp&#39;: &#39;1.0e10&#39;, &#39;isoc_dage&#39;: &#39;0.0&#39;, &#39;isoc_lagelow&#39;: &#39;6.6&#39;, &#39;isoc_lageupp&#39;: &#39;10.13&#39;, &#39;isoc_dlage&#39;: &#39;0.0&#39;, &#39;isoc_ismetlog&#39;: &#39;0&#39;, &#39;isoc_zlow&#39;: &#39;0.0152&#39;, &#39;isoc_zupp&#39;: &#39;0.03&#39;, &#39;isoc_dz&#39;: &#39;0.0&#39;, &#39;isoc_metlow&#39;: &#39;-2&#39;, &#39;isoc_metupp&#39;: &#39;0.3&#39;, &#39;isoc_dmet&#39;: &#39;0.0&#39;, &#39;output_kind&#39;: &#39;0&#39;, &#39;output_evstage&#39;: &#39;1&#39;, &#39;lf_maginf&#39;: &#39;-15&#39;, &#39;lf_magsup&#39;: &#39;20&#39;, &#39;lf_deltamag&#39;: &#39;0.5&#39;, &#39;sim_mtot&#39;: &#39;1.0e4&#39;, &#39;submit_form&#39;: &#39;Submit&#39;}
+</pre></div></div>
+</div>
+<p>If you prefer the <code class="docutils literal notranslate"><span class="pre">ezpadova.get_isochrones</span></code> <a class="reference external" href="https://github.com/mfouesneau/ezpadova/blob/f39625883e22a619b180c73b290a46a2a137f05e/src/ezpadova/parsec.py#L147">argument style</a>, that works too:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># equivalent to the above call with `from_padova`
+ip_ez = Isochrone.query_ezpadova(
+    logage=(9,9,0),
+    Z=(0.0207,0.0207,0),
+    photsys_file=&quot;euclid_nisp&quot;,
+    )
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Querying http://stev.oapd.inaf.it/cgi-bin/cmd...
+Retrieving data...
+Downloading data...http://stev.oapd.inaf.it/tmp/output505909469517.dat
+User-supplied query parameters (as seen by ezpadova):
+        {&#39;age_yr&#39;: None, &#39;logage&#39;: (9.0, 9.0, 0.0), &#39;Z&#39;: (0.0207, 0.0207, 0.0), &#39;MH&#39;: None, &#39;photsys_file&#39;: &#39;euclid_nisp&#39;}
+All query parameters (including defaults for those not specified by user):
+        {&#39;age_yr&#39;: None, &#39;logage&#39;: (9.0, 9.0, 0.0), &#39;Z&#39;: (0.0207, 0.0207, 0.0), &#39;MH&#39;: None, &#39;photsys_file&#39;: &#39;euclid_nisp&#39;, &#39;cmd_version&#39;: &#39;3.8&#39;, &#39;track_omegai&#39;: &#39;0.00&#39;, &#39;track_parsec&#39;: &#39;parsec_CAF09_v1.2S&#39;, &#39;track_colibri&#39;: &#39;parsec_CAF09_v1.2S_S_LMC_08_web&#39;, &#39;track_postagb&#39;: &#39;no&#39;, &#39;n_inTPC&#39;: &#39;10&#39;, &#39;eta_reimers&#39;: &#39;0.2&#39;, &#39;kind_interp&#39;: &#39;1&#39;, &#39;kind_postagb&#39;: &#39;-1&#39;, &#39;photsys_version&#39;: &#39;YBCnewVega&#39;, &#39;dust_sourceM&#39;: &#39;dpmod60alox40&#39;, &#39;dust_sourceC&#39;: &#39;AMCSIC15&#39;, &#39;kind_mag&#39;: &#39;2&#39;, &#39;kind_dust&#39;: &#39;0&#39;, &#39;extinction_av&#39;: &#39;0.0&#39;, &#39;extinction_coeff&#39;: &#39;constant&#39;, &#39;extinction_curve&#39;: &#39;cardelli&#39;, &#39;kind_LPV&#39;: &#39;3&#39;, &#39;imf_file&#39;: &#39;tab_imf/imf_kroupa_orig.dat&#39;, &#39;isoc_isagelog&#39;: &#39;0&#39;, &#39;isoc_agelow&#39;: &#39;1.0e9&#39;, &#39;isoc_ageupp&#39;: &#39;1.0e10&#39;, &#39;isoc_dage&#39;: &#39;0.0&#39;, &#39;isoc_lagelow&#39;: &#39;6.6&#39;, &#39;isoc_lageupp&#39;: &#39;10.13&#39;, &#39;isoc_dlage&#39;: &#39;0.0&#39;, &#39;isoc_ismetlog&#39;: &#39;0&#39;, &#39;isoc_zlow&#39;: &#39;0.0152&#39;, &#39;isoc_zupp&#39;: &#39;0.03&#39;, &#39;isoc_dz&#39;: &#39;0.0&#39;, &#39;isoc_metlow&#39;: &#39;-2&#39;, &#39;isoc_metupp&#39;: &#39;0.3&#39;, &#39;isoc_dmet&#39;: &#39;0.0&#39;, &#39;output_kind&#39;: &#39;0&#39;, &#39;output_evstage&#39;: &#39;1&#39;, &#39;lf_maginf&#39;: &#39;-15&#39;, &#39;lf_magsup&#39;: &#39;20&#39;, &#39;lf_deltamag&#39;: &#39;0.5&#39;, &#39;sim_mtot&#39;: &#39;1.0e4&#39;, &#39;submit_form&#39;: &#39;Submit&#39;}
+</pre></div></div>
+</div>
+<p>Or instead of querying, you can load a local isochrone file:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># load a mist file from a query over a grid of ages, including photometry
+im_local = Isochrone.from_mist(from_file=&quot;data_files/mist_multiple.zip&quot;)
+
+print(&quot;\n&quot;)
+
+# load a padova file for a single isochrone, including photometry
+ip_local = Isochrone.from_padova(from_file=&quot;data_files/padova_single.dat&quot;)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;from_file&#39; is not None. Loading isochrone data from file: data_files/mist_multiple.zip rather than performing a query.
+Zip archive contains: [&#39;MIST_iso_69b030f63c54a.iso&#39;, &#39;MIST_iso_69b030f63c54a.iso.SDSSugriz&#39;]
+Parsing theory file: MIST_iso_69b030f63c54a.iso
+Parsing photometry file: MIST_iso_69b030f63c54a.iso.SDSSugriz
+  Moving theory column &#39;[Fe/H]_init&#39; from photometry file to theory table.
+  Moving theory column &#39;[Fe/H]&#39; from photometry file to theory table.
+Theory file has 172 columns, photometry file has 16 columns, identified 5 photometry-only columns: [&#39;SDSS_u&#39;, &#39;SDSS_g&#39;, &#39;SDSS_r&#39;, &#39;SDSS_i&#39;, &#39;SDSS_z&#39;]
+
+
+&#39;from_file&#39; is not None. Loading isochrone data from file: data_files/padova_single.dat rather than performing a query.
+</pre></div></div>
+</div>
+</section>
+<section id="2.-Data">
+<h2>2. Data<a class="headerlink" href="#2.-Data" title="Link to this heading">#</a></h2>
+<p>The data in <code class="docutils literal notranslate"><span class="pre">Isochrone</span></code> is stored in astropy tables with physical units. All non-photometric data is in <code class="docutils literal notranslate"><span class="pre">Isochrone.data</span></code>. For the Padova/PARSEC isochrone queried above, we can get an overview of the data at multiple levels:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ip
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Isochrone(database=padova): 533 rows x 27 columns
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ip.columns
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;TableColumns names=(&#39;Zini&#39;,&#39;MH&#39;,&#39;logAge&#39;,&#39;Mini&#39;,&#39;int_IMF&#39;,&#39;Mass&#39;,&#39;logL&#39;,&#39;logTe&#39;,&#39;logg&#39;,&#39;label&#39;,&#39;McoreTP&#39;,&#39;C_O&#39;,&#39;period0&#39;,&#39;period1&#39;,&#39;period2&#39;,&#39;period3&#39;,&#39;period4&#39;,&#39;pmode&#39;,&#39;Mloss&#39;,&#39;tau1m&#39;,&#39;X&#39;,&#39;Y&#39;,&#39;Xc&#39;,&#39;Xn&#39;,&#39;Xo&#39;,&#39;Cexcess&#39;,&#39;Z&#39;)&gt;
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ip.data
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div><i>QTable length=533</i>
+<table id="table4446841904" class="table-striped table-bordered table-condensed">
+<thead><tr><th>Zini</th><th>MH</th><th>logAge</th><th>Mini</th><th>int_IMF</th><th>Mass</th><th>logL</th><th>logTe</th><th>logg</th><th>label</th><th>McoreTP</th><th>C_O</th><th>period0</th><th>period1</th><th>period2</th><th>period3</th><th>period4</th><th>pmode</th><th>Mloss</th><th>tau1m</th><th>X</th><th>Y</th><th>Xc</th><th>Xn</th><th>Xo</th><th>Cexcess</th><th>Z</th></tr></thead>
+<thead><tr><th></th><th>dex</th><th>dex(yr)</th><th>solMass</th><th></th><th>solMass</th><th>dex(solLum)</th><th>dex(K)</th><th>dex(cm / s2)</th><th></th><th>solMass</th><th></th><th>d</th><th>d</th><th>d</th><th>d</th><th>d</th><th></th><th>solMass / yr</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr></thead>
+<thead><tr><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th></tr></thead>
+<tr><td>0.0207</td><td>0.15867</td><td>9.0</td><td>0.0908484459</td><td>1.0897678296</td><td>0.091</td><td>-3.376</td><td>3.3592</td><td>5.161</td><td>0.0</td><td>0.0</td><td>0.545</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>-1.0</td><td>-4.66e-17</td><td>0.0</td><td>0.6935</td><td>0.2856</td><td>0.003749</td><td>0.001011</td><td>0.009172</td><td>-1.0</td><td>0.02085</td></tr>
+<tr><td>0.0207</td><td>0.15867</td><td>9.0</td><td>0.1008355916</td><td>1.1780487038</td><td>0.101</td><td>-3.231</td><td>3.3795</td><td>5.143</td><td>0.0</td><td>0.0</td><td>0.545</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>-1.0</td><td>-6.29e-17</td><td>0.0</td><td>0.6935</td><td>0.2857</td><td>0.003749</td><td>0.001011</td><td>0.009172</td><td>-1.0</td><td>0.02085</td></tr>
+<tr><td>0.0207</td><td>0.15867</td><td>9.0</td><td>0.1086777225</td><td>1.2397594949</td><td>0.109</td><td>-3.146</td><td>3.3911</td><td>5.136</td><td>0.0</td><td>0.0</td><td>0.545</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>-1.0</td><td>-7.42e-17</td><td>0.0</td><td>0.6935</td><td>0.2857</td><td>0.003749</td><td>0.001011</td><td>0.009172</td><td>-1.0</td><td>0.02085</td></tr>
+<tr><td>0.0207</td><td>0.15867</td><td>9.0</td><td>0.113472119</td><td>1.2747051904</td><td>0.113</td><td>-3.092</td><td>3.3982</td><td>5.129</td><td>0.0</td><td>0.0</td><td>0.545</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>-1.0</td><td>-8.27e-17</td><td>0.0</td><td>0.6935</td><td>0.2857</td><td>0.003749</td><td>0.001011</td><td>0.009172</td><td>-1.0</td><td>0.02085</td></tr>
+<tr><td>0.0207</td><td>0.15867</td><td>9.0</td><td>0.1183084249</td><td>1.3080637026</td><td>0.118</td><td>-3.036</td><td>3.4053</td><td>5.119</td><td>0.0</td><td>0.0</td><td>0.545</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>-1.0</td><td>-9.31e-17</td><td>0.0</td><td>0.6935</td><td>0.2857</td><td>0.003749</td><td>0.001011</td><td>0.009172</td><td>-1.0</td><td>0.02085</td></tr>
+<tr><td>0.0207</td><td>0.15867</td><td>9.0</td><td>0.1208098754</td><td>1.3246297029</td><td>0.121</td><td>-3.008</td><td>3.4088</td><td>5.115</td><td>0.0</td><td>0.0</td><td>0.545</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>-1.0</td><td>-9.86e-17</td><td>0.0</td><td>0.6934</td><td>0.2857</td><td>0.003749</td><td>0.001011</td><td>0.009172</td><td>-1.0</td><td>0.02085</td></tr>
+<tr><td>0.0207</td><td>0.15867</td><td>9.0</td><td>0.1407841742</td><td>1.4426669988</td><td>0.141</td><td>-2.826</td><td>3.43</td><td>5.084</td><td>0.0</td><td>0.0</td><td>0.545</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>-1.0</td><td>-1.44e-16</td><td>0.0</td><td>0.6934</td><td>0.2858</td><td>0.003749</td><td>0.001011</td><td>0.009172</td><td>-1.0</td><td>0.02085</td></tr>
+<tr><td>0.0207</td><td>0.15867</td><td>9.0</td><td>0.1423892677</td><td>1.4511987412</td><td>0.142</td><td>-2.814</td><td>3.4312</td><td>5.082</td><td>0.0</td><td>0.0</td><td>0.545</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>-1.0</td><td>-1.48e-16</td><td>0.0</td><td>0.6934</td><td>0.2858</td><td>0.003749</td><td>0.001011</td><td>0.009172</td><td>-1.0</td><td>0.02085</td></tr>
+<tr><td>0.0207</td><td>0.15867</td><td>9.0</td><td>0.1460757852</td><td>1.4703293683</td><td>0.146</td><td>-2.787</td><td>3.434</td><td>5.077</td><td>0.0</td><td>0.0</td><td>0.545</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>-1.0</td><td>-1.56e-16</td><td>0.0</td><td>0.6934</td><td>0.2858</td><td>0.003749</td><td>0.001011</td><td>0.009172</td><td>-1.0</td><td>0.02085</td></tr>
+<tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+<tr><td>0.0207</td><td>0.15867</td><td>9.0</td><td>2.3635585308</td><td>2.5813058508</td><td>0.78</td><td>3.664</td><td>3.5044</td><td>-0.364</td><td>8.0</td><td>0.655</td><td>0.765</td><td>247.7</td><td>-1.0</td><td>-1.0</td><td>-1.0</td><td>-1.0</td><td>0.0</td><td>-1.52e-06</td><td>0.05</td><td>0.6547</td><td>0.3218</td><td>0.004842</td><td>0.003165</td><td>0.00844</td><td>-1.0</td><td>0.02351</td></tr>
+<tr><td>0.0207</td><td>0.15867</td><td>9.0</td><td>2.3635587692</td><td>2.5813058577</td><td>0.775</td><td>3.708</td><td>3.5104</td><td>-0.387</td><td>8.0</td><td>0.655</td><td>0.765</td><td>244.54</td><td>-1.0</td><td>-1.0</td><td>-1.0</td><td>-1.0</td><td>0.0</td><td>-2.32e-06</td><td>0.09</td><td>0.6547</td><td>0.3218</td><td>0.004844</td><td>0.003165</td><td>0.00844</td><td>-1.0</td><td>0.02351</td></tr>
+<tr><td>0.0207</td><td>0.15867</td><td>9.0</td><td>2.3635594845</td><td>2.5813058784</td><td>0.767</td><td>3.781</td><td>3.5209</td><td>-0.423</td><td>8.0</td><td>0.655</td><td>0.766</td><td>240.45</td><td>-1.0</td><td>-1.0</td><td>-1.0</td><td>-1.0</td><td>0.0</td><td>-4.62e-06</td><td>0.34</td><td>0.6547</td><td>0.3218</td><td>0.004846</td><td>0.003165</td><td>0.00844</td><td>-1.0</td><td>0.02351</td></tr>
+<tr><td>0.0207</td><td>0.15867</td><td>9.0</td><td>2.3635601997</td><td>2.5813058991</td><td>0.759</td><td>3.846</td><td>3.5321</td><td>-0.447</td><td>8.0</td><td>0.655</td><td>0.766</td><td>235.45</td><td>-1.0</td><td>-1.0</td><td>-1.0</td><td>-1.0</td><td>0.0</td><td>-8.49e-06</td><td>0.62</td><td>0.6547</td><td>0.3218</td><td>0.004849</td><td>0.003165</td><td>0.00844</td><td>-1.0</td><td>0.02352</td></tr>
+<tr><td>0.0207</td><td>0.15867</td><td>9.0</td><td>2.363560915</td><td>2.5813059198</td><td>0.748</td><td>3.886</td><td>3.5419</td><td>-0.454</td><td>8.0</td><td>0.655</td><td>0.767</td><td>229.51</td><td>-1.0</td><td>-1.0</td><td>-1.0</td><td>-1.0</td><td>0.0</td><td>-1.25e-05</td><td>0.89</td><td>0.6546</td><td>0.3218</td><td>0.004852</td><td>0.003165</td><td>0.008439</td><td>-1.0</td><td>0.02352</td></tr>
+<tr><td>0.0207</td><td>0.15867</td><td>9.0</td><td>2.3635621071</td><td>2.5813059543</td><td>0.736</td><td>3.902</td><td>3.5501</td><td>-0.445</td><td>8.0</td><td>0.655</td><td>0.767</td><td>222.69</td><td>-1.0</td><td>-1.0</td><td>-1.0</td><td>-1.0</td><td>0.0</td><td>-1.48e-05</td><td>1.07</td><td>0.6546</td><td>0.3218</td><td>0.004856</td><td>0.003165</td><td>0.008439</td><td>-1.0</td><td>0.02353</td></tr>
+<tr><td>0.0207</td><td>0.15867</td><td>9.0</td><td>2.3635630608</td><td>2.5813059819</td><td>0.721</td><td>3.904</td><td>3.5574</td><td>-0.426</td><td>8.0</td><td>0.655</td><td>0.768</td><td>215.02</td><td>-1.0</td><td>-1.0</td><td>-1.0</td><td>-1.0</td><td>0.0</td><td>-1.56e-05</td><td>1.1</td><td>0.6546</td><td>0.3219</td><td>0.004861</td><td>0.003165</td><td>0.008439</td><td>-1.0</td><td>0.02353</td></tr>
+<tr><td>0.0207</td><td>0.15867</td><td>9.0</td><td>2.3635644913</td><td>2.5813060233</td><td>0.706</td><td>3.9</td><td>3.5648</td><td>-0.402</td><td>8.0</td><td>0.655</td><td>0.769</td><td>206.57</td><td>-1.0</td><td>-1.0</td><td>-1.0</td><td>-1.0</td><td>0.0</td><td>-1.56e-05</td><td>1.07</td><td>0.6546</td><td>0.3219</td><td>0.004867</td><td>0.003165</td><td>0.008439</td><td>-1.0</td><td>0.02354</td></tr>
+<tr><td>0.0207</td><td>0.15867</td><td>9.0</td><td>2.363568306</td><td>2.5813061338</td><td>0.655</td><td>-9.999</td><td>4.2037</td><td>2.116</td><td>9.0</td><td>0.656</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>-1.0</td><td>-9.999999999999999e-31</td><td>0.0</td><td>0.6546</td><td>0.3219</td><td>0.004882</td><td>0.003165</td><td>0.008439</td><td>-1.0</td><td>0.02355</td></tr>
+</table></div></div>
+</div>
+<p>Or for the MIST <code class="docutils literal notranslate"><span class="pre">Isochrone</span></code>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>im.data
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div><i>QTable length=1401</i>
+<table id="table4445546800" class="table-striped table-bordered table-condensed">
+<thead><tr><th>EEP</th><th>isochrone_age_yr</th><th>initial_mass</th><th>star_mass</th><th>star_mdot</th><th>he_core_mass</th><th>c_core_mass</th><th>o_core_mass</th><th>log_L</th><th>log_L_div_Ledd</th><th>log_LH</th><th>log_LHe</th><th>log_LZ</th><th>log_Teff</th><th>log_abs_Lgrav</th><th>log_R</th><th>log_g</th><th>log_surf_cell_z</th><th>surf_avg_omega</th><th>surf_avg_v_rot</th><th>surf_num_c12_div_num_o16</th><th>surf_avg_omega_crit</th><th>surf_avg_omega_div_omega_crit</th><th>surf_avg_v_crit</th><th>surf_avg_v_div_v_crit</th><th>surf_avg_Lrad_div_Ledd</th><th>v_div_csound_surf</th><th>surf_r_equatorial_div_r</th><th>surf_r_polar_div_r</th><th>total_angular_momentum</th><th>grav_dark_L_polar</th><th>grav_dark_Teff_polar</th><th>grav_dark_L_equatorial</th><th>grav_dark_Teff_equatorial</th><th>surface_h1</th><th>surface_h2</th><th>surface_he3</th><th>surface_he4</th><th>surface_li7</th><th>surface_be7</th><th>surface_be9</th><th>surface_be10</th><th>surface_b8</th><th>surface_c12</th><th>surface_c13</th><th>surface_n13</th><th>surface_n14</th><th>surface_n15</th><th>surface_o14</th><th>surface_o15</th><th>surface_o16</th><th>surface_o17</th><th>surface_o18</th><th>surface_f17</th><th>surface_f18</th><th>surface_f19</th><th>surface_ne18</th><th>surface_ne19</th><th>surface_ne20</th><th>surface_ne21</th><th>surface_ne22</th><th>surface_na21</th><th>surface_na22</th><th>surface_na23</th><th>surface_na24</th><th>surface_mg23</th><th>surface_mg24</th><th>surface_mg25</th><th>surface_mg26</th><th>surface_al25</th><th>surface_al26</th><th>surface_al27</th><th>surface_si27</th><th>surface_si28</th><th>surface_si29</th><th>surface_si30</th><th>surface_p30</th><th>surface_p31</th><th>surface_s31</th><th>surface_s32</th><th>surface_s33</th><th>surface_s34</th><th>surface_ca40</th><th>surface_ti48</th><th>surface_fe56</th><th>log_center_T</th><th>log_center_Rho</th><th>center_degeneracy</th><th>center_omega</th><th>center_gamma</th><th>mass_conv_core</th><th>center_h1</th><th>center_h2</th><th>center_he3</th><th>center_he4</th><th>center_li7</th><th>center_be7</th><th>center_be9</th><th>center_be10</th><th>center_b8</th><th>center_c12</th><th>center_c13</th><th>center_n13</th><th>center_n14</th><th>center_n15</th><th>center_o14</th><th>center_o15</th><th>center_o16</th><th>center_o17</th><th>center_o18</th><th>center_f17</th><th>center_f18</th><th>center_f19</th><th>center_ne18</th><th>center_ne19</th><th>center_ne20</th><th>center_ne21</th><th>center_ne22</th><th>center_na21</th><th>center_na22</th><th>center_na23</th><th>center_na24</th><th>center_mg23</th><th>center_mg24</th><th>center_mg25</th><th>center_mg26</th><th>center_al25</th><th>center_al26</th><th>center_al27</th><th>center_si27</th><th>center_si28</th><th>center_si29</th><th>center_si30</th><th>center_p30</th><th>center_p31</th><th>center_s31</th><th>center_s32</th><th>center_s33</th><th>center_s34</th><th>center_ca40</th><th>center_ti48</th><th>center_fe56</th><th>pp</th><th>cno</th><th>tri_alfa</th><th>burn_c</th><th>burn_n</th><th>burn_o</th><th>c12_c12</th><th>apsidal_constant_k2</th><th>delta_nu</th><th>delta_Pg</th><th>nu_max</th><th>acoustic_cutoff</th><th>max_conv_vel_div_csound</th><th>max_gradT_div_grada</th><th>gradT_excess_alpha</th><th>min_Pgas_div_P</th><th>max_L_rad_div_Ledd</th><th>e_thermal</th><th>conv_env_top_mass</th><th>conv_env_bot_mass</th><th>conv_env_top_radius</th><th>conv_env_bot_radius</th><th>conv_env_turnover_time_l_t</th><th>conv_env_turnover_time_l_b</th><th>conv_env_turnover_time_g</th><th>envelope_binding_energy</th><th>total_moment_of_inertia</th><th>phase</th><th>[Fe/H]_init</th><th>[Fe/H]</th></tr></thead>
+<thead><tr><th></th><th></th><th>solMass</th><th>solMass</th><th>solMass / yr</th><th>solMass</th><th>solMass</th><th>solMass</th><th>dex(solLum)</th><th>dex</th><th>dex(solLum)</th><th>dex(solLum)</th><th>dex(solLum)</th><th>dex(K)</th><th>dex(solLum)</th><th>dex(solRad)</th><th>dex(cm / s2)</th><th>dex</th><th>rad / s</th><th>km / s</th><th></th><th>rad / s</th><th></th><th>km / s</th><th></th><th></th><th></th><th></th><th></th><th>cm2 g / s</th><th>solLum</th><th>K</th><th>solLum</th><th>K</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th>dex(K)</th><th>dex(g / cm3)</th><th></th><th>rad / s</th><th></th><th>solMass</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th>dex(solLum)</th><th>dex(solLum)</th><th>dex(solLum)</th><th>dex(solLum)</th><th>dex(solLum)</th><th>dex(solLum)</th><th>dex(solLum)</th><th></th><th>uHz</th><th>s</th><th>uHz</th><th>uHz</th><th></th><th></th><th></th><th></th><th></th><th>erg</th><th>solMass</th><th>solMass</th><th>solRad</th><th>solRad</th><th>s</th><th>s</th><th>s</th><th>erg</th><th>cm2 g</th><th></th><th></th><th></th></tr></thead>
+<thead><tr><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th></tr></thead>
+<tr><td>189.0</td><td>9.0</td><td>0.1</td><td>0.099999779678962</td><td>-4.294061613144032e-17</td><td>0.0</td><td>0.0</td><td>0.0</td><td>-3.0639057420333473</td><td>-6.93398619083983</td><td>-3.0687227116564464</td><td>-74.96377136037967</td><td>-98.89141074486867</td><td>3.44867528806306</td><td>-5.023939721593992</td><td>-0.9060446106901656</td><td>5.249977617950291</td><td>-1.7862787350383975</td><td>0.0</td><td>0.0</td><td>0.48595659010177983</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.3349484906378118e-15</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0008631659575125392</td><td>2809.799225771435</td><td>0.0008631659575125392</td><td>2809.799225771435</td><td>0.7131899933251503</td><td>2.5291878196135213e-17</td><td>0.0002322015397185021</td><td>0.2702201418212206</td><td>1.2089833494288701e-18</td><td>5.588612478507706e-28</td><td>1.6776670312978908e-10</td><td>1.0124146946006672e-99</td><td>7.245534304465875e-99</td><td>0.0027836552348062932</td><td>3.118277673410103e-05</td><td>1.0039640024905058e-99</td><td>0.0008215363643255157</td><td>3.0203512429093096e-06</td><td>1.0201734066499735e-99</td><td>1.0203501357865112e-99</td><td>0.007637596420490365</td><td>2.8479411848968505e-06</td><td>1.5314574048978416e-05</td><td>1.020156684883626e-99</td><td>1.938058142874551e-96</td><td>4.060707890594906e-07</td><td>1.008519850865645e-99</td><td>1.0173005592551143e-99</td><td>0.0015959394599979854</td><td>3.825731137495182e-06</td><td>0.00011734932300985198</td><td>1.0216031199605605e-99</td><td>1.0083789314590178e-99</td><td>3.39953430469572e-05</td><td>1.000594015753046e-99</td><td>1.0246827571450015e-99</td><td>0.0005166105714193496</td><td>6.541998614991763e-05</td><td>7.19731028269094e-05</td><td>1.0158169295072354e-99</td><td>1.0096909029646111e-99</td><td>5.90134633069256e-05</td><td>1.0117159597168575e-99</td><td>0.0006656369691291614</td><td>3.3799146091957446e-05</td><td>2.2280548144971945e-05</td><td>1.0180077131218347e-99</td><td>7.95936673408997e-06</td><td>1.0155940799717452e-99</td><td>0.00034181837454956955</td><td>2.698054904496601e-06</td><td>1.5163068562980892e-05</td><td>6.350246378492004e-05</td><td>2.9506717358962757e-06</td><td>0.0012498817453984246</td><td>6.660777418912854</td><td>2.610154707406735</td><td>2.9569976153462254</td><td>0.0</td><td>0.407305311455412</td><td>0.099999779678962</td><td>0.7131899933246856</td><td>1.2149669841594712e-17</td><td>0.00023220154018308793</td><td>0.27022014182122067</td><td>1.2086592814574192e-18</td><td>6.931392163919109e-22</td><td>1.6776670312978903e-10</td><td>1.0124146946006676e-99</td><td>1.0284493028427043e-38</td><td>0.0027836552348062932</td><td>3.118277673410103e-05</td><td>4.156014488333652e-24</td><td>0.0008215363643255157</td><td>3.0203512429093096e-06</td><td>1.953964531437869e-49</td><td>6.642817155797774e-29</td><td>0.007637596420490365</td><td>2.8479411848968514e-06</td><td>1.5314574048978416e-05</td><td>2.0620182397554648e-31</td><td>6.1412539040498955e-33</td><td>4.060707890594906e-07</td><td>1.0007290992585647e-99</td><td>1.0000051648491528e-99</td><td>0.0015959394599979854</td><td>3.82573113749518e-06</td><td>0.000117349323009852</td><td>1.0000118108154214e-99</td><td>1.0083789314590176e-99</td><td>3.39953430469572e-05</td><td>1.0005940500867903e-99</td><td>1.000000268288428e-99</td><td>0.0005166105714193494</td><td>6.541998614991763e-05</td><td>7.197310282690939e-05</td><td>1.0000000176621929e-99</td><td>1.0096909029646115e-99</td><td>5.9013463306925606e-05</td><td>1.0000000026966154e-99</td><td>0.0006656369691291615</td><td>3.379914609195744e-05</td><td>2.2280548144971948e-05</td><td>1.000119772786094e-99</td><td>7.959366734089968e-06</td><td>1.0038635580162552e-99</td><td>0.00034181837454956955</td><td>2.698054904496602e-06</td><td>1.5163068562980883e-05</td><td>6.350246378492004e-05</td><td>2.9506717358962752e-06</td><td>0.0012498817453984244</td><td>-3.068722712203384</td><td>-11.968569984978997</td><td>-74.96377136037967</td><td>-56.90297711117493</td><td>-67.20865991385845</td><td>-77.37542303768979</td><td>-98.99999999999999</td><td>0.16044380101365566</td><td>1069.736624300975</td><td>0.0</td><td>28837.892464640056</td><td>239707.25174037172</td><td>0.02397736032033315</td><td>1.0060960520833893</td><td>0.0</td><td>0.9999966298341778</td><td>5.262280936676797e-06</td><td>1.1749383002259027e+47</td><td>0.099999779678962</td><td>0.0</td><td>0.12415247839448117</td><td>0.0</td><td>-1e+99</td><td>43547755.670947805</td><td>31272169.535834383</td><td>-1.345782396473872e+47</td><td>3.1992338721427923e+51</td><td>-1.0</td><td>0.0</td><td>-4e-06</td></tr>
+<tr><td>190.0</td><td>9.0</td><td>0.10010840125198968</td><td>0.10010818063871796</td><td>-4.311605973965251e-17</td><td>0.0</td><td>0.0</td><td>0.0</td><td>-3.0628538166255876</td><td>-6.9326315046404074</td><td>-3.0676222065509964</td><td>-74.9497131165856</td><td>-98.99999999999999</td><td>3.448780238044928</td><td>-5.026834369291651</td><td>-0.9057285479500221</td><td>5.249727262491179</td><td>-1.7862787350379934</td><td>0.0</td><td>0.0</td><td>0.4859565900706731</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.3995444200116036e-15</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.000867080042465856</td><td>2810.518712444916</td><td>0.000867080042465856</td><td>2810.518712444916</td><td>0.7131896600329788</td><td>2.5286202601679413e-17</td><td>0.00023253482788480472</td><td>0.27022014182521054</td><td>1.225766002816097e-18</td><td>3.148226605758009e-26</td><td>1.6776670312978908e-10</td><td>1.0123901189094702e-99</td><td>6.358710473604288e-98</td><td>0.0027836552346281085</td><td>3.118277692068945e-05</td><td>1.0039618908354129e-99</td><td>0.00082153636433406</td><td>3.0203512411912494e-06</td><td>1.0201716226869155e-99</td><td>1.0203460923486108e-99</td><td>0.0076375964204903665</td><td>2.847941184897063e-06</td><td>1.531457404897616e-05</td><td>1.020152911840124e-99</td><td>2.540275293437566e-91</td><td>4.0607078905949267e-07</td><td>1.0085270205522833e-99</td><td>1.0173110341362395e-99</td><td>0.0015959394599979852</td><td>3.825731137495182e-06</td><td>0.00011734932300985198</td><td>1.021606595669723e-99</td><td>1.0083629799213138e-99</td><td>3.39953430469572e-05</td><td>1.0006229613115982e-99</td><td>1.0246755260595463e-99</td><td>0.0005166105714193496</td><td>6.541998614991763e-05</td><td>7.19731028269094e-05</td><td>1.0158219234721594e-99</td><td>1.0096744671364398e-99</td><td>5.90134633069256e-05</td><td>1.0117271282031946e-99</td><td>0.0006656369691291614</td><td>3.3799146091957446e-05</td><td>2.2280548144971945e-05</td><td>1.0179975571807197e-99</td><td>7.95936673408997e-06</td><td>1.0155928393616359e-99</td><td>0.00034181837454956955</td><td>2.698054904496601e-06</td><td>1.5163068562980892e-05</td><td>6.350246378492004e-05</td><td>2.9506717358962757e-06</td><td>0.0012498817453984246</td><td>6.661001706180254</td><td>2.6096107721216133</td><td>2.9530925139416095</td><td>0.0</td><td>0.4069972412816982</td><td>0.10010818063871796</td><td>0.713189660032513</td><td>1.214539803476738e-17</td><td>0.00023253482835044353</td><td>0.2702201418252106</td><td>1.2252783468586205e-18</td><td>9.485970394206437e-22</td><td>1.6776670312978903e-10</td><td>1.0123901189094706e-99</td><td>1.3573317039359626e-37</td><td>0.0027836552346281085</td><td>3.118277692068946e-05</td><td>5.367334874311931e-24</td><td>0.00082153636433406</td><td>3.0203512411912494e-06</td><td>1.4469868362081216e-47</td><td>1.0231751061829458e-28</td><td>0.0076375964204903665</td><td>2.847941184897064e-06</td><td>1.531457404897616e-05</td><td>4.020017275904955e-31</td><td>1.2230379646758328e-32</td><td>4.0607078905949267e-07</td><td>1.0007280425095472e-99</td><td>1.0000054037820808e-99</td><td>0.0015959394599979852</td><td>3.82573113749518e-06</td><td>0.000117349323009852</td><td>1.0000117950687482e-99</td><td>1.0083629799213136e-99</td><td>3.39953430469572e-05</td><td>1.0006229960987726e-99</td><td>1.0000002685246702e-99</td><td>0.0005166105714193494</td><td>6.541998614991763e-05</td><td>7.197310282690939e-05</td><td>1.0000000177060294e-99</td><td>1.0096744671364402e-99</td><td>5.9013463306925606e-05</td><td>1.0000106174929415e-99</td><td>0.0006656369691291615</td><td>3.379914609195744e-05</td><td>2.2280548144971948e-05</td><td>1.0001200425813163e-99</td><td>7.959366734089968e-06</td><td>1.0038727021013184e-99</td><td>0.00034181837454956955</td><td>2.698054904496602e-06</td><td>1.5163068562980883e-05</td><td>6.350246378492004e-05</td><td>2.9506717358962752e-06</td><td>0.0012498817453984244</td><td>-3.067622207181453</td><td>-11.963402736906144</td><td>-74.9497131165856</td><td>-56.890569665629314</td><td>-67.19439885276974</td><td>-77.35967164907183</td><td>-98.99999999999999</td><td>0.1604293972452102</td><td>1069.1111353726694</td><td>0.0</td><td>28820.891621750274</td><td>239547.82862143673</td><td>0.023999514219998137</td><td>1.0061056799277035</td><td>0.0</td><td>0.9999966057016325</td><td>5.300401472657831e-06</td><td>1.1782126727536186e+47</td><td>0.10010818063871796</td><td>0.0</td><td>0.12426040558485175</td><td>0.0</td><td>-1e+99</td><td>43545930.39407836</td><td>31271561.80473397</td><td>-1.3475018364905235e+47</td><td>3.21244657147979e+51</td><td>-1.0</td><td>0.0</td><td>-3e-06</td></tr>
+<tr><td>191.0</td><td>9.0</td><td>0.1037384742910229</td><td>0.103738243767821</td><td>-4.9004003929530717e-17</td><td>0.0</td><td>0.0</td><td>0.0</td><td>-3.0274973922576396</td><td>-6.887129289988304</td><td>-3.030990425509411</td><td>-74.48028020012849</td><td>-98.99999999999999</td><td>3.4523076577934666</td><td>-5.129415716834393</td><td>-0.8951051752631245</td><td>5.2412649915817555</td><td>-1.7862787350231668</td><td>0.0</td><td>0.0</td><td>0.4859565889302754</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>3.286168700617285e-15</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0009983194385035947</td><td>2834.6943632149028</td><td>0.0009983194385035947</td><td>2834.6943632149028</td><td>0.7131781264831396</td><td>2.509562374013245e-17</td><td>0.0002440682187846455</td><td>0.2702201419835914</td><td>1.81697544779124e-18</td><td>1.1265975850136255e-24</td><td>1.67766703129789e-10</td><td>1.0115671435988323e-99</td><td>2.061257839893742e-96</td><td>0.002783655228095705</td><td>3.118278376131754e-05</td><td>1.003893135416284e-99</td><td>0.0008215363646473133</td><td>3.0203511780417173e-06</td><td>1.0201140001506675e-99</td><td>1.0202114396817752e-99</td><td>0.007637596420490424</td><td>2.8479411849048952e-06</td><td>1.531457404889282e-05</td><td>1.020028951426672e-99</td><td>5.455278359857237e-90</td><td>4.0607078905957044e-07</td><td>1.0087642046581249e-99</td><td>1.0176643028434474e-99</td><td>0.001595939459997985</td><td>3.825731137495182e-06</td><td>0.00011734932300985198</td><td>1.0217251253788884e-99</td><td>1.0078288048459588e-99</td><td>3.3995343046957196e-05</td><td>1.0015922722989649e-99</td><td>1.0244365142116372e-99</td><td>0.0005166105714193496</td><td>6.541998614991762e-05</td><td>7.197310282690939e-05</td><td>1.015990275386244e-99</td><td>1.0091240744461147e-99</td><td>5.901346330692559e-05</td><td>1.0120992785555986e-99</td><td>0.0006656369691291613</td><td>3.3799146091957446e-05</td><td>2.2280548144971945e-05</td><td>1.0176583912263894e-99</td><td>7.959366734089968e-06</td><td>1.0155479467491333e-99</td><td>0.00034181837454956945</td><td>2.6980549044966005e-06</td><td>1.5163068562980889e-05</td><td>6.350246378492003e-05</td><td>2.950671735896275e-06</td><td>0.0012498817453984244</td><td>6.668499211185842</td><td>2.5912773125794373</td><td>2.821749299176332</td><td>0.0</td><td>0.39665583593955905</td><td>0.103738243767821</td><td>0.713178126482639</td><td>1.2002569423686209e-17</td><td>0.0002440682192854056</td><td>0.2702201419835914</td><td>1.8106948947633992e-18</td><td>9.993993172587112e-21</td><td>1.6776670312978908e-10</td><td>1.011567143598833e-99</td><td>4.5952376572516675e-36</td><td>0.0027836552280957054</td><td>3.118278376131762e-05</td><td>4.6128342219948404e-23</td><td>0.0008215363646473136</td><td>3.0203511780417173e-06</td><td>4.974770675733769e-46</td><td>1.310606406897843e-27</td><td>0.007637596420490424</td><td>2.847941184904896e-06</td><td>1.531457404889282e-05</td><td>6.997098681874627e-30</td><td>2.173498808118175e-31</td><td>4.060707890595706e-07</td><td>1.00069040662488e-99</td><td>1.0000142936646609e-99</td><td>0.0015959394599979852</td><td>3.82573113749518e-06</td><td>0.000117349323009852</td><td>1.0000112623069148e-99</td><td>1.0078288048459588e-99</td><td>3.39953430469572e-05</td><td>1.0015923218195771e-99</td><td>1.000000276398226e-99</td><td>0.0005166105714193494</td><td>6.541998614991763e-05</td><td>7.197310282690939e-05</td><td>1.0000000191878959e-99</td><td>1.0091240744461147e-99</td><td>5.9013463306925606e-05</td><td>1.000734821804086e-99</td><td>0.0006656369691291615</td><td>3.379914609195744e-05</td><td>2.2280548144971948e-05</td><td>1.000129129023126e-99</td><td>7.959366734089968e-06</td><td>1.0041537773896088e-99</td><td>0.00034181837454956955</td><td>2.698054904496602e-06</td><td>1.5163068562980889e-05</td><td>6.350246378492004e-05</td><td>2.950671735896275e-06</td><td>0.0012498817453984244</td><td>-3.030990428945729</td><td>-11.79090509125656</td><td>-74.48028020012849</td><td>-56.47614177797895</td><td>-66.71803361269467</td><td>-76.83351203267647</td><td>-98.99999999999999</td><td>0.15994753054531563</td><td>1048.0090937177624</td><td>0.0</td><td>28245.6763678116</td><td>234159.56821643503</td><td>0.02474481900005441</td><td>1.006429215544156</td><td>0.0</td><td>0.999995796869915</td><td>6.5780464057270635e-06</td><td>1.2879112824377998e+47</td><td>0.103738243767821</td><td>0.0</td><td>0.1278850617801971</td><td>0.0</td><td>-1e+99</td><td>43483927.81301263</td><td>31253492.06563329</td><td>-1.404968346926727e+47</td><td>3.655302828820291e+51</td><td>-1.0</td><td>0.0</td><td>4e-06</td></tr>
+<tr><td>192.0</td><td>9.0</td><td>0.10735300888691028</td><td>0.1073527682433084</td><td>-5.487261460320685e-17</td><td>0.0</td><td>0.0</td><td>0.0</td><td>-2.99218584807677</td><td>-6.841719912265148</td><td>-2.994688776976697</td><td>-74.01386156348794</td><td>-37.77011061861292</td><td>3.4558306262855147</td><td>-5.242951269658795</td><td>-0.8844953401567879</td><td>5.232775071749235</td><td>-1.7862787350057945</td><td>0.0</td><td>0.0</td><td>0.485956587593856</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>4.984473113034866e-15</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0011290806525412935</td><td>2858.833155729722</td><td>0.0011290806525412935</td><td>2858.833155729722</td><td>0.7131659194454959</td><td>2.490540202403988e-17</td><td>0.0002562750427914779</td><td>0.2702201421965744</td><td>2.4647671705842552e-18</td><td>2.3364159559761758e-24</td><td>1.6776670312978908e-10</td><td>1.010747691014856e-99</td><td>4.271527164551867e-96</td><td>0.0027836552204404566</td><td>3.1182791778023185e-05</td><td>1.0038289823437806e-99</td><td>0.0008215363650144344</td><td>3.020351103725656e-06</td><td>1.0200602460075317e-99</td><td>1.020078000540573e-99</td><td>0.007637596420490493</td><td>2.8479411849141436e-06</td><td>1.531457404879391e-05</td><td>1.0199097624440378e-99</td><td>6.623409762731481e-90</td><td>4.0607078905966313e-07</td><td>1.008994254180778e-99</td><td>1.0180210295679486e-99</td><td>0.0015959394599979854</td><td>3.825731137495182e-06</td><td>0.000117349323009852</td><td>1.021847388414374e-99</td><td>1.0072969162945795e-99</td><td>3.39953430469572e-05</td><td>1.00255743456496e-99</td><td>1.0242047534653374e-99</td><td>0.0005166105714193496</td><td>6.541998614991766e-05</td><td>7.197310282690942e-05</td><td>1.0161601344609139e-99</td><td>1.0085760376988742e-99</td><td>5.901346330692561e-05</td><td>1.012466057023992e-99</td><td>0.0006656369691291616</td><td>3.3799146091957446e-05</td><td>2.2280548144971948e-05</td><td>1.01732154148987e-99</td><td>7.95936673408997e-06</td><td>1.0154963915157047e-99</td><td>0.00034181837454956966</td><td>2.698054904496602e-06</td><td>1.516306856298089e-05</td><td>6.350246378492003e-05</td><td>2.9506717358962752e-06</td><td>0.0012498817453984244</td><td>6.675955328775956</td><td>2.5729257363054456</td><td>2.690476223011483</td><td>0.0</td><td>0.3863367700769259</td><td>0.1073527682433084</td><td>0.71316591944496</td><td>1.1860510026900054e-17</td><td>0.0002562750433271369</td><td>0.2702201421965744</td><td>2.4520883544623283e-18</td><td>1.998350718852416e-20</td><td>1.6776670312978908e-10</td><td>1.010747691014856e-99</td><td>9.547110584894696e-36</td><td>0.0027836552204404553</td><td>3.118279177802332e-05</td><td>8.700564798670601e-23</td><td>0.0008215363650144342</td><td>3.0203511037256545e-06</td><td>9.857194236052471e-46</td><td>2.523163340539606e-27</td><td>0.007637596420490493</td><td>2.8479411849141427e-06</td><td>1.53145740487939e-05</td><td>1.361983518788033e-29</td><td>4.233717745072011e-31</td><td>4.060707890596631e-07</td><td>1.000650067567272e-99</td><td>1.0000243291011104e-99</td><td>0.001595939459997985</td><td>3.82573113749518e-06</td><td>0.000117349323009852</td><td>1.0000107240097197e-99</td><td>1.0072969162945795e-99</td><td>3.39953430469572e-05</td><td>1.0025574981774474e-99</td><td>1.0000002841458655e-99</td><td>0.0005166105714193494</td><td>6.541998614991763e-05</td><td>7.197310282690939e-05</td><td>1.0000000206777979e-99</td><td>1.0085760376988742e-99</td><td>5.90134633069256e-05</td><td>1.0018092789657988e-99</td><td>0.0006656369691291615</td><td>3.3799146091957446e-05</td><td>2.2280548144971948e-05</td><td>1.000138248845118e-99</td><td>7.959366734089968e-06</td><td>1.0044041395779219e-99</td><td>0.00034181837454956955</td><td>2.698054904496602e-06</td><td>1.5163068562980883e-05</td><td>6.350246378492004e-05</td><td>2.950671735896275e-06</td><td>0.0012498817453984244</td><td>-2.9946887832203295</td><td>-11.619554261028831</td><td>-74.01386156348794</td><td>-56.06428120215139</td><td>-66.24459987755752</td><td>-76.31058009638036</td><td>-98.99999999999999</td><td>0.15946825399441486</td><td>1026.8662106840743</td><td>0.0</td><td>27667.95072277156</td><td>228752.84586736743</td><td>0.02548956804097531</td><td>1.006752232419856</td><td>0.0</td><td>0.9999949909338248</td><td>7.851105281888052e-06</td><td>1.3971948032416183e+47</td><td>0.1073527682433084</td><td>0.0</td><td>0.13150223937629454</td><td>0.0</td><td>-1e+99</td><td>43421430.75412849</td><td>31237247.9180552</td><td>-1.4621037926663146e+47</td><td>4.096476280478279e+51</td><td>-1.0</td><td>0.0</td><td>1.1e-05</td></tr>
+<tr><td>193.0</td><td>9.0</td><td>0.11095190304849614</td><td>0.11095165206110816</td><td>-6.072321703489613e-17</td><td>0.0</td><td>0.0</td><td>0.0</td><td>-2.9569400845578495</td><td>-6.796416653448183</td><td>-2.958688331241166</td><td>-73.55031706842455</td><td>-74.16701075734976</td><td>3.4593471275315477</td><td>-5.369171193750837</td><td>-0.8739054608893938</td><td>5.224269980297115</td><td>-1.786278734985714</td><td>0.0</td><td>0.0</td><td>0.48595658604862424</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>6.482505241769527e-15</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.001259376186597882</td><td>2882.9230893515596</td><td>0.001259376186597882</td><td>2882.9230893515596</td><td>0.7131530135578819</td><td>2.4715638536670426e-17</td><td>0.0002691806496063496</td><td>0.27022014247661713</td><td>3.172330158090626e-18</td><td>3.6663982805720656e-24</td><td>1.677667031297891e-10</td><td>1.009931784279995e-99</td><td>6.703375170429517e-96</td><td>0.002783655211589093</td><td>3.118280104754946e-05</td><td>1.0037706647808833e-99</td><td>0.0008215363654389376</td><td>3.0203510175090444e-06</td><td>1.0200105185591096e-99</td><td>1.0199458534403208e-99</td><td>0.007637596420490571</td><td>2.8479411849248988e-06</td><td>1.5314574048678346e-05</td><td>1.0197955415267678e-99</td><td>5.984603819087126e-90</td><td>4.0607078905977113e-07</td><td>1.009216604245948e-99</td><td>1.0183817923277071e-99</td><td>0.001595939459997985</td><td>3.825731137495181e-06</td><td>0.00011734932300985198</td><td>1.0219739000390187e-99</td><td>1.0067673292754516e-99</td><td>3.39953430469572e-05</td><td>1.003518421119988e-99</td><td>1.0239813127127867e-99</td><td>0.0005166105714193495</td><td>6.541998614991764e-05</td><td>7.197310282690939e-05</td><td>1.0163318632838877e-99</td><td>1.0080303723586496e-99</td><td>5.901346330692561e-05</td><td>1.0128271973224e-99</td><td>0.0006656369691291615</td><td>3.3799146091957446e-05</td><td>2.2280548144971948e-05</td><td>1.0169870986917447e-99</td><td>7.95936673408997e-06</td><td>1.0154376744634743e-99</td><td>0.00034181837454956955</td><td>2.698054904496602e-06</td><td>1.5163068562980889e-05</td><td>6.350246378492004e-05</td><td>2.950671735896276e-06</td><td>0.0012498817453984244</td><td>6.683370946242799</td><td>2.5545751995611825</td><td>2.559385009513523</td><td>0.0</td><td>0.3760454368305556</td><td>0.11095165206110816</td><td>0.7131530135573113</td><td>1.1719202083795152e-17</td><td>0.000269180650176686</td><td>0.2702201424766172</td><td>3.1526199283273945e-18</td><td>3.096068573252355e-20</td><td>1.6776670312978908e-10</td><td>1.0099317842799954e-99</td><td>1.500680581494565e-35</td><td>0.002783655211589093</td><td>3.118280104754966e-05</td><td>1.27891806673307e-22</td><td>0.0008215363654389376</td><td>3.0203510175090427e-06</td><td>1.4765473625815726e-45</td><td>3.7364836195500336e-27</td><td>0.007637596420490575</td><td>2.8479411849248983e-06</td><td>1.5314574048678346e-05</td><td>2.0249519745353433e-29</td><td>6.296555526557239e-31</td><td>4.0607078905977113e-07</td><td>1.0006072163029116e-99</td><td>1.0000362422260644e-99</td><td>0.0015959394599979852</td><td>3.82573113749518e-06</td><td>0.000117349323009852</td><td>1.00001018179471e-99</td><td>1.0067673292754514e-99</td><td>3.39953430469572e-05</td><td>1.0035184978070987e-99</td><td>1.000000291990586e-99</td><td>0.0005166105714193494</td><td>6.541998614991763e-05</td><td>7.197310282690939e-05</td><td>1.0000000222061026e-99</td><td>1.0080303723586496e-99</td><td>5.901346330692561e-05</td><td>1.0031859429117016e-99</td><td>0.0006656369691291615</td><td>3.3799146091957446e-05</td><td>2.2280548144971948e-05</td><td>1.0001474120859191e-99</td><td>7.95936673408997e-06</td><td>1.0046174246183822e-99</td><td>0.00034181837454956955</td><td>2.698054904496602e-06</td><td>1.5163068562980883e-05</td><td>6.350246378492004e-05</td><td>2.9506717358962752e-06</td><td>0.0012498817453984244</td><td>-2.958688340288574</td><td>-11.449291033360408</td><td>-73.55031706842455</td><td>-55.6548809309966</td><td>-65.77397844100972</td><td>-75.79074610699752</td><td>-98.99999999999999</td><td>0.15899139192249365</td><td>1005.7102344338654</td><td>0.0</td><td>27088.761197553424</td><td>223336.2497363702</td><td>0.026233391868605543</td><td>1.0070746004444242</td><td>0.0</td><td>0.9999941879782503</td><td>9.119447950306675e-06</td><td>1.5060426183791714e+47</td><td>0.11095165206110816</td><td>0.0</td><td>0.13511053255667632</td><td>0.0</td><td>-1e+99</td><td>43358525.803924955</td><td>31222529.55333676</td><td>-1.5189192784575183e+47</td><td>4.535969571618746e+51</td><td>-1.0</td><td>0.0</td><td>1.9e-05</td></tr>
+<tr><td>194.0</td><td>9.0</td><td>0.11453510081099016</td><td>0.1145348392427957</td><td>-6.655610737034215e-17</td><td>0.0</td><td>0.0</td><td>0.0</td><td>-2.9217783913658453</td><td>-6.751233336882377</td><td>-2.922962091538033</td><td>-73.08950417844204</td><td>-48.73314170475355</td><td>3.462855363969836</td><td>-5.510986132171739</td><td>-0.8633410871699677</td><td>5.215760619526622</td><td>-1.7862787349627456</td><td>0.0</td><td>0.0</td><td>0.4859565842813164</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>7.785078627854341e-15</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.001389206591239863</td><td>2906.9532474367243</td><td>0.001389206591239863</td><td>2906.9532474367243</td><td>0.713139381996631</td><td>2.452641606436824e-17</td><td>0.00028281184807970965</td><td>0.27022014283852935</td><td>3.943109572884627e-18</td><td>5.122788380094019e-24</td><td>1.6776670312978908e-10</td><td>1.0091194360820507e-99</td><td>9.367448069255128e-96</td><td>0.002783655201465638</td><td>3.118281164948108e-05</td><td>1.0037203067463782e-99</td><td>0.000821536365924469</td><td>3.020350918631944e-06</td><td>1.0199649486256777e-99</td><td>1.0198150402242269e-99</td><td>0.0076375964204906605</td><td>2.8479411849372574e-06</td><td>1.5314574048545087e-05</td><td>1.019686439683718e-99</td><td>4.732470015168239e-90</td><td>4.060707890598958e-07</td><td>1.0094315077438082e-99</td><td>1.0187471416689706e-99</td><td>0.0015959394599979848</td><td>3.82573113749518e-06</td><td>0.00011734932300985198</td><td>1.0221051350657786e-99</td><td>1.006240052023944e-99</td><td>3.39953430469572e-05</td><td>1.0044752169824813e-99</td><td>1.0237677455657563e-99</td><td>0.0005166105714193495</td><td>6.541998614991762e-05</td><td>7.197310282690938e-05</td><td>1.0165061500229749e-99</td><td>1.0074870869108675e-99</td><td>5.90134633069256e-05</td><td>1.0131826908278412e-99</td><td>0.0006656369691291613</td><td>3.3799146091957446e-05</td><td>2.2280548144971945e-05</td><td>1.0166550852128203e-99</td><td>7.95936673408997e-06</td><td>1.0153723038997187e-99</td><td>0.00034181837454956945</td><td>2.6980549044966005e-06</td><td>1.5163068562980889e-05</td><td>6.350246378492004e-05</td><td>2.950671735896276e-06</td><td>0.0012498817453984244</td><td>6.690747177686125</td><td>2.536242343334671</td><td>2.4285678345819903</td><td>0.0</td><td>0.3657861690503609</td><td>0.1145348392427957</td><td>0.7131393819960262</td><td>1.15786251340164e-17</td><td>0.00028281184868450895</td><td>0.27022014283852935</td><td>3.915702717573801e-18</td><td>4.297572580766948e-20</td><td>1.6776670312978903e-10</td><td>1.0091194360820507e-99</td><td>2.0994716150586167e-35</td><td>0.002783655201465638</td><td>3.118281164948135e-05</td><td>1.6871416805932993e-22</td><td>0.000821536365924469</td><td>3.0203509186319416e-06</td><td>1.9681477412146282e-45</td><td>4.948192236538032e-27</td><td>0.007637596420490666</td><td>2.8479411849372574e-06</td><td>1.531457404854509e-05</td><td>2.687211448597425e-29</td><td>8.357675477544145e-31</td><td>4.0607078905989586e-07</td><td>1.00056202657406e-99</td><td>1.0000499576152442e-99</td><td>0.001595939459997985</td><td>3.82573113749518e-06</td><td>0.000117349323009852</td><td>1.0000096357488046e-99</td><td>1.006240052023944e-99</td><td>3.39953430469572e-05</td><td>1.004475305798279e-99</td><td>1.0000002999082828e-99</td><td>0.0005166105714193494</td><td>6.541998614991763e-05</td><td>7.197310282690939e-05</td><td>1.0000000237688793e-99</td><td>1.0074870869108675e-99</td><td>5.90134633069256e-05</td><td>1.004638801100822e-99</td><td>0.0006656369691291615</td><td>3.379914609195744e-05</td><td>2.2280548144971948e-05</td><td>1.000156615109402e-99</td><td>7.95936673408997e-06</td><td>1.0047988333546143e-99</td><td>0.00034181837454956955</td><td>2.698054904496602e-06</td><td>1.5163068562980883e-05</td><td>6.350246378492004e-05</td><td>2.9506717358962752e-06</td><td>0.0012498817453984244</td><td>-2.922962103382327</td><td>-11.280056346908488</td><td>-73.08950417844204</td><td>-55.24783032121836</td><td>-65.30604543316593</td><td>-75.27387495874697</td><td>-98.99999999999999</td><td>0.15851681650735772</td><td>984.5646331758873</td><td>0.0</td><td>26508.99533198306</td><td>217917.09377022763</td><td>0.02697591783861345</td><td>1.00739619067843</td><td>0.0</td><td>0.9999933880792069</td><td>1.038295721508636e-05</td><td>1.614440357512193e+47</td><td>0.1145348392427957</td><td>0.0</td><td>0.13870864892843976</td><td>0.0</td><td>-1e+99</td><td>43295309.63603186</td><td>31209061.515824392</td><td>-1.5754264728305632e+47</td><td>4.9737679456113785e+51</td><td>-1.0</td><td>0.0</td><td>2.7e-05</td></tr>
+<tr><td>195.0</td><td>9.0</td><td>0.11810256660455344</td><td>0.11810229420423247</td><td>-7.237091097984041e-17</td><td>0.0</td><td>0.0</td><td>0.0</td><td>-2.886716394195807</td><td>-6.706183384146869</td><td>-2.887485932301783</td><td>-72.63128858930546</td><td>-45.20585923683267</td><td>3.4663537910992837</td><td>-5.673729726350337</td><td>-0.8528069428438435</td><td>5.2072563118387425</td><td>-1.7862787349367122</td><td>0.0</td><td>0.0</td><td>0.4859565822781145</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>8.906921114896211e-15</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.001518565106507363</td><td>2930.9141148598824</td><td>0.001518565106507363</td><td>2930.9141148598824</td><td>0.7131249964747997</td><td>2.4337801741312158e-17</td><td>0.0002971969075808119</td><td>0.2702201432998791</td><td>4.7808023777238375e-18</td><td>6.71257357363759e-24</td><td>1.677667031297891e-10</td><td>1.0083106544850754e-99</td><td>1.2275866094853833e-95</td><td>0.00278365518999094</td><td>3.1182823666725e-05</td><td>1.0036799861721733e-99</td><td>0.0008215363664748257</td><td>3.020350806303611e-06</td><td>1.0199237102643517e-99</td><td>1.0196858182733334e-99</td><td>0.007637596420490765</td><td>2.8479411849513245e-06</td><td>1.531457404839302e-05</td><td>1.0195826254512482e-99</td><td>3.4472504785896374e-90</td><td>4.060707890600382e-07</td><td>1.0096395213742784e-99</td><td>1.0191176070897664e-99</td><td>0.0015959394599979852</td><td>3.825731137495181e-06</td><td>0.00011734932300985204</td><td>1.0222415687600147e-99</td><td>1.0057150897742562e-99</td><td>3.39953430469572e-05</td><td>1.0054278125926303e-99</td><td>1.0235655765245724e-99</td><td>0.0005166105714193496</td><td>6.541998614991763e-05</td><td>7.197310282690942e-05</td><td>1.0166837314234202e-99</td><td>1.006946186748614e-99</td><td>5.9013463306925606e-05</td><td>1.0135325541604645e-99</td><td>0.0006656369691291615</td><td>3.379914609195746e-05</td><td>2.2280548144971948e-05</td><td>1.0163257562203323e-99</td><td>7.959366734089971e-06</td><td>1.015301245359878e-99</td><td>0.00034181837454956955</td><td>2.698054904496601e-06</td><td>1.516306856298089e-05</td><td>6.350246378492006e-05</td><td>2.950671735896276e-06</td><td>0.0012498817453984246</td><td>6.698085189780789</td><td>2.517941346054223</td><td>2.298099844572601</td><td>0.0</td><td>0.35556242565455193</td><td>0.11810229420423247</td><td>0.7131249964741606</td><td>1.1438758669921356e-17</td><td>0.0002971969082198708</td><td>0.270220143299879</td><td>4.744997609621484e-18</td><td>5.608506568849964e-20</td><td>1.6776670312978903e-10</td><td>1.0083106544850756e-99</td><td>2.753576629005625e-35</td><td>0.0027836551899909395</td><td>3.118282366672533e-05</td><td>2.0942598059266001e-22</td><td>0.0008215363664748256</td><td>3.0203508063036083e-06</td><td>2.4593419753116013e-45</td><td>6.156756739186456e-27</td><td>0.007637596420490768</td><td>2.8479411849513236e-06</td><td>1.5314574048393018e-05</td><td>3.347855310077613e-29</td><td>1.0414288377097971e-30</td><td>4.0607078906003826e-07</td><td>1.0005146651622045e-99</td><td>1.000065385691699e-99</td><td>0.001595939459997985</td><td>3.825731137495179e-06</td><td>0.000117349323009852</td><td>1.0000090859281402e-99</td><td>1.005715089774256e-99</td><td>3.3995343046957196e-05</td><td>1.0054279126871954e-99</td><td>1.0000003078732443e-99</td><td>0.0005166105714193494</td><td>6.541998614991763e-05</td><td>7.197310282690939e-05</td><td>1.0000000253618599e-99</td><td>1.0069461867486138e-99</td><td>5.901346330692559e-05</td><td>1.0060385162017698e-99</td><td>0.0006656369691291615</td><td>3.379914609195744e-05</td><td>2.2280548144971948e-05</td><td>1.0001658541151434e-99</td><td>7.95936673408997e-06</td><td>1.0049532194266907e-99</td><td>0.00034181837454956955</td><td>2.698054904496602e-06</td><td>1.5163068562980883e-05</td><td>6.350246378492004e-05</td><td>2.9506717358962752e-06</td><td>0.0012498817453984244</td><td>-2.887485946933934</td><td>-11.111795192033604</td><td>-72.63128858930546</td><td>-54.843024177860954</td><td>-64.84068275566005</td><td>-74.75983768451033</td><td>-98.99999999999997</td><td>0.15804443792723982</td><td>963.4489303596384</td><td>0.0</td><td>25929.39190516712</td><td>212501.49823487416</td><td>0.02771679201158561</td><td>1.0077168845829718</td><td>0.0</td><td>0.9999925913049181</td><td>1.1641527368300562e-05</td><td>1.722378004900114e+47</td><td>0.11810229420423247</td><td>0.0</td><td>0.14229543006789877</td><td>0.0</td><td>-1e+99</td><td>43231878.91159144</td><td>31196598.235404864</td><td>-1.6316365323245243e+47</td><td>5.4098454206028684e+51</td><td>-1.0</td><td>0.0</td><td>3.6e-05</td></tr>
+<tr><td>196.0</td><td>9.0</td><td>0.12165427533480833</td><td>0.1216539918360785</td><td>-7.816688062457757e-17</td><td>0.0</td><td>0.0</td><td>0.0</td><td>-2.8517671116754144</td><td>-6.661279175836491</td><td>-2.8522390106299547</td><td>-72.17554993321285</td><td>-82.65870564613476</td><td>3.4698411252779846</td><td>-5.868661807254087</td><td>-0.8423069699410498</td><td>5.1987648528962715</td><td>-1.7862787349074245</td><td>0.0</td><td>0.0</td><td>0.485956580024568</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>9.86788764199308e-15</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0016474409964902191</td><td>2954.797690483322</td><td>0.0016474409964902191</td><td>2954.797690483322</td><td>0.7131098272218659</td><td>2.4149849116776738e-17</td><td>0.00031236557782264314</td><td>0.27022014388146814</td><td>5.689356114218974e-18</td><td>8.443452285702564e-24</td><td>1.677667031297891e-10</td><td>1.0075054451782252e-99</td><td>1.5442253369317185e-95</td><td>0.002783655177082224</td><td>3.118283718598115e-05</td><td>1.0036527419476046e-99</td><td>0.000821536367093979</td><td>3.020350679697759e-06</td><td>1.0198868426142108e-99</td><td>1.0195581541321282e-99</td><td>0.007637596420490885</td><td>2.8479411849672013e-06</td><td>1.531457404822097e-05</td><td>1.0194841569254385e-99</td><td>2.365731524950205e-90</td><td>4.060707890601993e-07</td><td>1.0098397565180506e-99</td><td>1.0194932268224825e-99</td><td>0.0015959394599979854</td><td>3.82573113749518e-06</td><td>0.000117349323009852</td><td>1.022383229652646e-99</td><td>1.0051924462190927e-99</td><td>3.39953430469572e-05</td><td>1.0063762012166442e-99</td><td>1.0233746010037283e-99</td><td>0.0005166105714193496</td><td>6.541998614991763e-05</td><td>7.197310282690942e-05</td><td>1.016864511486034e-99</td><td>1.006407675676693e-99</td><td>5.901346330692561e-05</td><td>1.0138764723083442e-99</td><td>0.0006656369691291615</td><td>3.379914609195746e-05</td><td>2.228054814497195e-05</td><td>1.0159990705801143e-99</td><td>7.959366734089973e-06</td><td>1.015223551241685e-99</td><td>0.00034181837454956955</td><td>2.698054904496602e-06</td><td>1.516306856298089e-05</td><td>6.350246378492006e-05</td><td>2.950671735896276e-06</td><td>0.0012498817453984246</td><td>6.705386098957169</td><td>2.499684034916835</td><td>2.16804137672614</td><td>0.0</td><td>0.3453769355119837</td><td>0.1216539918360785</td><td>0.7131098272211926</td><td>1.12995835880363e-17</td><td>0.0003123655784957712</td><td>0.2702201438814681</td><td>5.644412293560093e-18</td><td>7.035101877515652e-20</td><td>1.6776670312978908e-10</td><td>1.0075054451782252e-99</td><td>3.4658994776098165e-35</td><td>0.0027836551770822233</td><td>3.118283718598154e-05</td><td>2.4999915086337644e-22</td><td>0.0008215363670939789</td><td>3.0203506796977547e-06</td><td>2.949414749290505e-45</td><td>7.361252795386951e-27</td><td>0.007637596420490885</td><td>2.8479411849672004e-06</td><td>1.5314574048220962e-05</td><td>4.006336269239227e-29</td><td>1.246472410547391e-30</td><td>4.060707890601993e-07</td><td>1.000465292831398e-99</td><td>1.000082517643378e-99</td><td>0.0015959394599979852</td><td>3.825731137495179e-06</td><td>0.000117349323009852</td><td>1.0000085325369257e-99</td><td>1.0051924462190927e-99</td><td>3.39953430469572e-05</td><td>1.0063763117887344e-99</td><td>1.0000003158866115e-99</td><td>0.0005166105714193494</td><td>6.541998614991762e-05</td><td>7.197310282690939e-05</td><td>1.0000000269844829e-99</td><td>1.0064076756766928e-99</td><td>5.9013463306925606e-05</td><td>1.0073446137155027e-99</td><td>0.0006656369691291615</td><td>3.379914609195744e-05</td><td>2.2280548144971948e-05</td><td>1.0001751269676586e-99</td><td>7.95936673408997e-06</td><td>1.0050837511655214e-99</td><td>0.00034181837454956955</td><td>2.698054904496602e-06</td><td>1.5163068562980883e-05</td><td>6.350246378492003e-05</td><td>2.9506717358962752e-06</td><td>0.0012498817453984244</td><td>-2.852239028039662</td><td>-10.944458653694191</td><td>-72.17554993321285</td><td>-54.44036767462535</td><td>-64.37778375575985</td><td>-74.248517724402</td><td>-98.99999999999999</td><td>0.15757419500297887</td><td>942.3790717687434</td><td>0.0</td><td>25350.55386371578</td><td>207094.48715430143</td><td>0.028455696802070538</td><td>1.0080365782919791</td><td>0.0</td><td>0.9999917977150607</td><td>1.28950655904384e-05</td><td>1.8298486698020824e+47</td><td>0.1216539918360785</td><td>0.0</td><td>0.1458698671096868</td><td>0.0</td><td>-1e+99</td><td>43168322.252636194</td><td>31184925.856852937</td><td>-1.6875595357325895e+47</td><td>5.844170463639353e+51</td><td>-1.0</td><td>0.0</td><td>4.5e-05</td></tr>
+<tr><td>197.0</td><td>9.0</td><td>0.12519020526497668</td><td>0.12518991038592223</td><td>-8.39430907410039e-17</td><td>0.0</td><td>0.0</td><td>0.0</td><td>-2.816941313959161</td><td>-6.6165315505023425</td><td>-2.8172039009505765</td><td>-71.72218502801567</td><td>-98.99999999999999</td><td>3.4733162860292515</td><td>-6.12770067007277</td><td>-0.8318443925854573</td><td>5.190292614374233</td><td>-1.7862787348746876</td><td>0.0</td><td>0.0</td><td>0.48595657750552507</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0689701053654952e-14</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0017758214550730985</td><td>2978.5971589129877</td><td>0.0017758214550730985</td><td>2978.5971589129877</td><td>0.7130938429827363</td><td>2.3962600237024234e-17</td><td>0.0003283490893047056</td><td>0.27022014460788235</td><td>6.672968367687495e-18</td><td>1.0323800484135449e-23</td><td>1.6776670312978908e-10</td><td>1.0067038130894538e-99</td><td>1.888165204849742e-95</td><td>0.0027836551626526963</td><td>3.118285229816092e-05</td><td>1.0036421008847558e-99</td><td>0.0008215363677860931</td><td>3.020350537948369e-06</td><td>1.0198541902369404e-99</td><td>1.0194317576226717e-99</td><td>0.007637596420491014</td><td>2.8479411849849974e-06</td><td>1.5314574048027713e-05</td><td>1.0193909122058798e-99</td><td>1.5474797113823816e-90</td><td>4.060707890603802e-07</td><td>1.0100308463197444e-99</td><td>1.0198737376122443e-99</td><td>0.0015959394599979852</td><td>3.825731137495179e-06</td><td>0.00011734932300985196</td><td>1.0225298199403412e-99</td><td>1.00467212455708e-99</td><td>3.3995343046957196e-05</td><td>1.0073203766971667e-99</td><td>1.0231938789973922e-99</td><td>0.0005166105714193495</td><td>6.54199861499176e-05</td><td>7.197310282690938e-05</td><td>1.0170481082035482e-99</td><td>1.005871556990846e-99</td><td>5.9013463306925606e-05</td><td>1.014213981585228e-99</td><td>0.0006656369691291614</td><td>3.379914609195744e-05</td><td>2.2280548144971945e-05</td><td>1.015674748418735e-99</td><td>7.959366734089971e-06</td><td>1.015137560870776e-99</td><td>0.0003418183745495695</td><td>2.698054904496602e-06</td><td>1.5163068562980889e-05</td><td>6.350246378492004e-05</td><td>2.9506717358962757e-06</td><td>0.0012498817453984244</td><td>6.712650904148569</td><td>2.4814800636205536</td><td>2.038440111174983</td><td>0.0</td><td>0.33523182655944395</td><td>0.12518991038592223</td><td>0.7130938429820293</td><td>1.1161083158853229e-17</td><td>0.0003283490900117251</td><td>0.27022014460788235</td><td>6.6181009446119424e-18</td><td>8.584142944795449e-20</td><td>1.6776670312978908e-10</td><td>1.0067038130894536e-99</td><td>4.239715308497868e-35</td><td>0.0027836551626526963</td><td>3.118285229816138e-05</td><td>2.9041848645037165e-22</td><td>0.0008215363677860931</td><td>3.0203505379483656e-06</td><td>3.437974967099902e-45</td><td>8.561177722719213e-27</td><td>0.007637596420491014</td><td>2.8479411849849974e-06</td><td>1.5314574048027713e-05</td><td>4.6623565371153044e-29</td><td>1.450808925639485e-30</td><td>4.0607078906038025e-07</td><td>1.0004140500275691e-99</td><td>1.00010033203227e-99</td><td>0.001595939459997985</td><td>3.825731137495178e-06</td><td>0.000117349323009852</td><td>1.0000079738832331e-99</td><td>1.0046721245570796e-99</td><td>3.3995343046957196e-05</td><td>1.0073204974762073e-99</td><td>1.0000003236468775e-99</td><td>0.0005166105714193494</td><td>6.541998614991762e-05</td><td>7.197310282690938e-05</td><td>1.0000000285942232e-99</td><td>1.005871556990846e-99</td><td>5.9013463306925606e-05</td><td>1.0085604358477146e-99</td><td>0.0006656369691291615</td><td>3.379914609195744e-05</td><td>2.2280548144971948e-05</td><td>1.0001844172864232e-99</td><td>7.959366734089968e-06</td><td>1.0052028756225835e-99</td><td>0.0003418183745495695</td><td>2.698054904496601e-06</td><td>1.5163068562980883e-05</td><td>6.350246378492003e-05</td><td>2.9506717358962752e-06</td><td>0.0012498817453984244</td><td>-2.8172039211268656</td><td>-10.778005027018189</td><td>-71.72218502801567</td><td>-54.03977922874475</td><td>-63.91725656383815</td><td>-73.73981462321069</td><td>-98.99999999999999</td><td>0.15710604781207646</td><td>921.3678334136318</td><td>0.0</td><td>24772.964685881132</td><td>201700.09532161773</td><td>0.029192355595246813</td><td>1.0083551796399863</td><td>0.0</td><td>0.9999910073606073</td><td>1.4143492354213596e-05</td><td>1.9368476223627064e+47</td><td>0.12518991038592223</td><td>0.0</td><td>0.14943110465967668</td><td>0.0</td><td>-1e+99</td><td>43104717.839589536</td><td>31173863.253135163</td><td>-1.7432041521256164e+47</td><td>6.276710039702366e+51</td><td>-1.0</td><td>0.0</td><td>5.5e-05</td></tr>
+<tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+<tr><td>1596.0</td><td>9.0</td><td>4.269675550477905</td><td>0.8571623335558649</td><td>0.0</td><td>0.8571613891032833</td><td>0.8537818338882475</td><td>0.0</td><td>-2.8128311845789566</td><td>-2.2345848650468016</td><td>-7.633335539208501</td><td>-98.99999999999997</td><td>-40.758077091298</td><td>4.073604691893319</td><td>-2.830711695143516</td><td>-2.0309718152116196</td><td>8.43306394748239</td><td>-14.147542405320934</td><td>8.36418688886318e-05</td><td>0.5416763749658329</td><td>1.3629112376731407</td><td>0.6469315506393103</td><td>0.00012923393203886576</td><td>4190.541883059517</td><td>0.00012923393203886576</td><td>3.385080549612685e-07</td><td>0.0</td><td>1.000000002788302</td><td>0.999999994423396</td><td>9.58112196073538e+45</td><td>0.0015390755486641332</td><td>11847.347529651746</td><td>0.0015390755383223108</td><td>11847.347519847952</td><td>0.9999999999113445</td><td>0.0</td><td>8.349242974254168e-11</td><td>5.155628210679386e-12</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>8.737599830684681e-16</td><td>8.989068314035552e-16</td><td>3.470549808426635e-57</td><td>9.320866953929773e-16</td><td>1.2833889840643628e-19</td><td>4.142421099641407e-99</td><td>1.785688150271536e-63</td><td>8.551825528529948e-16</td><td>5.810581876726702e-18</td><td>3.358234045709748e-18</td><td>7.346531465274571e-69</td><td>1.570371613570703e-99</td><td>1.3489351029928566e-16</td><td>1.570371613570703e-99</td><td>1.570371613570703e-99</td><td>6.665837975093191e-16</td><td>0.0</td><td>7.984274461350061e-16</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>7.665276623988429e-16</td><td>0.0</td><td>7.722929284042771e-16</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>5.754917675282239e-16</td><td>6.885946141573216</td><td>7.185133219164791</td><td>944.3913653887984</td><td>7.74811388898306e-05</td><td>158.70364761286334</td><td>0.0</td><td>6.048538561395909e-47</td><td>0.0</td><td>7.682828745767535e-26</td><td>2.14816610275322e-25</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.3468564326562684</td><td>2.0918311850718287e-10</td><td>3.0438562184973915e-47</td><td>5.939000887302008e-15</td><td>1.851247320596986e-17</td><td>3.2562050476331756e-95</td><td>7.502988436842092e-53</td><td>0.630552647739009</td><td>3.0636635700702086e-06</td><td>3.090459509629567e-13</td><td>1.86307599848559e-40</td><td>0.0</td><td>0.00042704364495434633</td><td>0.0</td><td>0.0</td><td>0.001634465457550028</td><td>0.0</td><td>0.017323268166523055</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.000556537867910783</td><td>0.0</td><td>0.00014203606826414326</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0025045045264521144</td><td>-7.633777097377521</td><td>-10.647152790397705</td><td>-98.99999999999997</td><td>-98.99999999999997</td><td>-98.99999999999997</td><td>-51.351753612722646</td><td>-98.99999999999997</td><td>0.09103328072005058</td><td>133048.06010753548</td><td>0.0</td><td>21241698.60017401</td><td>17769000.52070173</td><td>0.010446538645420613</td><td>1.006638826013193</td><td>0.0</td><td>0.9999894086216639</td><td>1.4385791073500577e-05</td><td>2.2783904939490797e+47</td><td>0.8571623335558649</td><td>0.8571623326591027</td><td>0.009311926429200663</td><td>0.00929615689097126</td><td>147.32747085730253</td><td>192.3341336115899</td><td>427.49562928986234</td><td>-3.363453956065835e+44</td><td>1.2110664036291366e+50</td><td>6.0</td><td>0.0</td><td>-12.508061</td></tr>
+<tr><td>1597.0</td><td>9.0</td><td>4.501098460949468</td><td>0.8715945357371302</td><td>0.0</td><td>0.8715937775253565</td><td>0.8683885413230281</td><td>0.0</td><td>-2.81801365640776</td><td>-2.222712655595412</td><td>-7.82417719795148</td><td>-98.99999999999999</td><td>-93.16252468470904</td><td>4.07612260561554</td><td>-2.837527499557594</td><td>-2.0385988785704634</td><td>8.455568741376938</td><td>-16.41358209359697</td><td>9.210343646473048e-05</td><td>0.5861211026073095</td><td>1.3491139686258355</td><td>0.6697683179788905</td><td>0.0001374690829167696</td><td>4262.941273860735</td><td>0.0001374690829167696</td><td>3.214812797468376e-07</td><td>0.0</td><td>1.0000000031462284</td><td>0.9999999937075437</td><td>1.0410595268364064e+46</td><td>0.0015206948903612105</td><td>11916.12640056912</td><td>0.0015206948777996266</td><td>11916.12638840956</td><td>0.999999999845592</td><td>0.0</td><td>1.4149247675340076e-10</td><td>1.290766566835756e-11</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>8.80335573995394e-16</td><td>9.026606311019644e-16</td><td>9.200453368287869e-57</td><td>9.164707103646653e-16</td><td>1.2693179866057573e-19</td><td>5.64782705285155e-99</td><td>5.13168194808768e-63</td><td>8.70251269724251e-16</td><td>5.5096649007188115e-18</td><td>3.3946808046578347e-18</td><td>2.3428383095411096e-68</td><td>1.6335968317509707e-99</td><td>1.3918630558801662e-16</td><td>1.6335968317509707e-99</td><td>1.6335968317509705e-99</td><td>6.837221693036378e-16</td><td>0.0</td><td>8.192061362389196e-16</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>7.866062190883461e-16</td><td>0.0</td><td>7.92506672069111e-16</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>6.338688471004333e-16</td><td>6.88078910986059</td><td>7.220288964689674</td><td>993.6872431544934</td><td>8.640099988606696e-05</td><td>162.10419302051133</td><td>0.0</td><td>4.316298886125874e-47</td><td>0.0</td><td>4.5554777145586924e-26</td><td>1.2901763734004358e-25</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.3833669878672374</td><td>2.8802834815736733e-10</td><td>9.643299376671492e-47</td><td>5.519576280615504e-15</td><td>1.7217077276547776e-17</td><td>1.7050266070995424e-94</td><td>4.2787325108419884e-55</td><td>0.5939967093248805</td><td>3.3401729632957734e-06</td><td>3.585099020046437e-13</td><td>1.2365645975405927e-42</td><td>0.0</td><td>0.00042801940101202705</td><td>0.0</td><td>0.0</td><td>0.0016325846426211996</td><td>0.0</td><td>0.017361309868469427</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0005562742165998982</td><td>0.0</td><td>0.00014375768454087917</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0025110165332830545</td><td>-7.8245874708522605</td><td>-10.84919936356748</td><td>-98.99999999999999</td><td>-98.99999999999999</td><td>-98.99999999999999</td><td>-51.16979913863784</td><td>-98.99999999999999</td><td>0.09039629948781458</td><td>137905.9715380201</td><td>0.0</td><td>22306970.215880573</td><td>18624585.265930977</td><td>0.010161224181103504</td><td>1.0062679576372642</td><td>0.0</td><td>0.9999896194262613</td><td>1.4067203098447215e-05</td><td>2.301656430213172e+47</td><td>0.8715945357371302</td><td>0.8715945348656317</td><td>0.009149817675920675</td><td>0.009134698922525778</td><td>142.80042886357586</td><td>186.81464365113607</td><td>415.1953780428506</td><td>-2.7921603513869568e+44</td><td>1.1851271117207251e+50</td><td>6.0</td><td>0.0</td><td>-14.774101</td></tr>
+<tr><td>1598.0</td><td>9.0</td><td>4.730435082976705</td><td>0.8859997990228003</td><td>0.0</td><td>0.8859991023362288</td><td>0.8829515213032627</td><td>0.0</td><td>-2.82124763166384</td><td>-2.1996284816073643</td><td>-7.881283553608509</td><td>-99.0</td><td>-68.10118763199634</td><td>4.079143217440829</td><td>-2.842365173892287</td><td>-2.0462570898490804</td><td>8.477976954169431</td><td>-14.136052890965829</td><td>0.0001060151662811856</td><td>0.6617005758395563</td><td>1.3799857636903607</td><td>0.6935705187329272</td><td>0.00015235381678649262</td><td>4336.261197385152</td><td>0.00015235381678649262</td><td>3.1306688783337514e-07</td><td>0.0</td><td>1.000000003919232</td><td>0.999999992161536</td><td>1.1752171412416445e+46</td><td>0.0015108556424879903</td><td>12001.093832192537</td><td>0.0015108556244811703</td><td>12001.09381462454</td><td>0.9999999997614959</td><td>0.0</td><td>2.0439527217573656e-10</td><td>3.410121492177164e-11</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>8.813107468914577e-16</td><td>8.878685149547695e-16</td><td>3.4296815706731973e-56</td><td>9.075730238537896e-16</td><td>8.665321785238619e-20</td><td>6.4326030503512655e-99</td><td>2.244140769690247e-62</td><td>8.51512140517063e-16</td><td>5.931658730041989e-18</td><td>2.2693625807906514e-18</td><td>1.1977744266872086e-67</td><td>1.6651804636094574e-99</td><td>1.3931012162986975e-16</td><td>1.6651804060573627e-99</td><td>1.665180423800549e-99</td><td>6.791636754547001e-16</td><td>0.0</td><td>8.106355918410535e-16</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>7.912428656338765e-16</td><td>0.0</td><td>8.082034263039462e-16</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>6.715741460449172e-16</td><td>6.876930689345874</td><td>7.256286778133213</td><td>1043.098550215736</td><td>0.00010034614843449423</td><td>167.43638035978927</td><td>0.0</td><td>6.649973018762753e-46</td><td>0.0</td><td>2.160387287542543e-25</td><td>1.6015716349853002e-26</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.3922895610016112</td><td>3.8369805469046524e-10</td><td>5.0062933658263795e-45</td><td>6.253311721696253e-15</td><td>1.7283219971904716e-17</td><td>7.813763986364375e-91</td><td>6.759187431810806e-54</td><td>0.5850183174496565</td><td>4.002233669622633e-06</td><td>4.689677736635598e-13</td><td>1.957872621647608e-41</td><td>0.0</td><td>0.000428530318295129</td><td>0.0</td><td>0.0</td><td>0.0016476428253192374</td><td>0.0</td><td>0.017382414627205727</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0005620640434568539</td><td>0.0</td><td>0.0001514263745655682</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.002516040742046995</td><td>-7.881712541884781</td><td>-10.945493860338503</td><td>-99.0</td><td>-99.0</td><td>-99.0</td><td>-50.961235516952506</td><td>-99.0</td><td>0.0895316356200587</td><td>142869.91421733404</td><td>0.0</td><td>23415776.29446833</td><td>19440609.717844214</td><td>0.009888494620683317</td><td>1.0059013338095784</td><td>0.0</td><td>0.9999897305181997</td><td>1.399111585993334e-05</td><td>2.3234038054808432e+47</td><td>0.8859997990228003</td><td>0.8859997981937081</td><td>0.00899060611113997</td><td>0.008976241001222128</td><td>135.80755297524257</td><td>179.11989801119677</td><td>393.0727891664536</td><td>-2.624476140620003e+44</td><td>1.1581553241709795e+50</td><td>6.0</td><td>0.0</td><td>-12.496572</td></tr>
+<tr><td>1599.0</td><td>9.0</td><td>4.928519192672327</td><td>0.8984990126461744</td><td>0.0</td><td>0.8984984102544676</td><td>0.8956756157976051</td><td>0.0</td><td>-2.8239509728052408</td><td>-2.1834002202127145</td><td>-7.997429971417878</td><td>-98.99999999999997</td><td>-31.23437278857609</td><td>4.081889139322174</td><td>-2.8464304663832376</td><td>-2.053100604182472</td><td>8.497760981700777</td><td>-14.151520421943848</td><td>0.00012194090957850518</td><td>0.7498263331768937</td><td>1.3891953234168848</td><td>0.7150607189290873</td><td>0.00017020901748793536</td><td>4401.202323288256</td><td>0.00017020901748793536</td><td>3.0017642049615353e-07</td><td>0.0</td><td>1.0000000048742157</td><td>0.9999999902515685</td><td>1.329399756486571e+46</td><td>0.0015009170790206785</td><td>12076.485405282843</td><td>0.0015009170548189107</td><td>12076.485381183416</td><td>0.9999999996387668</td><td>0.0</td><td>2.951389319280061e-10</td><td>6.608677186989456e-11</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>8.803960395171155e-16</td><td>8.762760502064773e-16</td><td>5.5395594238320105e-56</td><td>8.97616393427652e-16</td><td>3.268378720250954e-20</td><td>6.392802641620873e-99</td><td>3.607981805456512e-62</td><td>8.450075121952662e-16</td><td>6.935377155923367e-18</td><td>6.059288474931511e-19</td><td>1.9468710172748867e-67</td><td>1.6984585873423871e-99</td><td>1.4045302764882062e-16</td><td>1.6984563587562947e-99</td><td>1.6984569440326406e-99</td><td>6.791424699148795e-16</td><td>0.0</td><td>8.115615356805846e-16</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>8.153023507402022e-16</td><td>0.0</td><td>8.080458300992237e-16</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>7.148095874847946e-16</td><td>6.873820100436592</td><td>7.2880564895204545</td><td>1087.7461260407515</td><td>0.00011597096390658838</td><td>174.57772967362422</td><td>0.0</td><td>4.610977422167714e-46</td><td>0.0</td><td>3.900905452435075e-25</td><td>1.2795662575263667e-28</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.3711144461980531</td><td>4.706719480467039e-10</td><td>4.2139593212982824e-45</td><td>7.736139883423994e-15</td><td>1.8260472916340874e-17</td><td>7.368854143231772e-91</td><td>8.460340099472504e-53</td><td>0.6061370595320899</td><td>4.970313160632929e-06</td><td>6.16588802200651e-13</td><td>2.0202061799290973e-40</td><td>0.0</td><td>0.0004285700381235795</td><td>0.0</td><td>0.0</td><td>0.0016760352711613735</td><td>0.0</td><td>0.01738425106547692</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0005724209642908213</td><td>0.0</td><td>0.00016342183970857822</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0025188243066388075</td><td>-7.997868748424025</td><td>-11.022358164964816</td><td>-98.99999999999997</td><td>-98.99999999999997</td><td>-98.99999999999997</td><td>-50.43242325816049</td><td>-98.99999999999997</td><td>0.08882058239702822</td><td>147408.88984777415</td><td>0.0</td><td>24425119.335425735</td><td>20238869.798429735</td><td>0.009660240123080917</td><td>1.0056147919131688</td><td>0.0</td><td>0.999989883906088</td><td>1.3703310840782936e-05</td><td>2.33431921560546e+47</td><td>0.8984990126461744</td><td>0.8984990118588272</td><td>0.008849740142465402</td><td>0.008835954952371581</td><td>131.2360604276204</td><td>170.52607228568246</td><td>388.4427185667229</td><td>-2.3893620396709223e+44</td><td>1.1339785674287544e+50</td><td>6.0</td><td>0.0</td><td>-12.51204</td></tr>
+<tr><td>1600.0</td><td>9.0</td><td>5.086018667982165</td><td>0.908052431654192</td><td>0.0</td><td>0.9080519117455736</td><td>0.9053903127721896</td><td>0.0</td><td>-2.824491253704828</td><td>-2.163067264433975</td><td>-8.124979344188361</td><td>-98.99999999999997</td><td>-23.05645540380215</td><td>4.084385015816368</td><td>-2.848050839225591</td><td>-2.058362497620654</td><td>8.512894684328076</td><td>-14.171081435625949</td><td>0.00013641792675644245</td><td>0.8292841141660857</td><td>1.3904625024077952</td><td>0.7319245000087229</td><td>0.00018622320901234753</td><td>4451.323677518837</td><td>0.00018622320901234753</td><td>2.9599173544791937e-07</td><td>0.0</td><td>1.0000000058096083</td><td>0.9999999883807831</td><td>1.4693334656451017e+46</td><td>0.0014992997280159342</td><td>12145.84285053171</td><td>0.0014992996971889931</td><td>12145.842819584155</td><td>0.999999999383544</td><td>0.0</td><td>4.550735942245092e-10</td><td>1.6137450966875008e-10</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>8.842147575331385e-16</td><td>8.448678298657783e-16</td><td>9.701981822349825e-56</td><td>8.916555553263304e-16</td><td>1.3498406927318075e-20</td><td>6.517065843540981e-99</td><td>6.692293627434164e-62</td><td>8.478958524105484e-16</td><td>7.725546850651049e-18</td><td>1.0255694893110854e-21</td><td>3.868306773769315e-67</td><td>1.742960290340903e-99</td><td>1.4413948954984952e-16</td><td>1.742960290340903e-99</td><td>1.742960290340903e-99</td><td>6.926556300764819e-16</td><td>0.0</td><td>8.271161998716021e-16</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>8.271675065153357e-16</td><td>0.0</td><td>8.189467219198266e-16</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>7.446084757957669e-16</td><td>6.871971335800004</td><td>7.3123464513552685</td><td>1121.5922950845495</td><td>0.0001303538445945216</td><td>178.97449973040696</td><td>0.0</td><td>2.8312588588711293e-46</td><td>0.0</td><td>3.1026623677114564e-25</td><td>1.1050768593373696e-26</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.3669095566920315</td><td>5.789953575307149e-10</td><td>3.259498720809318e-45</td><td>1.1543303504427576e-14</td><td>1.8969103673522482e-17</td><td>4.7107945562480655e-91</td><td>9.475153289406519e-53</td><td>0.6103002744544684</td><td>5.537960904273691e-06</td><td>7.103755152579578e-13</td><td>1.558368885605091e-40</td><td>0.0</td><td>0.0004287104123176729</td><td>0.0</td><td>0.0</td><td>0.0016932298890411416</td><td>0.0</td><td>0.017390873572356108</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0005789202712097858</td><td>0.0</td><td>0.00017135562338292207</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.002521540544570975</td><td>-8.125464439817028</td><td>-11.110426436160443</td><td>-98.99999999999997</td><td>-98.99999999999997</td><td>-98.99999999999997</td><td>-49.93259079705068</td><td>-98.99999999999997</td><td>0.08830200349952624</td><td>150972.59574588638</td><td>0.0</td><td>25212005.057584815</td><td>20811821.9815852</td><td>0.00949207341181056</td><td>1.0053927667515723</td><td>0.0</td><td>0.9999899333832453</td><td>1.3674551225509651e-05</td><td>2.3485616975665713e+47</td><td>0.908052431654192</td><td>0.9080524309095928</td><td>0.008742761699589447</td><td>0.008729504323900497</td><td>124.97271896687532</td><td>164.81301202911914</td><td>360.64125869360134</td><td>-2.0615662052118255e+44</td><td>1.1155321607914718e+50</td><td>6.0</td><td>0.0</td><td>-12.531601</td></tr>
+<tr><td>1601.0</td><td>9.0</td><td>5.218336483569271</td><td>0.9158336994375</td><td>0.0</td><td>0.9158332482890998</td><td>0.9133001519984024</td><td>0.0</td><td>-2.8234679691142435</td><td>-2.1427591217405095</td><td>-8.245332332682667</td><td>-98.99999999999999</td><td>-84.69553003839914</td><td>4.086793054015659</td><td>-2.8479409029510383</td><td>-2.0626669317239426</td><td>8.525215034801862</td><td>-14.209437755559051</td><td>0.0001499094009372837</td><td>0.9026282728771837</td><td>1.3853417900863998</td><td>0.7460207353384332</td><td>0.00020089187854056717</td><td>4492.525755116037</td><td>0.00020089187854056717</td><td>2.9276974019382364e-07</td><td>0.0</td><td>1.0000000067232728</td><td>0.9999999865534549</td><td>1.5985679559515684e+46</td><td>0.0015021476789293796</td><td>12212.696752555688</td><td>0.0015021476414730746</td><td>12212.696714674255</td><td>0.9999999990525327</td><td>0.0</td><td>6.519141332903454e-10</td><td>2.9554544806021036e-10</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>8.77031755189946e-16</td><td>8.243905134444182e-16</td><td>1.4640568712261616e-55</td><td>8.83992400475684e-16</td><td>1.3639751272319595e-20</td><td>6.620502280412645e-99</td><td>1.0551001638322896e-61</td><td>8.441106813781116e-16</td><td>8.287541692840249e-18</td><td>1.1872977716409457e-21</td><td>6.29937450091416e-67</td><td>1.780161769608336e-99</td><td>1.4795106378224126e-16</td><td>1.780161769608336e-99</td><td>1.780161769608336e-99</td><td>7.078870341464601e-16</td><td>0.0</td><td>8.424534364040403e-16</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>8.256635475131699e-16</td><td>0.0</td><td>8.46671964311515e-16</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>7.684870909279814e-16</td><td>6.871068594699377</td><td>7.3321354057741805</td><td>1148.3173374285814</td><td>0.00014384502823844888</td><td>181.44555136701004</td><td>0.0</td><td>2.8473922452701772e-46</td><td>0.0</td><td>2.1376981864812906e-25</td><td>2.2498822864940166e-26</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.3743281855325344</td><td>7.340602954785592e-10</td><td>6.569364383299612e-45</td><td>1.8314618439455075e-14</td><td>1.957644701572721e-17</td><td>7.502063927254598e-91</td><td>5.372956491252747e-53</td><td>0.6028500739974039</td><td>5.850268111218738e-06</td><td>7.739134884611039e-13</td><td>4.842101349057813e-41</td><td>0.0</td><td>0.00042895213734787615</td><td>0.0</td><td>0.0</td><td>0.001701835440489977</td><td>0.0</td><td>0.017402066557547467</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0005825103902263976</td><td>0.0</td><td>0.0001761518694534079</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.002524373072032746</td><td>-8.245871729268336</td><td>-11.18025610194992</td><td>-98.99999999999999</td><td>-98.99999999999999</td><td>-98.99999999999999</td><td>-49.489630838065395</td><td>-98.99999999999999</td><td>0.08788844132207327</td><td>153956.0019991915</td><td>0.0</td><td>25863963.391822215</td><td>21280044.508439858</td><td>0.009364890812406464</td><td>1.005226334096163</td><td>0.0</td><td>0.9999899602817724</td><td>1.3621852939230052e-05</td><td>2.365686769880731e+47</td><td>0.9158336994375</td><td>0.915833698739391</td><td>0.008656390533457224</td><td>0.008643502949485689</td><td>120.33113180733471</td><td>159.00653405763217</td><td>354.27046148984834</td><td>-1.841020879665192e+44</td><td>1.1005439015821504e+50</td><td>6.0</td><td>0.0</td><td>-12.569957</td></tr>
+<tr><td>1602.0</td><td>9.0</td><td>5.343259087189497</td><td>0.9233208411754849</td><td>0.0</td><td>0.9233204107161559</td><td>0.920883162381092</td><td>0.0</td><td>-2.820520179922964</td><td>-2.1120817764516064</td><td>-8.266994181930318</td><td>-98.99999999999997</td><td>-82.44234918256595</td><td>4.089567350941473</td><td>-2.845926664122101</td><td>-2.066741630979931</td><td>8.536896062387552</td><td>-14.21902353404942</td><td>0.0001629679052423274</td><td>0.9718936998879268</td><td>1.402166076559102</td><td>0.7597127318196188</td><td>0.0002143845715212653</td><td>4532.091402937664</td><td>0.0002143845715212653</td><td>2.966177226886429e-07</td><td>0.0</td><td>1.000000007698323</td><td>0.9999999846033533</td><td>1.7180427594120896e+46</td><td>0.0015132169165644194</td><td>12291.697595552872</td><td>0.001513216871735064</td><td>12291.697550293076</td><td>0.9999999988729733</td><td>0.0</td><td>7.326670179176646e-10</td><td>3.943520114745179e-10</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>8.751956643918285e-16</td><td>8.456531537319719e-16</td><td>2.4672392920531975e-55</td><td>8.792700659630457e-16</td><td>1.4144757544255886e-20</td><td>5.974024697959228e-99</td><td>1.8486131682334554e-61</td><td>8.322409579982936e-16</td><td>8.292097339018088e-18</td><td>1.0912091998291306e-21</td><td>1.1484705056992588e-66</td><td>1.744990546561365e-99</td><td>1.4467680056309735e-16</td><td>1.744523383494966e-99</td><td>1.744523383494966e-99</td><td>6.909831325901844e-16</td><td>0.0</td><td>7.985293718273036e-16</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>8.220649294951009e-16</td><td>0.0</td><td>8.512823790640457e-16</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>7.570039167850648e-16</td><td>6.871541348866711</td><td>7.35116594879482</td><td>1170.8841225702367</td><td>0.00015681860770306577</td><td>182.19992905734267</td><td>0.0</td><td>2.9650115600908263e-46</td><td>0.0</td><td>2.3205688525882726e-25</td><td>8.197352170294999e-26</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.39385087856606904</td><td>1.0957270655087987e-09</td><td>1.1660921721267065e-44</td><td>3.490773036922101e-14</td><td>2.050058460084398e-17</td><td>1.7797063616806047e-90</td><td>4.793047951511427e-53</td><td>0.5833064286423062</td><td>6.007179005767188e-06</td><td>8.410239322744205e-13</td><td>6.386268493682786e-41</td><td>0.0</td><td>0.0004294619274284985</td><td>0.0</td><td>0.0</td><td>0.0016977347825975213</td><td>0.0</td><td>0.017423176593731868</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0005820370531705742</td><td>0.0</td><td>0.00017627599472813855</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0025279981643591687</td><td>-8.267710239188418</td><td>-11.09421432747371</td><td>-98.99999999999997</td><td>-98.99999999999997</td><td>-98.99999999999997</td><td>-49.29831400913655</td><td>-98.99999999999997</td><td>0.0873943857541383</td><td>156772.1055398742</td><td>0.0</td><td>26485408.65116809</td><td>21645659.061452266</td><td>0.009246022790063773</td><td>1.0050525643325376</td><td>0.0</td><td>0.9999899000439885</td><td>1.3695877877677948e-05</td><td>2.3929801495356643e+47</td><td>0.9233208411754849</td><td>0.9233208405375569</td><td>0.008575662460745183</td><td>0.008563346209963008</td><td>112.51209255881125</td><td>147.18833738346518</td><td>321.7875658324076</td><td>-1.780383691356764e+44</td><td>1.0862051809614018e+50</td><td>6.0</td><td>0.0</td><td>-12.579543</td></tr>
+<tr><td>1603.0</td><td>9.0</td><td>5.419733983305413</td><td>0.928289774594923</td><td>0.0</td><td>0.9282893708444949</td><td>0.9260060954075581</td><td>0.0</td><td>-2.8182305540921666</td><td>-2.147643563976592</td><td>-8.323879099910615</td><td>-98.99999999999999</td><td>-22.846131283761142</td><td>4.091516204644288</td><td>-2.844262396038127</td><td>-2.0694945254701604</td><td>8.544734635077262</td><td>-14.247606533025158</td><td>0.0001735713533569202</td><td>1.0284848375828703</td><td>1.4321784093542769</td><td>0.769020952881924</td><td>0.00022552238585203291</td><td>4558.685319014015</td><td>0.00022552238585203291</td><td>1.9272019361022684e-06</td><td>0.0</td><td>1.0000000085177143</td><td>0.9999999829645718</td><td>1.8135754834309093e+46</td><td>0.001527506564310845</td><td>12350.335218630518</td><td>0.0015275065117201308</td><td>12350.335166419123</td><td>0.9999999979564153</td><td>0.0</td><td>9.550878278054172e-10</td><td>1.0884891686169872e-09</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>8.92217369210547e-16</td><td>8.426090508075291e-16</td><td>4.965515071239883e-55</td><td>8.749180627939159e-16</td><td>1.4611049464608202e-20</td><td>8.508096645259958e-99</td><td>4.200647313372958e-61</td><td>8.308152272619187e-16</td><td>8.388617335458337e-18</td><td>1.0460185995095162e-21</td><td>3.102846472123961e-66</td><td>1.7991049287551186e-99</td><td>1.441016694658358e-16</td><td>1.7991049287551186e-99</td><td>1.7991049287551186e-99</td><td>6.873365794346124e-16</td><td>0.0</td><td>7.822411165238568e-16</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>8.313309170734228e-16</td><td>0.0</td><td>8.518375807422195e-16</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>7.562222580393134e-16</td><td>6.8725465803541015</td><td>7.363949269383104</td><td>1184.9277606692108</td><td>0.00016709469558053166</td><td>183.12821896004013</td><td>0.0</td><td>7.056483230751865e-47</td><td>0.0</td><td>1.9868212111686527e-25</td><td>5.1067035779518574e-26</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.3995838366804235</td><td>1.4731448008684776e-09</td><td>3.593650593370555e-45</td><td>6.194325325176997e-14</td><td>2.1705957397822298e-17</td><td>9.994584535436267e-91</td><td>4.207059397244435e-52</td><td>0.577553357111632</td><td>6.224915268470768e-06</td><td>9.042582216663665e-13</td><td>6.350863766677531e-41</td><td>0.0</td><td>0.00042963488191764387</td><td>0.0</td><td>0.0</td><td>0.0017015319730620151</td><td>0.0</td><td>0.01743277320440526</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0005837443460139356</td><td>0.0</td><td>0.00017877513311186568</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.002530120280054184</td><td>-8.32646891028344</td><td>-11.050792425852997</td><td>-98.99999999999999</td><td>-98.99999999999999</td><td>-98.99999999999999</td><td>-49.10598049396322</td><td>-98.99999999999999</td><td>0.0870723727734829</td><td>158552.48143881877</td><td>0.0</td><td>26905601.29174059</td><td>21312874.472431615</td><td>0.009093390824326284</td><td>1.0048995030925696</td><td>0.0</td><td>0.9999865023696493</td><td>1.846261308813379e-05</td><td>2.4138146215756804e+47</td><td>0.835282025409214</td><td>0.8352820247692454</td><td>0.007695052496019925</td><td>0.007683715783665099</td><td>107.65118739350636</td><td>141.0301081845554</td><td>312.24971791936514</td><td>-1.6904026800979611e+44</td><td>1.0765120126126963e+50</td><td>6.0</td><td>0.0</td><td>-12.608126</td></tr>
+<tr><td>1604.0</td><td>9.0</td><td>5.456161073112079</td><td>0.9311845432817789</td><td>0.0</td><td>0.9311841722752616</td><td>0.9290554171330992</td><td>0.0</td><td>-2.816580889312843</td><td>-2.0872817762913805</td><td>-8.417209884203166</td><td>-98.99999999999999</td><td>-25.792322529953147</td><td>4.092757895979074</td><td>-2.8429572346230616</td><td>-2.0711530757500727</td><td>8.549396824954082</td><td>-14.227993931012868</td><td>0.0001821478450483287</td><td>1.0746075645189055</td><td>1.4299367474622051</td><td>0.7747015789101656</td><td>0.00023471228309580175</td><td>4574.566732795323</td><td>0.00023471228309580175</td><td>2.114434183832404e-06</td><td>0.0</td><td>1.0000000092642467</td><td>0.9999999814715071</td><td>1.889749123504372e+46</td><td>0.0015422454494274187</td><td>12391.320422154711</td><td>0.0015422453892062575</td><td>12391.320363497342</td><td>0.999999996175118</td><td>0.0</td><td>1.3506271354861838e-09</td><td>2.4742472428867147e-09</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>8.995876726650446e-16</td><td>8.412894335884085e-16</td><td>7.65327465895054e-55</td><td>8.743943149731689e-16</td><td>1.507826435659486e-20</td><td>1.1006190185660296e-98</td><td>6.675497775158833e-61</td><td>8.391710538388597e-16</td><td>8.532876644446823e-18</td><td>1.0389030089226732e-21</td><td>5.141047947331728e-66</td><td>1.9233209618192084e-99</td><td>1.4524880647279667e-16</td><td>1.9233209618192084e-99</td><td>1.9233209618192084e-99</td><td>6.922114042348461e-16</td><td>0.0</td><td>7.913809217037196e-16</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>8.416907138930715e-16</td><td>0.0</td><td>8.474147646558417e-16</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>7.659612203339958e-16</td><td>6.873950783230963</td><td>7.371591231967924</td><td>1191.518441944134</td><td>0.0001751954921534088</td><td>184.2288702270305</td><td>0.0</td><td>1.6181872436542519e-46</td><td>0.0</td><td>2.3081708571468724e-25</td><td>4.079850340639007e-26</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.39379888949757735</td><td>1.866729378070572e-09</td><td>9.305292861106925e-45</td><td>9.793622420780815e-14</td><td>2.3156126410573513e-17</td><td>6.098097375650482e-90</td><td>6.288491130811806e-52</td><td>0.5833192602996139</td><td>6.49527587245643e-06</td><td>9.64715771660539e-13</td><td>2.3912526024899205e-40</td><td>0.0</td><td>0.0004295270076128081</td><td>0.0</td><td>0.0</td><td>0.0017119799016504518</td><td>0.0</td><td>0.017432339711352753</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.000587292932112212</td><td>0.0</td><td>0.00018328722054723151</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0025309262858687555</td><td>-8.421400504967659</td><td>-11.045402715574216</td><td>-98.99999999999999</td><td>-98.99999999999999</td><td>-98.99999999999999</td><td>-48.925026378501215</td><td>-98.99999999999999</td><td>0.08688539869278146</td><td>159454.84215523704</td><td>0.0</td><td>27157320.64844084</td><td>20454172.49433279</td><td>0.009026256221604073</td><td>1.0046438799388404</td><td>0.0</td><td>0.9999833987495352</td><td>2.292776815711604e-05</td><td>2.4292478113354764e+47</td><td>0.6664931770650162</td><td>0.6664931764232098</td><td>0.0061381962013546554</td><td>0.006128759747492772</td><td>97.19889647735248</td><td>126.20193584899916</td><td>275.82807400590025</td><td>-1.5704553534569399e+44</td><td>1.0706387390334607e+50</td><td>6.0</td><td>0.0</td><td>-12.588513</td></tr>
+</table></div></div>
+</div>
+<p>Access columns in the data with their titles:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ip.data[&quot;Mini&quot;]
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="math notranslate nohighlight">
+$[0.090848446,~0.10083559,~0.10867772,~\dots,~2.3635631,~2.3635645,~2.3635683] \; \mathrm{M_{\odot}}$</div></div>
+</div>
+<p>Or use shorthands for the most commonly used columns:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># print first few values of properties
+ip.log_age[:5]
+ip.log_Teff[:5]
+ip.initial_mass[:5]
+ip.mass[:5]
+ip.initial_metallicity[:5]
+ip.metallicity[:5]
+ip.log_g[:5]
+ip.log_L[:5]
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="math notranslate nohighlight">
+$[9,~9,~9,~9,~9] \; \mathrm{dex\left(yr\right)}$</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="math notranslate nohighlight">
+$[3.3592,~3.3795,~3.3911,~3.3982,~3.4053] \; \mathrm{dex\left(K\right)}$</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="math notranslate nohighlight">
+$[0.090848446,~0.10083559,~0.10867772,~0.11347212,~0.11830842] \; \mathrm{M_{\odot}}$</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="math notranslate nohighlight">
+$[0.091,~0.101,~0.109,~0.113,~0.118] \; \mathrm{M_{\odot}}$</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="math notranslate nohighlight">
+$[0.0207,~0.0207,~0.0207,~0.0207,~0.0207] \; \mathrm{}$</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="math notranslate nohighlight">
+$[0.02085,~0.02085,~0.02085,~0.02085,~0.02085] \; \mathrm{}$</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="math notranslate nohighlight">
+$[5.161,~5.143,~5.136,~5.129,~5.119] \; \mathrm{dex\left(\frac{cm}{s^{2}}\right)}$</div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="math notranslate nohighlight">
+$[-3.376,~-3.231,~-3.146,~-3.092,~-3.036] \; \mathrm{dex\left(L_{\odot}\right)}$</div></div>
+</div>
+<p>If the dataset has multiple isochrones (we queried over an age or metallicity grid), they’re all stored in <code class="docutils literal notranslate"><span class="pre">Isochrone.data</span></code>, but we can also access them individually with <code class="docutils literal notranslate"><span class="pre">Isochrone.isochrone</span></code>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(f&quot;Number of isochrones in MIST data: {im_local.n_isochrones}&quot;)
+print(f&quot;As individual objects: {im_local.isochrone}\n&quot;)
+
+# get an `Isochrone` with the data only for the isochrone of log_age=9.5
+im_local.isochrone[1]
+# same as above
+im_local.isochrone[&#39;log_age=9.5&#39;]
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Number of isochrones in MIST data: 3
+As individual objects: &lt;IsochroneIndex: 3 isochrone(s): [&#39;log_age=9&#39;, &#39;log_age=9.5&#39;, &#39;log_age=10&#39;]&gt;
+
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Isochrone(database=mist): 1398 rows x 172 columns
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Isochrone(database=mist): 1398 rows x 172 columns
+</pre></div></div>
+</div>
+<p>A few other <code class="docutils literal notranslate"><span class="pre">Isochrone</span></code> properties may be helpful:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># values used to perform the MIST query, as seen by the server
+print(f&quot;MIST query parameters\n{im.query_parameters}\n&quot;)
+
+print(f&quot;PARSEC query parameters\n{ip.query_parameters}\n&quot;)
+
+# header of file downloaded from MIST query
+print(f&quot;MIST header:\n{im.header}\n&quot;)
+
+print(f&quot;PARSEC header:\n{ip.header}\n&quot;)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+MIST query parameters
+{&#39;age&#39;: 1000000000.0, &#39;FeH&#39;: 0.0, &#39;alphaFe&#39;: None, &#39;v_div_vcrit&#39;: None, &#39;output_option&#39;: &#39;photometry&#39;, &#39;output&#39;: &#39;JWST&#39;, &#39;extinction_Av&#39;: None, &#39;version&#39;: None}
+
+PARSEC query parameters
+{&#39;age_yr&#39;: None, &#39;logage&#39;: (9.0, 9.0, 0.0), &#39;Z&#39;: (0.0207, 0.0207, 0.0), &#39;MH&#39;: None, &#39;photsys_file&#39;: &#39;euclid_nisp&#39;, &#39;cmd_version&#39;: &#39;3.8&#39;, &#39;track_omegai&#39;: &#39;0.00&#39;, &#39;track_parsec&#39;: &#39;parsec_CAF09_v1.2S&#39;, &#39;track_colibri&#39;: &#39;parsec_CAF09_v1.2S_S_LMC_08_web&#39;, &#39;track_postagb&#39;: &#39;no&#39;, &#39;n_inTPC&#39;: &#39;10&#39;, &#39;eta_reimers&#39;: &#39;0.2&#39;, &#39;kind_interp&#39;: &#39;1&#39;, &#39;kind_postagb&#39;: &#39;-1&#39;, &#39;photsys_version&#39;: &#39;YBCnewVega&#39;, &#39;dust_sourceM&#39;: &#39;dpmod60alox40&#39;, &#39;dust_sourceC&#39;: &#39;AMCSIC15&#39;, &#39;kind_mag&#39;: &#39;2&#39;, &#39;kind_dust&#39;: &#39;0&#39;, &#39;extinction_av&#39;: &#39;0.0&#39;, &#39;extinction_coeff&#39;: &#39;constant&#39;, &#39;extinction_curve&#39;: &#39;cardelli&#39;, &#39;kind_LPV&#39;: &#39;3&#39;, &#39;imf_file&#39;: &#39;tab_imf/imf_kroupa_orig.dat&#39;, &#39;isoc_isagelog&#39;: &#39;0&#39;, &#39;isoc_agelow&#39;: &#39;1.0e9&#39;, &#39;isoc_ageupp&#39;: &#39;1.0e10&#39;, &#39;isoc_dage&#39;: &#39;0.0&#39;, &#39;isoc_lagelow&#39;: &#39;6.6&#39;, &#39;isoc_lageupp&#39;: &#39;10.13&#39;, &#39;isoc_dlage&#39;: &#39;0.0&#39;, &#39;isoc_ismetlog&#39;: &#39;0&#39;, &#39;isoc_zlow&#39;: &#39;0.0152&#39;, &#39;isoc_zupp&#39;: &#39;0.03&#39;, &#39;isoc_dz&#39;: &#39;0.0&#39;, &#39;isoc_metlow&#39;: &#39;-2&#39;, &#39;isoc_metupp&#39;: &#39;0.3&#39;, &#39;isoc_dmet&#39;: &#39;0.0&#39;, &#39;output_kind&#39;: &#39;0&#39;, &#39;output_evstage&#39;: &#39;1&#39;, &#39;lf_maginf&#39;: &#39;-15&#39;, &#39;lf_magsup&#39;: &#39;20&#39;, &#39;lf_deltamag&#39;: &#39;0.5&#39;, &#39;sim_mtot&#39;: &#39;1.0e4&#39;, &#39;submit_form&#39;: &#39;Submit&#39;}
+
+MIST header:
+MIST version number  = 2.5
+MESA revision number =    11701
+--------------------------------------------------------------------------------------
+Yinit        Zinit   [Fe/H]   [a/Fe]  v/vcrit
+0.2722  1.78798E-02     0.00     0.00     0.40
+--------------------------------------------------------------------------------------
+number of isochrones =     1
+--------------------------------------------------------------------------------------
+number of EEPs, cols =  1401  170
+
+PARSEC header:
+File generated by CMD 3.9 (http://stev.oapd.inaf.it/cmd) on Fri Mar 13 00:41:33 UTC 2026
+isochrones based on PARSEC release v1.2S +  COLIBRI S_37 + S_35 + PR16
+Basic references: Bressan et al. (2012), MNRAS, 427, 127 + Chen et al. (2014, 2015), MNRAS, 444, 2525 + MNRAS, 452, 1068 + Tang et al. (2014), MNRAS, 445, 4287 + Marigo et al. (2017), ApJ, 835, 77 + Pastorelli al. (2019), MNRAS, 485, 5666 + Pastorelli al. (2020), MNRAS, in press
+Thermal pulse cycles included
+On RGB, assumed Reimers mass loss with efficiency eta=0.2
+LPV periods and growth rates added cf. Trabucchi et al. (2019)
+but fundamental-mode LPV periods are from Trabucchi et al. (2021)
+Photometric system: Euclid VIS+NISP (ABmags)
+Using YBC version of bolometric corrections as in Chen et al. (2019)
+O-rich circumstellar dpmod60alox40 dust from Groenewegen (2006)
+C-rich circumstellar AMCSIC15 dust from Groenewegen (2006)
+IMF: Kroupa (2001, 2002) + Kroupa et al. (2013) canonical two-part-power law IMF corrected for unresolved binaries
+Kind of output: isochrone tables
+
+</pre></div></div>
+</div>
+</section>
+<section id="3.-Photometry">
+<h2>3. Photometry<a class="headerlink" href="#3.-Photometry" title="Link to this heading">#</a></h2>
+<p>Photometry data is kept separate from <code class="docutils literal notranslate"><span class="pre">Isochrone.data</span></code> and is in <code class="docutils literal notranslate"><span class="pre">Isochrone.photometry.data</span></code>. Its attributes largely mirror those in <code class="docutils literal notranslate"><span class="pre">Isochrone.data</span></code>. For example:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ip.photometry
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;Photometry: 1 system(s): Euclid_VIS+NISP_(ABmags) (7 bands)&gt;
+</pre></div></div>
+</div>
+<p>(The ‘system’ here is the photometric system, composed of multiple bands. Data from each photometric system is stored in its own table in <code class="docutils literal notranslate"><span class="pre">Isochrone.photometry</span></code>. We’ll add more photometric systems to a dataset below.)</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ip.photometry.columns
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;Euclid_VIS+NISP_(ABmags)&#39;: [&#39;mbolmag&#39;,
+  &#39;VISmag&#39;,
+  &#39;Ymag&#39;,
+  &#39;Bluemag&#39;,
+  &#39;Jmag&#39;,
+  &#39;Redmag&#39;,
+  &#39;Hmag&#39;]}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ip.photometry.data
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;Euclid_VIS+NISP_(ABmags)&#39;: &lt;QTable length=533&gt;
+ mbolmag  VISmag   Ymag  Bluemag   Jmag   Redmag   Hmag
+   mag     mag     mag     mag     mag     mag     mag
+ float64 float64 float64 float64 float64 float64 float64
+ ------- ------- ------- ------- ------- ------- -------
+   13.21  14.824  12.333  12.258  12.048  11.982  11.984
+  12.848  14.462  11.971  11.897  11.687  11.622  11.623
+  12.635  14.249  11.758  11.683  11.474  11.409   11.41
+    12.5  14.113  11.622  11.548  11.339  11.274  11.275
+   12.36  13.973  11.482  11.408    11.2  11.135  11.135
+  12.291  13.904  11.413  11.339  11.131  11.066  11.066
+  11.835  13.267  10.959  10.893  10.689  10.628  10.631
+  11.805   13.22  10.929  10.863   10.66    10.6  10.602
+  11.737  13.117  10.862  10.797  10.595  10.536  10.539
+     ...     ...     ...     ...     ...     ...     ...
+  -4.389  -2.434  -4.995  -5.073  -5.574  -5.718  -5.859
+    -4.5  -2.688  -5.087  -5.157  -5.638  -5.785  -5.928
+  -4.683  -2.859  -5.077  -5.144  -5.647  -5.821  -5.991
+  -4.845  -2.841   -4.98  -5.054  -5.608  -5.817  -6.021
+  -4.944  -2.694  -4.829   -4.91  -5.524  -5.766  -6.001
+  -4.984  -2.565  -4.694   -4.78  -5.433  -5.696  -5.951
+   -4.99  -2.617  -4.667  -4.752  -5.405  -5.667  -5.921
+   -4.98  -2.739   -4.68  -4.763  -5.397  -5.652  -5.897
+  29.767  31.402   32.07   32.11  32.494  32.689  32.976}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ip.photometry.data[&quot;Ymag&quot;]
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="math notranslate nohighlight">
+$[12.333,~11.971,~11.758,~\dots,~-4.667,~-4.68,~32.07] \; \mathrm{mag}$</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(f&quot;MIST photometry header:\n{im.photometry.header}\n&quot;)
+
+print(f&quot;PARSEC photometry header:\n{ip.photometry.header}\n&quot;)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+MIST photometry header:
+PHOTOMETRY.JWST
+MIST version number  = 2.5
+MESA revision number =    11701
+photometric system   = JWST NIRCAM (Vega)
+--------------------------------------------------------------------------------------
+Yinit        Zinit   [Fe/H]   [a/Fe]  v/vcrit
+0.2722  1.78798E-02     0.00     0.00     0.40
+--------------------------------------------------------------------------------------
+number of isochrones =     1
+extinction:   Av, Rv =  0.000 3.100
+--------------------------------------------------------------------------------------
+number of EEPs, cols =  1401   40
+
+PARSEC photometry header:
+PHOTOMETRY.euclid_nisp
+File generated by CMD 3.9 (http://stev.oapd.inaf.it/cmd) on Fri Mar 13 00:41:33 UTC 2026
+isochrones based on PARSEC release v1.2S +  COLIBRI S_37 + S_35 + PR16
+Basic references: Bressan et al. (2012), MNRAS, 427, 127 + Chen et al. (2014, 2015), MNRAS, 444, 2525 + MNRAS, 452, 1068 + Tang et al. (2014), MNRAS, 445, 4287 + Marigo et al. (2017), ApJ, 835, 77 + Pastorelli al. (2019), MNRAS, 485, 5666 + Pastorelli al. (2020), MNRAS, in press
+Thermal pulse cycles included
+On RGB, assumed Reimers mass loss with efficiency eta=0.2
+LPV periods and growth rates added cf. Trabucchi et al. (2019)
+but fundamental-mode LPV periods are from Trabucchi et al. (2021)
+Photometric system: Euclid VIS+NISP (ABmags)
+Using YBC version of bolometric corrections as in Chen et al. (2019)
+O-rich circumstellar dpmod60alox40 dust from Groenewegen (2006)
+C-rich circumstellar AMCSIC15 dust from Groenewegen (2006)
+IMF: Kroupa (2001, 2002) + Kroupa et al. (2013) canonical two-part-power law IMF corrected for unresolved binaries
+Kind of output: isochrone tables
+
+</pre></div></div>
+</div>
+<section id="3.1-Computing-colors">
+<h3>3.1 Computing colors<a class="headerlink" href="#3.1-Computing-colors" title="Link to this heading">#</a></h3>
+<p>Select two magnitude columns in a photometric dataset to compute a color, which will be added as a new column to the dataset:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># B-V color
+ip_local.photometry.get_color(&quot;Bmag&quot;, &quot;Vmag&quot;)
+
+print(f&quot;Updated photometry data:\n{ip_local.photometry.data}\n&quot;)
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Bmag-Vmag column added to photometry table.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="math notranslate nohighlight">
+$[1.83,~1.823,~1.795,~\dots,~2.735,~2.715,~-0.187] \; \mathrm{mag}$</div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Updated photometry data:
+{&#39;YBC_tab_mag_odfnew/tab_mag_ubvrijhk.dat&#39;: &lt;QTable length=638&gt;
+mbolmag   Umag    Bmag    Vmag  ...   Jmag    Hmag    Kmag       Bmag-Vmag
+  mag     mag     mag     mag   ...   mag     mag     mag           mag
+float64 float64 float64 float64 ... float64 float64 float64       float64
+------- ------- ------- ------- ... ------- ------- ------- --------------------
+  13.23  22.457  19.862  18.032 ...   11.14  10.526  10.234   1.8299999999999983
+ 12.826  22.013   19.44  17.617 ...  10.737  10.124   9.829   1.8230000000000004
+ 12.208  21.023  18.583  16.788 ...  10.133    9.52    9.22   1.7949999999999982
+  12.14  20.769  18.389  16.607 ...  10.073   9.459   9.159                1.782
+ 11.755  19.486  17.374  15.667 ...   9.727   9.112   8.812    1.706999999999999
+ 11.585  18.996  16.976  15.296 ...   9.572   8.956   8.657   1.6799999999999997
+ 11.403  18.485  16.559    14.9 ...   9.409   8.791   8.494   1.6590000000000007
+ 10.865  17.155  15.445  13.843 ...   8.915   8.296   8.008   1.6020000000000003
+  10.36  16.059  14.495  12.927 ...   8.452    7.83   7.552   1.5679999999999996
+    ...     ...     ...     ... ...     ...     ...     ...                  ...
+ -4.734   3.607   0.509  -1.879 ...   -6.42   -7.49  -7.951                2.388
+ -4.845   4.024   0.756  -1.732 ...   -6.53  -7.609  -8.105                2.488
+ -5.016   4.846   1.234  -1.416 ...  -6.647   -7.74  -8.324                 2.65
+ -5.163   5.181   1.416  -1.303 ...  -6.728  -7.844  -8.484                2.719
+ -5.255   5.291   1.474  -1.272 ...  -6.768  -7.905  -8.575                2.746
+ -5.297   5.257   1.438  -1.309 ...  -6.808  -7.946  -8.617                2.747
+ -5.311   5.158    1.36  -1.375 ...  -6.844  -7.973  -8.632   2.7350000000000003
+ -5.314   4.995   1.239  -1.476 ...  -6.888    -8.0  -8.634                2.715
+ 29.767  30.491  31.398  31.585 ...  32.048  32.128  32.199 -0.18700000000000117}
+
+</pre></div></div>
+</div>
+</section>
+<section id="3.2-Adding-multiple-photometric-systems-to-data">
+<h3>3.2 Adding multiple photometric systems to data<a class="headerlink" href="#3.2-Adding-multiple-photometric-systems-to-data" title="Link to this heading">#</a></h3>
+<p>To add more photometry to an existing <code class="docutils literal notranslate"><span class="pre">Isochrone</span></code>, you can first see which systems are currently in your data:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ip.photometry.systems
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;euclid_nisp&#39;: &#39;Euclid_VIS+NISP_(ABmags)&#39;}
+</pre></div></div>
+</div>
+<p>The key in this dictionary is the shorthand name for the system used by the web server, and the value is the name in the dropdown menu of the webform (with spaces replaced with ‘_’).</p>
+<p>We can see which other systems are available from the server:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ip.photometry.available_systems
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;2mass_spitzer&#39;: &#39;2MASS + Spitzer (IRAC+MIPS)&#39;,
+ &#39;2mass_spitzer_wise&#39;: &#39;2MASS + Spitzer (IRAC+MIPS) + WISE&#39;,
+ &#39;2mass&#39;: &#39;2MASS JHKs&#39;,
+ &#39;ogle_2mass_spitzer&#39;: &#39;OGLE + 2MASS + Spitzer (IRAC+MIPS)&#39;,
+ &#39;ubvrijhk&#39;: &#39;UBVRIJHK (cf. Maiz-Apellaniz 2006 + Bessell 1990)&#39;,
+ &#39;bessell&#39;: &#39;UBVRIJHKLMN (cf. Bessell 1990 + Bessell &amp; Brett 1988)&#39;,
+ &#39;akari&#39;: &#39;AKARI&#39;,
+ &#39;batc&#39;: &#39;BATC&#39;,
+ &#39;megacam_wircam&#39;: &#39;CFHT Megacam + Wircam (all ABmags)&#39;,
+ &#39;wircam&#39;: &#39;CFHT Wircam&#39;,
+ &#39;megacam_post2014&#39;: &#34;CFHT/Megacam post-2014 u*g&#39;r&#39;i&#39;z&#39;&#34;,
+ &#39;megacam&#39;: &#34;CFHT/Megacam pre-2014 u*g&#39;r&#39;i&#39;z&#39;&#34;,
+ &#39;ciber&#39;: &#39;CIBER&#39;,
+ &#39;clue_galex&#39;: &#39;CLUE + GALEX (Vegamags)&#39;,
+ &#39;CSST&#39;: &#39;CSST (ABmags)&#39;,
+ &#39;decam&#39;: &#39;DECAM (ABmags)&#39;,
+ &#39;denis&#39;: &#39;DENIS&#39;,
+ &#39;dmc14&#39;: &#39;DMC 14 filters&#39;,
+ &#39;dmc15&#39;: &#39;DMC 15 filters&#39;,
+ &#39;eis&#39;: &#39;ESO/EIS (WFI UBVRIZ + SOFI JHK)&#39;,
+ &#39;wfi&#39;: &#39;ESO/WFI&#39;,
+ &#39;wfi2&#39;: &#39;ESO/WFI2&#39;,
+ &#39;euclid_nisp&#39;: &#39;Euclid VIS+NISP (ABmags)&#39;,
+ &#39;galex_sloan&#39;: &#39;GALEX FUV+NUV (Vegamag) + SDSS ugriz (ABmags)&#39;,
+ &#39;galex&#39;: &#34;GALEX FUV+NUV + Johnson&#39;s UBV (Maiz-Apellaniz version), all Vegamags&#34;,
+ &#39;gaia_tycho2_2mass&#39;: &#39;Gaia DR1 + Tycho2 + 2MASS (all Vegamags)&#39;,
+ &#39;gaiaDR2_tycho2_2mass&#39;: &#39;Gaia DR2 + Tycho2 + 2MASS (all Vegamags, Gaia passbands from Evans et al. 2018)&#39;,
+ &#39;gaiaDR2weiler_tycho2_2mass&#39;: &#39;Gaia DR2 + Tycho2 + 2MASS (all Vegamags, Gaia passbands from Weiler 2018)&#39;,
+ &#39;gaiaEDR3&#39;: &#39;Gaia EDR3 (all Vegamags, Gaia passbands from ESA/Gaia website)&#39;,
+ &#39;gaia&#39;: &#34;Gaia&#39;s DR1 G, G_BP and G_RP (Vegamags)&#34;,
+ &#39;gaiaDR2&#39;: &#34;Gaia&#39;s DR2 G, G_BP and G_RP (Vegamags, Gaia passbands from Evans et al. 2018)&#34;,
+ &#39;gaiaDR2maiz&#39;: &#34;Gaia&#39;s DR2 G, G_BP and G_RP (Vegamags, Gaia passbands from Maiz-Apellaniz and Weiler 2018)&#34;,
+ &#39;gaiaDR2weiler&#39;: &#34;Gaia&#39;s DR2 G, G_BP and G_RP (Vegamags, Gaia passbands from Weiler 2018)&#34;,
+ &#39;UVbright&#39;: &#39;HST+GALEX+Swift/UVOT UV filters&#39;,
+ &#39;acs_hrc&#39;: &#39;HST/ACS HRC&#39;,
+ &#39;acs_wfc_pos04jul06&#39;: &#39;HST/ACS WFC (c.f. 2007 revision, pos-04jul06)&#39;,
+ &#39;acs_wfc_202101&#39;: &#39;HST/ACS WFC - updated filters and zeropoints, 2021&#39;,
+ &#39;nicmosab&#39;: &#39;HST/NICMOS AB&#39;,
+ &#39;nicmosvega&#39;: &#39;HST/NICMOS Vega&#39;,
+ &#39;stis&#39;: &#39;HST/STIS imaging mode, Vegamag&#39;,
+ &#39;wfc3_wideverywide&#39;: &#39;HST/WFC3 all W+LP+X filters (UVIS1+IR, final throughputs)&#39;,
+ &#39;wfc3_202101_verywide&#39;: &#39;HST/WFC3 long-pass and extremely wide filters (UVIS) - updated filters and zeropoints, 2021&#39;,
+ &#39;wfc3_202101_medium&#39;: &#39;HST/WFC3 medium filters (UVIS+IR) - updated filters and zeropoints, 2021&#39;,
+ &#39;wfc3_202101_wide&#39;: &#39;HST/WFC3 wide filters (UVIS+IR) - updated filters and zeropoints, 2021&#39;,
+ &#39;wfpc2&#39;: &#39;HST/WFPC2 (Vegamag, cf. Holtzman et al. 1995)&#39;,
+ &#39;hipparcos&#39;: &#39;Hipparcos+Tycho+Gaia DR1 (Vegamags)&#39;,
+ &#39;int_wfc&#39;: &#39;INT/WFC (Vegamag)&#39;,
+ &#39;iphas&#39;: &#39;IPHAS&#39;,
+ &#39;jwst_miri_wide&#39;: &#39;JWST MIRI wide filters, Vegamags&#39;,
+ &#39;jwst_nircam_wide&#39;: &#39;JWST NIRCam wide+verywide filters, Vegamags&#39;,
+ &#39;jwst_nircam_widemedium_nov22&#39;: &#39;JWST NIRCam wide+verywide+medium filters (Nov 2022), Vegamags&#39;,
+ &#39;jwst_nircam_widemedium&#39;: &#39;JWST NIRCam wide+verywide+medium filters, Vegamags&#39;,
+ &#39;jwst_niriss_nov22&#39;: &#39;JWST NIRISS filters (Nov 2022), Vegamags&#39;,
+ &#39;jwst_nirspec&#39;: &#39;JWST Nirspec filters, Vegamags&#39;,
+ &#39;jwst_fnl&#39;: &#39;JWST custom, Vegamags&#39;,
+ &#39;kepler&#39;: &#39;Kepler + SDSS griz + DDO51 (in ABmags)&#39;,
+ &#39;kepler_2mass&#39;: &#39;Kepler + SDSS griz + DDO51 (in ABmags) + 2MASS (~Vegamag)&#39;,
+ &#39;vst_vista&#39;: &#39;KiDS/VIKING (VST/OMEGAM + VISTA/VIRCAM, all ABmags)&#39;,
+ &#39;lbt_lbc&#39;: &#39;LBT/LBC (Vegamag)&#39;,
+ &#39;lsst_wfirst_proposed2017&#39;: &#39;LSST (ABmags) + WFIRST proposed filters (Vegamags)&#39;,
+ &#39;lsst&#39;: &#39;LSST ugrizY, March 2012 total filter throughputs (all ABmags)&#39;,
+ &#39;lsstDP0&#39;: &#39;LSST ugrizy, Oct 2017 total filter throughputs for DP0 (all ABmags)&#39;,
+ &#39;lsstR1.9&#39;: &#39;LSST ugrizy, Sept 2023, total filter throughputs R1.9 (all ABmags)&#39;,
+ &#39;noao_ctio_mosaic2&#39;: &#39;NOAO/CTIO/MOSAIC2 (Vegamag)&#39;,
+ &#39;ogle&#39;: &#39;OGLE-II&#39;,
+ &#39;panstarrs1&#39;: &#39;Pan-STARRS1&#39;,
+ &#39;gulli&#39;: &#39;Pan-STARRS1 + narrow Omegacam filters (ABmags)&#39;,
+ &#39;Roman2021&#39;: &#39;Roman (ex-WFIRST) 2021 filters, Vegamags&#39;,
+ &#39;splus&#39;: &#39;S-PLUS (Vegamags), revised on Nov. 2017&#39;,
+ &#39;sloan&#39;: &#39;SDSS ugriz&#39;,
+ &#39;sloan_2mass&#39;: &#39;SDSS ugriz + 2MASS JHKs&#39;,
+ &#39;sloan_ukidss&#39;: &#39;SDSS ugriz + UKIDSS ZYJHK&#39;,
+ &#39;swift_uvot&#39;: &#39;SWIFT/UVOT UVW2, UVM2, UVW1,u (Vegamag)&#39;,
+ &#39;skymapper&#39;: &#39;SkyMapper (ABmags)&#39;,
+ &#39;spitzer&#39;: &#39;Spitzer IRAC+MIPS&#39;,
+ &#39;stroemgren&#39;: &#39;Stroemgren-Crawford&#39;,
+ &#39;hsc&#39;: &#39;Subaru/Hyper Suprime-Cam (ABmags)&#39;,
+ &#39;suprimecam&#39;: &#39;Subaru/Suprime-Cam (ABmags)&#39;,
+ &#39;SuperBIT&#39;: &#39;SuperBIT, all ABmags&#39;,
+ &#39;TESS_2mass&#39;: &#39;TESS + 2MASS (Vegamags)&#39;,
+ &#39;TESS_2mass_kepler&#39;: &#39;TESS + 2MASS (Vegamags) + Kepler + SDSS griz + DDO51 (in ABmags)&#39;,
+ &#39;ukidss&#39;: &#39;UKIDSS ZYJHK (Vegamag)&#39;,
+ &#39;uvit&#39;: &#39;UVIT (all ABmags)&#39;,
+ &#39;visir&#39;: &#39;VISIR&#39;,
+ &#39;vista&#39;: &#39;VISTA ZYJHKs (Vegamag)&#39;,
+ &#39;vphas&#39;: &#39;VPHAS+ (ABmags)&#39;,
+ &#39;vst_omegacam&#39;: &#39;VST/OMEGACAM (ABmag)&#39;,
+ &#39;vilnius&#39;: &#39;Vilnius&#39;,
+ &#39;wfc3_uvisCaHK&#39;: &#39;WFC3/UVIS around CaHK&#39;,
+ &#39;washington_ddo51&#39;: &#39;Washington CMT1T2 + DDO51&#39;,
+ &#39;ztf&#39;: &#39;ZTF (ABmags)&#39;,
+ &#39;deltaa&#39;: &#39;deltaa (Paunzen) + UBV (Maiz-Apellaniz), in Vegamags&#39;,
+ &#39;photsys_version&#39;: &#34;[&#39;YBC&#39;, &#39;YBC&#39;]&#34;}
+</pre></div></div>
+</div>
+<p>And we can add one or more to the existing <code class="docutils literal notranslate"><span class="pre">Isochrone</span></code> by passing either the shorthand or full names:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ip.photometry.add_photometry([&quot;galex_sloan&quot;, &quot;UBVRIJHKLMN (cf. Bessell 1990 + Bessell &amp; Brett 1988)&quot;])
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Querying padova for photometric system &#39;galex_sloan&#39;...
+Querying http://stev.oapd.inaf.it/cgi-bin/cmd...
+Retrieving data...
+Downloading data...http://stev.oapd.inaf.it/tmp/output498372857299.dat
+Added system &#39;GALEX_FUV+NUV_(Vegamag)_+_SDSS_ugriz_(ABmags)&#39; with 8 columns: [&#39;mbolmag&#39;, &#39;FUVmag&#39;, &#39;NUVmag&#39;, &#39;umag&#39;, &#39;gmag&#39;, &#39;rmag&#39;, &#39;imag&#39;, &#39;zmag&#39;]
+Querying padova for photometric system &#39;bessell&#39;...
+Querying http://stev.oapd.inaf.it/cgi-bin/cmd...
+Retrieving data...
+Downloading data...http://stev.oapd.inaf.it/tmp/output176902455817.dat
+Added system &#39;UBVRIJHKLMN_(cf._Bessell_1990_+_Bessell_&amp;_Brett_1988)&#39; with 13 columns: [&#39;mbolmag&#39;, &#39;UXmag&#39;, &#39;BXmag&#39;, &#39;Bmag&#39;, &#39;Vmag&#39;, &#39;Rmag&#39;, &#39;Imag&#39;, &#39;Jmag&#39;, &#39;Hmag&#39;, &#39;Kmag&#39;, &#39;Lmag&#39;, &#34;L&#39;mag&#34;, &#39;Mmag&#39;]
+</pre></div></div>
+</div>
+<p>This <code class="docutils literal notranslate"><span class="pre">Isochrone</span></code> now has data from 3 photometric systems…</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ip.photometry
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;Photometry: 3 system(s): Euclid_VIS+NISP_(ABmags) (7 bands), GALEX_FUV+NUV_(Vegamag)_+_SDSS_ugriz_(ABmags) (8 bands), UBVRIJHKLMN_(cf._Bessell_1990_+_Bessell_&amp;_Brett_1988) (13 bands)&gt;
+</pre></div></div>
+</div>
+<p>…each with their own table:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ip.photometry.data
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;Euclid_VIS+NISP_(ABmags)&#39;: &lt;QTable length=533&gt;
+ mbolmag  VISmag   Ymag  Bluemag   Jmag   Redmag   Hmag
+   mag     mag     mag     mag     mag     mag     mag
+ float64 float64 float64 float64 float64 float64 float64
+ ------- ------- ------- ------- ------- ------- -------
+   13.21  14.824  12.333  12.258  12.048  11.982  11.984
+  12.848  14.462  11.971  11.897  11.687  11.622  11.623
+  12.635  14.249  11.758  11.683  11.474  11.409   11.41
+    12.5  14.113  11.622  11.548  11.339  11.274  11.275
+   12.36  13.973  11.482  11.408    11.2  11.135  11.135
+  12.291  13.904  11.413  11.339  11.131  11.066  11.066
+  11.835  13.267  10.959  10.893  10.689  10.628  10.631
+  11.805   13.22  10.929  10.863   10.66    10.6  10.602
+  11.737  13.117  10.862  10.797  10.595  10.536  10.539
+     ...     ...     ...     ...     ...     ...     ...
+  -4.389  -2.434  -4.995  -5.073  -5.574  -5.718  -5.859
+    -4.5  -2.688  -5.087  -5.157  -5.638  -5.785  -5.928
+  -4.683  -2.859  -5.077  -5.144  -5.647  -5.821  -5.991
+  -4.845  -2.841   -4.98  -5.054  -5.608  -5.817  -6.021
+  -4.944  -2.694  -4.829   -4.91  -5.524  -5.766  -6.001
+  -4.984  -2.565  -4.694   -4.78  -5.433  -5.696  -5.951
+   -4.99  -2.617  -4.667  -4.752  -5.405  -5.667  -5.921
+   -4.98  -2.739   -4.68  -4.763  -5.397  -5.652  -5.897
+  29.767  31.402   32.07   32.11  32.494  32.689  32.976,
+ &#39;GALEX_FUV+NUV_(Vegamag)_+_SDSS_ugriz_(ABmags)&#39;: &lt;QTable length=533&gt;
+ mbolmag  FUVmag  NUVmag   umag    gmag    rmag    imag    zmag
+   mag     mag     mag     mag     mag     mag     mag     mag
+ float64 float64 float64 float64 float64 float64 float64 float64
+ ------- ------- ------- ------- ------- ------- ------- -------
+   13.21  52.842  32.471  23.155  18.879  17.209  14.793  13.265
+  12.848  52.545  32.084  22.758  18.506  16.842   14.43  12.904
+  12.635  52.354  31.861  22.532  18.288  16.627  14.216   12.69
+    12.5  52.244  31.716  22.383  18.149   16.49   14.08  12.556
+   12.36  52.138  31.562  22.224  18.002  16.347  13.939  12.416
+  12.291  52.085  31.487  22.147  17.931  16.277   13.87  12.347
+  11.835  51.208  29.816  20.914  17.009  15.413   13.17  11.801
+  11.805   51.09  29.676  20.819  16.938  15.348  13.119  11.763
+  11.737  50.819  29.362  20.608  16.779  15.203  13.004  11.677
+     ...     ...     ...     ...     ...     ...     ...     ...
+  -4.389  28.531   9.472   3.648   1.528  -0.073   -2.67  -3.915
+    -4.5  26.751   9.458   3.739   1.181  -0.439  -2.945   -4.12
+  -4.683  24.398  10.165   4.743   1.025   -0.84  -3.151  -4.256
+  -4.845  23.256  11.098   5.963   1.114   -1.03  -3.168  -4.231
+  -4.944  22.938  12.047   7.146   1.374  -1.069  -3.042  -4.087
+  -4.984   22.83  12.699   7.951   1.555  -1.097  -2.922  -3.948
+   -4.99  22.511  12.688   7.997     1.4  -1.309  -2.968  -3.941
+   -4.98  22.096  12.426   7.748   1.111  -1.589  -3.079  -3.985
+  29.767  29.128   29.32  30.922  30.862  31.237  31.532  31.791,
+ &#39;UBVRIJHKLMN_(cf._Bessell_1990_+_Bessell_&amp;_Brett_1988)&#39;: &lt;QTable length=533&gt;
+ mbolmag  UXmag   BXmag    Bmag    Vmag  ...   Kmag    Lmag   L&#39;mag    Mmag
+   mag     mag     mag     mag     mag   ...   mag     mag     mag     mag
+ float64 float64 float64 float64 float64 ... float64 float64 float64 float64
+ ------- ------- ------- ------- ------- ... ------- ------- ------- -------
+   13.21   22.15  19.696  19.747  17.966 ...  10.204   9.819    9.59   9.777
+  12.848  21.755   19.32  19.371  17.596 ...   9.842   9.458   9.229   9.413
+  12.635  21.529  19.102  19.153  17.379 ...   9.628   9.244   9.015   9.198
+    12.5  21.381  18.961  19.012  17.241 ...   9.493   9.109    8.88   9.063
+   12.36  21.222  18.813  18.864  17.096 ...   9.353   8.969    8.74   8.921
+  12.291  21.145  18.741  18.792  17.025 ...   9.284     8.9   8.672   8.852
+  11.835  19.932  17.778  17.825  16.114 ...   8.858   8.493   8.279   8.426
+  11.805  19.839  17.704   17.75  16.045 ...    8.83   8.467   8.255   8.399
+  11.737  19.632  17.537  17.583  15.892 ...    8.77   8.411   8.201   8.341
+     ...     ...     ...     ...     ... ...     ...     ...     ...     ...
+  -4.389    2.76   2.005   2.013   0.672 ...  -7.569  -7.829  -7.856  -7.672
+    -4.5   2.841   1.744    1.76   0.292 ...  -7.649   -7.95  -7.987  -7.834
+  -4.683    3.82   1.782   1.815  -0.044 ...   -7.79  -8.282   -8.36  -8.304
+  -4.845   5.018   2.023    2.07  -0.151 ...  -7.916  -8.605   -8.72  -8.746
+  -4.944   6.181   2.389   2.445  -0.095 ...  -7.988  -8.837  -8.977  -9.057
+  -4.984   6.972   2.634   2.696  -0.061 ...  -7.996  -8.933  -9.085  -9.188
+   -4.99   7.015   2.492   2.556  -0.268 ...  -7.981  -8.946  -9.102  -9.209
+   -4.98    6.77   2.197   2.262  -0.566 ...  -7.954  -8.926  -9.083  -9.186
+  29.767  30.136  30.937  30.931  31.089 ...  31.562  31.605  31.609  31.622}
+</pre></div></div>
+</div>
+</section>
+</section>
+<section id="4.-Plotting">
+<h2>4. Plotting<a class="headerlink" href="#4.-Plotting" title="Link to this heading">#</a></h2>
+<p>There are simple plotting routines in <code class="docutils literal notranslate"><span class="pre">isoc.plot</span></code> to make an H-R diagram or a color-magnitude diagram.</p>
+<section id="4.1:-Comparing-Padova/PARSEC-and-MIST/MESA-isochrones-on-an-H-R-diagram">
+<h3>4.1: Comparing Padova/PARSEC and MIST/MESA isochrones on an H-R diagram<a class="headerlink" href="#4.1:-Comparing-Padova/PARSEC-and-MIST/MESA-isochrones-on-an-H-R-diagram" title="Link to this heading">#</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from isoc.plot import plot_isochrone
+
+fig, ax = plot_isochrone(im, x=&quot;log_Teff&quot;, y=&quot;log_L&quot;,
+                         color=&#39;#EE4B2B&#39;, marker=&#39;x&#39;, ls=&#39;none&#39;, markersize=5, label=&quot;MIST&quot;)
+plot_isochrone(ip, x=&quot;log_Teff&quot;, y=&quot;log_L&quot;, ax=ax,
+               color=&#39;#0BDA51&#39;, marker=&#39;+&#39;, ls=&#39;none&#39;, label=&quot;Padova&quot;)
+
+ax.set_xlim(4.0, 3.3)
+ax.set_ylim(-4.5, 4.5)
+ax.legend(loc=&#39;lower left&#39;)
+ax.set_title(f&quot;H-R diagram: 1 Gyr, solar metallicity&quot;);
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/demo_55_0.png" src="_images/demo_55_0.png" />
+</div>
+</div>
+</section>
+<section id="4.2:-Plotting-over-a-grid-of-ages">
+<h3>4.2: Plotting over a grid of ages<a class="headerlink" href="#4.2:-Plotting-over-a-grid-of-ages" title="Link to this heading">#</a></h3>
+<p>(We could also plot isochrones across a metallicity grid for Padova/PARSEC.)</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ip_grid = Isochrone.from_padova(
+    age=(7.0, 10.0, 0.5),
+    metallicity=0.0207,
+    metallicity_type=&quot;Z&quot;,
+)
+
+ip_grid.isochrone
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Inferred log10 age scale based on age values (7.0, 10.0, 0.5).
+&#39;photometry&#39; is None. Using default ezpadova photometric system.
+
+
+Querying http://stev.oapd.inaf.it/cgi-bin/cmd...
+Retrieving data...
+Downloading data...http://stev.oapd.inaf.it/tmp/output754520679199.dat
+User-supplied query parameters (as seen by ezpadova):
+        {&#39;age_yr&#39;: None, &#39;logage&#39;: (7.0, 10.0, 0.5), &#39;Z&#39;: (0.0207, 0.0207, 0.0), &#39;MH&#39;: None, &#39;photsys_file&#39;: None}
+All query parameters (including defaults for those not specified):
+        {&#39;age_yr&#39;: None, &#39;logage&#39;: (7.0, 10.0, 0.5), &#39;Z&#39;: (0.0207, 0.0207, 0.0), &#39;MH&#39;: None, &#39;photsys_file&#39;: None, &#39;cmd_version&#39;: &#39;3.8&#39;, &#39;track_omegai&#39;: &#39;0.00&#39;, &#39;track_parsec&#39;: &#39;parsec_CAF09_v1.2S&#39;, &#39;track_colibri&#39;: &#39;parsec_CAF09_v1.2S_S_LMC_08_web&#39;, &#39;track_postagb&#39;: &#39;no&#39;, &#39;n_inTPC&#39;: &#39;10&#39;, &#39;eta_reimers&#39;: &#39;0.2&#39;, &#39;kind_interp&#39;: &#39;1&#39;, &#39;kind_postagb&#39;: &#39;-1&#39;, &#39;photsys_version&#39;: &#39;YBCnewVega&#39;, &#39;dust_sourceM&#39;: &#39;dpmod60alox40&#39;, &#39;dust_sourceC&#39;: &#39;AMCSIC15&#39;, &#39;kind_mag&#39;: &#39;2&#39;, &#39;kind_dust&#39;: &#39;0&#39;, &#39;extinction_av&#39;: &#39;0.0&#39;, &#39;extinction_coeff&#39;: &#39;constant&#39;, &#39;extinction_curve&#39;: &#39;cardelli&#39;, &#39;kind_LPV&#39;: &#39;3&#39;, &#39;imf_file&#39;: &#39;tab_imf/imf_kroupa_orig.dat&#39;, &#39;isoc_isagelog&#39;: &#39;0&#39;, &#39;isoc_agelow&#39;: &#39;1.0e9&#39;, &#39;isoc_ageupp&#39;: &#39;1.0e10&#39;, &#39;isoc_dage&#39;: &#39;0.0&#39;, &#39;isoc_lagelow&#39;: &#39;6.6&#39;, &#39;isoc_lageupp&#39;: &#39;10.13&#39;, &#39;isoc_dlage&#39;: &#39;0.0&#39;, &#39;isoc_ismetlog&#39;: &#39;0&#39;, &#39;isoc_zlow&#39;: &#39;0.0152&#39;, &#39;isoc_zupp&#39;: &#39;0.03&#39;, &#39;isoc_dz&#39;: &#39;0.0&#39;, &#39;isoc_metlow&#39;: &#39;-2&#39;, &#39;isoc_metupp&#39;: &#39;0.3&#39;, &#39;isoc_dmet&#39;: &#39;0.0&#39;, &#39;output_kind&#39;: &#39;0&#39;, &#39;output_evstage&#39;: &#39;1&#39;, &#39;lf_maginf&#39;: &#39;-15&#39;, &#39;lf_magsup&#39;: &#39;20&#39;, &#39;lf_deltamag&#39;: &#39;0.5&#39;, &#39;sim_mtot&#39;: &#39;1.0e4&#39;, &#39;submit_form&#39;: &#39;Submit&#39;}
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;IsochroneIndex: 7 isochrone(s): [&#39;log_age=7&#39;, &#39;log_age=7.5&#39;, &#39;log_age=8&#39;, &#39;log_age=8.5&#39;, &#39;log_age=9&#39;, &#39;log_age=9.5&#39;, &#39;log_age=10&#39;]&gt;
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fig, ax = plot_isochrone(
+    ip_grid.isochrone,
+    iso_labels=ip_grid.isochrone.labels,
+    marker=&#39;.&#39;,
+    linestyle=&#39;none&#39;,
+    x=&quot;log_Teff&quot;,
+    y=&quot;log_L&quot;,
+    cmap=&quot;plasma&quot;,
+    )
+
+ax.set_xlim(4.5, 3.3)
+ax.set_ylim(-4.5, 5.5)
+ax.legend(loc=&#39;lower left&#39;)
+ax.set_title(&quot;Padova — age grid&quot;);
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/demo_59_0.png" src="_images/demo_59_0.png" />
+</div>
+</div>
+</section>
+<section id="4.3:-Color-magnitude-diagram">
+<h3>4.3: Color-magnitude diagram<a class="headerlink" href="#4.3:-Color-magnitude-diagram" title="Link to this heading">#</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from isoc.plot import plot_color_magnitude
+fig, ax = plot_color_magnitude(ip, band1=&quot;Bmag&quot;, band2=&quot;Vmag&quot;, mag=&quot;Bmag&quot;, marker=&#39;.&#39;, c=&#39;k&#39;, ls=&#39;none&#39;)
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Bmag-Vmag column added to photometry table.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/demo_61_1.png" src="_images/demo_61_1.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="5.-Parameter-help">
+<h2>5. Parameter help<a class="headerlink" href="#5.-Parameter-help" title="Link to this heading">#</a></h2>
+<p>Checking the arguments for <code class="docutils literal notranslate"><span class="pre">from_mist</span></code> shows that you can provide an <code class="docutils literal notranslate"><span class="pre">age</span></code> as a float, a list or a tuple for a range (with min, max, step), and you can supply any of these in linear or log space. A few other arguments have generalized names whose corresponding values on the <a class="reference external" href="https://mist.science/interp_isos.html">MIST webform</a> are given in the docstring, e.g., <code class="docutils literal notranslate"><span class="pre">metallicity</span></code> for “[Fe/H]”, <code class="docutils literal notranslate"><span class="pre">abundance</span></code> for “[alpha/Fe]”, and <code class="docutils literal notranslate"><span class="pre">extinction</span></code> for “Extinction Av”.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>Isochrone.from_mist?
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">Signature:</span>
+Isochrone.from_mist(
+    age: tuple[float, float, float] | list | float | <span class="ansi-bold" style="color: rgb(0,135,0)">None</span> = <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>,
+    metallicity: float | <span class="ansi-bold" style="color: rgb(0,135,0)">None</span> = <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>,
+    abundance: float | <span class="ansi-bold" style="color: rgb(0,135,0)">None</span> = <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>,
+    v_div_vcrit: float | <span class="ansi-bold" style="color: rgb(0,135,0)">None</span> = <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>,
+    photometry: str | <span class="ansi-bold" style="color: rgb(0,135,0)">None</span> = <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>,
+    extinction: float | <span class="ansi-bold" style="color: rgb(0,135,0)">None</span> = <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>,
+    version: Literal[<span class="ansi-yellow-fg">&#39;MIST1&#39;</span>, <span class="ansi-yellow-fg">&#39;MIST2&#39;</span>, <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>] = <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>,
+    from_file: str | <span class="ansi-bold" style="color: rgb(0,135,0)">None</span> = <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>,
+    **kwargs,
+) -&gt; <span class="ansi-yellow-fg">&#39;Isochrone&#39;</span>
+<span class="ansi-red-fg">Docstring:</span>
+Query the MIST/MESA service and return an :class:`Isochrone`.
+
+Any parameters passed as ``None`` will use the MIST defaults
+(see `Isochrone.default_values`).
+
+Parameters
+----------
+age : float, tuple of (low, high, step), list or None
+    Age in years or log10(years). A single float queries one isochrone; a tuple of
+    length 3 sets a min, max and step size to query over the corresponding age grid,
+    and a list queries over an age grid.
+metallicity : float or None
+     [Fe/H] metallicity value.
+abundance : float or None
+    [alpha/Fe] abundance ratio.
+v_div_vcrit : float or None
+    Initial rotation velocity v/v_crit.
+photometry : str or None
+    The name of a photometric system to retrieve synthetic photometry for.
+    If None, MIST output is set to &#34;theory&#34;.
+extinction : float or None
+    Extinction A_V to apply to photometry.  Has no effect if *photometry* is
+    ``None``.
+version : str or None
+    MIST version to query.
+from_file : str or None
+    If provided, load isochrone data from a file instead of querying the MIST service.
+**kwargs
+    Additional keyword arguments forwarded to the MIST query.
+
+Returns
+-------
+Isochrone
+    An Isochrone object containing the queried data.
+<span class="ansi-red-fg">File:</span>      ~/Desktop/isoc/isoc/isochrone.py
+<span class="ansi-red-fg">Type:</span>      method
+</pre></div></div>
+</div>
+<p>Checking the arguments for <code class="docutils literal notranslate"><span class="pre">from_padova</span></code>, <code class="docutils literal notranslate"><span class="pre">age</span></code> and <code class="docutils literal notranslate"><span class="pre">metallicity</span></code> generalize and handle multiple input types just as they do in <code class="docutils literal notranslate"><span class="pre">from_mist</span></code> - though for <code class="docutils literal notranslate"><span class="pre">from_padova</span></code> you also have to specify <code class="docutils literal notranslate"><span class="pre">metallicity_type</span></code> as <code class="docutils literal notranslate"><span class="pre">Z</span></code> or <code class="docutils literal notranslate"><span class="pre">MH</span></code>. The <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> take any <a class="reference external" href="https://github.com/mfouesneau/ezpadova/blob/master/src/ezpadova/parsec.md#default-values">arguments named</a> in <code class="docutils literal notranslate"><span class="pre">ezpadova</span></code> (which <code class="docutils literal notranslate"><span class="pre">from_padova</span></code> uses as a backend to perform the query).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>Isochrone.from_padova?
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">Signature:</span>
+Isochrone.from_padova(
+    age: tuple[float, float, float] | float | <span class="ansi-bold" style="color: rgb(0,135,0)">None</span> = <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>,
+    metallicity: tuple[float, float, float] | float | <span class="ansi-bold" style="color: rgb(0,135,0)">None</span> = <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>,
+    metallicity_type: Literal[<span class="ansi-yellow-fg">&#39;Z&#39;</span>, <span class="ansi-yellow-fg">&#39;MH&#39;</span>, <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>] = <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>,
+    photometry: str | <span class="ansi-bold" style="color: rgb(0,135,0)">None</span> = <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>,
+    from_file: str | <span class="ansi-bold" style="color: rgb(0,135,0)">None</span> = <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>,
+    **kwargs,
+) -&gt; <span class="ansi-yellow-fg">&#39;Isochrone&#39;</span>
+<span class="ansi-red-fg">Docstring:</span>
+Query the Padova/PARSEC service and return an :class:`Isochrone`.
+
+Any parameters passed as None will use the Padova/PARSEC defaults
+(see `Isochrone.default_values`).
+
+Parameters
+----------
+age : tuple of (low, high, step) or float or None
+    Age in years or log10(years). A single float queries one isochrone; a tuple of
+    length 3 sets a min, max and step size to query over the corresponding age grid,
+    and a list queries over an age grid.
+metallicity : tuple of (low, high, step) or float or None
+    Metallicity value. Interpreted as Z or [M/H] depending on metallicity_type.
+metallicity_type : str or None
+    Whether the metallicity parameter is interpreted as &#34;Z&#34; or &#34;MH&#34; ([M/H]).
+photometry : str or None
+    The name of a photometric system to retrieve synthetic photometry for.
+from_file : str or None
+    If provided, load isochrone data from a file instead of querying the Padova service.
+**kwargs
+    Additional keyword arguments forwarded to the Padova query.
+
+Returns
+-------
+Isochrone
+    An Isochrone object containing the queried data.
+<span class="ansi-red-fg">File:</span>      ~/Desktop/isoc/isoc/isochrone.py
+<span class="ansi-red-fg">Type:</span>      method
+</pre></div></div>
+</div>
+<p>The arguments to <code class="docutils literal notranslate"><span class="pre">query_ezpadova</span></code> follow the <code class="docutils literal notranslate"><span class="pre">ezpadova</span></code> names and expected types, if you prefer this over using <code class="docutils literal notranslate"><span class="pre">from_padova</span></code>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>Isochrone.query_ezpadova?
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">Signature:</span>
+Isochrone.query_ezpadova(
+    age_yr: tuple[float, float, float] | <span class="ansi-bold" style="color: rgb(0,135,0)">None</span> = <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>,
+    Z: tuple[float, float, float] | <span class="ansi-bold" style="color: rgb(0,135,0)">None</span> = <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>,
+    logage: tuple[float, float, float] | <span class="ansi-bold" style="color: rgb(0,135,0)">None</span> = <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>,
+    MH: tuple[float, float, float] | <span class="ansi-bold" style="color: rgb(0,135,0)">None</span> = <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>,
+    default_ranges: bool = <span class="ansi-bold" style="color: rgb(0,135,0)">False</span>,
+    **kwargs,
+) -&gt; <span class="ansi-yellow-fg">&#39;Isochrone&#39;</span>
+<span class="ansi-red-fg">Docstring:</span> Query the Padova/PARSEC service and return an :class:`Isochrone`.
+<span class="ansi-red-fg">File:</span>      ~/Desktop/isoc/isoc/isochrone.py
+<span class="ansi-red-fg">Type:</span>      method
+</pre></div></div>
+</div>
+<p>To understand all available parameters for Padova/PARSEC or MIST/MESA queries and see their defaults (note that these are the parameter names and types expected by the server, not those in <code class="docutils literal notranslate"><span class="pre">from_mist</span></code> or <code class="docutils literal notranslate"><span class="pre">from_padova</span></code>):</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(&quot;MIST/MESA:&quot;)
+print(&quot;\nParameter descriptions:&quot;)
+Isochrone.parameter_descriptions(database=&quot;mist&quot;)
+print(&quot;\nDefaults:&quot;)
+Isochrone.default_values(database=&quot;mist&quot;)
+
+print(&quot;Padova/PARSEC:&quot;)
+print(&quot;\nParameter descriptions:&quot;)
+Isochrone.parameter_descriptions(database=&quot;padova&quot;)
+print(&quot;\nDefaults:&quot;)
+Isochrone.default_values(database=&quot;padova&quot;)
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+MIST/MESA:
+
+Parameter descriptions:
+See https://mist.science/interp_isos.html and https://www.mist.science/resources.html
+
+Defaults:
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;v_div_vcrit&#39;: &#39;vvcrit0.4&#39;,
+ &#39;FeH_value&#39;: &#39;0&#39;,
+ &#39;alpha_value&#39;: &#39;p0&#39;,
+ &#39;age_value&#39;: &#39;&#39;,
+ &#39;age_range_low&#39;: &#39;5&#39;,
+ &#39;age_range_high&#39;: &#39;10.3&#39;,
+ &#39;age_range_delta&#39;: &#39;0.05&#39;,
+ &#39;Av_value&#39;: &#39;0&#39;,
+ &#39;output_option&#39;: &#39;theory&#39;,
+ &#39;output&#39;: &#39;UBVRIplus&#39;,
+ &#39;version&#39;: &#39;MIST2&#39;,
+ &#39;age_type&#39;: &#39;standard&#39;,
+ &#39;age_scale&#39;: &#39;log10&#39;,
+ &#39;_aliases&#39;: {&#39;FeH_value&#39;: &#39;metallicity&#39;,
+  &#39;afe&#39;: &#39;abundance&#39;,
+  &#39;output&#39;: &#39;photometry&#39;,
+  &#39;Av_value&#39;: &#39;extinction&#39;}}
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Padova/PARSEC:
+
+Parameter descriptions:
+See https://stev.oapd.inaf.it/cgi-bin/cmd, https://github.com/mfouesneau/ezpadova/blob/master/src/ezpadova/parsec.md and https://stev.oapd.inaf.it/cmd_3.9/help.html
+
+Defaults:
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;cmd_version&#39;: &#39;3.8&#39;,
+ &#39;track_omegai&#39;: &#39;0.00&#39;,
+ &#39;track_parsec&#39;: &#39;parsec_CAF09_v1.2S&#39;,
+ &#39;track_colibri&#39;: &#39;parsec_CAF09_v1.2S_S_LMC_08_web&#39;,
+ &#39;track_postagb&#39;: &#39;no&#39;,
+ &#39;n_inTPC&#39;: &#39;10&#39;,
+ &#39;eta_reimers&#39;: &#39;0.2&#39;,
+ &#39;kind_interp&#39;: &#39;1&#39;,
+ &#39;kind_postagb&#39;: &#39;-1&#39;,
+ &#39;photsys_file&#39;: &#39;YBC_tab_mag_odfnew/tab_mag_ubvrijhk.dat&#39;,
+ &#39;photsys_version&#39;: &#39;YBCnewVega&#39;,
+ &#39;dust_sourceM&#39;: &#39;dpmod60alox40&#39;,
+ &#39;dust_sourceC&#39;: &#39;AMCSIC15&#39;,
+ &#39;kind_mag&#39;: &#39;2&#39;,
+ &#39;kind_dust&#39;: &#39;0&#39;,
+ &#39;extinction_av&#39;: &#39;0.0&#39;,
+ &#39;extinction_coeff&#39;: &#39;constant&#39;,
+ &#39;extinction_curve&#39;: &#39;cardelli&#39;,
+ &#39;kind_LPV&#39;: &#39;3&#39;,
+ &#39;imf_file&#39;: &#39;tab_imf/imf_kroupa_orig.dat&#39;,
+ &#39;isoc_isagelog&#39;: &#39;0&#39;,
+ &#39;isoc_agelow&#39;: &#39;1.0e9&#39;,
+ &#39;isoc_ageupp&#39;: &#39;1.0e10&#39;,
+ &#39;isoc_dage&#39;: &#39;0.0&#39;,
+ &#39;isoc_lagelow&#39;: &#39;6.6&#39;,
+ &#39;isoc_lageupp&#39;: &#39;10.13&#39;,
+ &#39;isoc_dlage&#39;: &#39;0.0&#39;,
+ &#39;isoc_ismetlog&#39;: &#39;0&#39;,
+ &#39;isoc_zlow&#39;: &#39;0.0152&#39;,
+ &#39;isoc_zupp&#39;: &#39;0.03&#39;,
+ &#39;isoc_dz&#39;: &#39;0.0&#39;,
+ &#39;isoc_metlow&#39;: &#39;-2&#39;,
+ &#39;isoc_metupp&#39;: &#39;0.3&#39;,
+ &#39;isoc_dmet&#39;: &#39;0.0&#39;,
+ &#39;output_kind&#39;: &#39;0&#39;,
+ &#39;output_evstage&#39;: &#39;1&#39;,
+ &#39;lf_maginf&#39;: &#39;-15&#39;,
+ &#39;lf_magsup&#39;: &#39;20&#39;,
+ &#39;lf_deltamag&#39;: &#39;0.5&#39;,
+ &#39;sim_mtot&#39;: &#39;1.0e4&#39;,
+ &#39;submit_form&#39;: &#39;Submit&#39;,
+ &#39;_aliases&#39;: {&#39;age_yr&#39;: &#39;age&#39;,
+  &#39;logage&#39;: &#39;age&#39;,
+  &#39;Z&#39;: &#39;metallicity_type&#39;,
+  &#39;MH&#39;: &#39;metallicity_type&#39;}}
+</pre></div></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "CCA-Software-Group/isoc",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Documentation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="py_API.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">API Reference</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#1.-Querying">1. Querying</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#2.-Data">2. Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#3.-Photometry">3. Photometry</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#3.1-Computing-colors">3.1 Computing colors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#3.2-Adding-multiple-photometric-systems-to-data">3.2 Adding multiple photometric systems to data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#4.-Plotting">4. Plotting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#4.1:-Comparing-Padova/PARSEC-and-MIST/MESA-isochrones-on-an-H-R-diagram">4.1: Comparing Padova/PARSEC and MIST/MESA isochrones on an H-R diagram</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#4.2:-Plotting-over-a-grid-of-ages">4.2: Plotting over a grid of ages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#4.3:-Color-magnitude-diagram">4.3: Color-magnitude diagram</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#5.-Parameter-help">5. Parameter help</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, CCA Software Group.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
