@@ -1,3 +1,8 @@
+/* Allow content to fill more of the window (theme default caps at 60em) */
+.bd-article-container {
+    max-width: 90em;
+}
+
 /* Hide input/output prompt labels ([ ]: / [1]: ) */
 .nbinput .prompt, .nboutput .prompt {
     display: none;
