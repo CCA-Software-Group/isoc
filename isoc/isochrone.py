@@ -3,8 +3,6 @@ Query and process Padova/PARSEC or MIST/MESA isochrone databases to get isochron
 and associated photometry as astropy QTable objects with physical units.
 """
 
-import json
-from pathlib import Path
 from typing import Literal
 
 import ezpadova
@@ -61,8 +59,8 @@ class Photometry:
 
     def __init__(self, isochrone: "Isochrone"):
         self._isochrone = isochrone
-        self._tables: dict[str, QTable] = {}  
-        self._systems: dict[str, str] = {}    
+        self._tables: dict[str, QTable] = {}
+        self._systems: dict[str, str] = {}
 
     @property
     def data(self) -> "_PhotometryTables":
@@ -425,7 +423,7 @@ class _IsochroneIndex:
         # collect unique combinations in original row order
         seen: set = set()
         unique_combos: list = []
-        for row in zip(*arrays):
+        for row in zip(*arrays, strict=False):
             k = tuple(round(x, 8) for x in row)
             if k not in seen:
                 seen.add(k)
@@ -434,9 +432,9 @@ class _IsochroneIndex:
         groups = []
         for combo in unique_combos:
             mask = np.ones(len(data), dtype=bool)
-            for arr, val in zip(arrays, combo):
+            for arr, val in zip(arrays, combo, strict=False):
                 mask &= np.isclose(arr, val)
-            label = ",".join(f"{n}={v:.6g}" for n, v in zip(names, combo))
+            label = ",".join(f"{n}={v:.6g}" for n, v in zip(names, combo, strict=False))
             groups.append((mask, label))
         return groups
 
@@ -465,7 +463,7 @@ class _IsochroneIndex:
 
         elif isinstance(key, str):
             # try exact label match first
-            for mask, label in groups:
+            for _mask, label in groups:
                 if label == key:
                     break
             else:
@@ -499,7 +497,7 @@ class _IsochroneIndex:
                 raise KeyError(
                     f"Unknown field {field!r}. "
                     f"Use a column name from: {iso._data.colnames}."
-                )
+                ) from None
 
         mask = np.isclose(col_values, val)
         if not np.any(mask):
@@ -589,14 +587,14 @@ class Isochrone:
         ) -> "Isochrone":
         """Query the MIST/MESA service and return an :class:`Isochrone`.
 
-        Any parameters passed as ``None`` will use the MIST defaults 
+        Any parameters passed as ``None`` will use the MIST defaults
         (see `Isochrone.default_values`).
 
         Parameters
         ----------
         age : float, tuple of (low, high, step), list or None
-            Age in years or log10(years). A single float queries one isochrone; a tuple of 
-            length 3 sets a min, max and step size to query over the corresponding age grid, 
+            Age in years or log10(years). A single float queries one isochrone; a tuple of
+            length 3 sets a min, max and step size to query over the corresponding age grid,
             and a list queries over an age grid.
         metallicity : float or None
              [Fe/H] metallicity value.
@@ -608,7 +606,7 @@ class Isochrone:
             The name of a photometric system to retrieve synthetic photometry for.
             If None, MIST output is set to "theory".
         extinction : float or None
-            Extinction A_V to apply to photometry.  Has no effect if *photometry* is 
+            Extinction A_V to apply to photometry.  Has no effect if *photometry* is
             ``None``.
         version : str or None
             MIST version to query.
@@ -693,14 +691,14 @@ class Isochrone:
         ) -> "Isochrone":
         """Query the Padova/PARSEC service and return an :class:`Isochrone`.
 
-        Any parameters passed as None will use the Padova/PARSEC defaults 
+        Any parameters passed as None will use the Padova/PARSEC defaults
         (see `Isochrone.default_values`).
 
         Parameters
         ----------
         age : tuple of (low, high, step) or float or None
-            Age in years or log10(years). A single float queries one isochrone; a tuple of 
-            length 3 sets a min, max and step size to query over the corresponding age grid, 
+            Age in years or log10(years). A single float queries one isochrone; a tuple of
+            length 3 sets a min, max and step size to query over the corresponding age grid,
             and a list queries over an age grid.
         metallicity : tuple of (low, high, step) or float or None
             Metallicity value. Interpreted as Z or [M/H] depending on metallicity_type.
@@ -777,12 +775,12 @@ class Isochrone:
         )
 
         if photometry is None:
-            print("'photometry' is None. Using default ezpadova photometric system.") 
+            print("'photometry' is None. Using default ezpadova photometric system.")
         else:
             # resolve photometry system (short key or long description)
             photometry = cls._resolve_photometry_system(photometry, "padova")
             kw["photsys_file"] = photometry
-        
+
         print("\n")
         result = ezpadova.get_isochrones(**kw)
 
@@ -998,10 +996,10 @@ class Isochrone:
 
         Examples
         --------
-        >>> iso.isochrone[-1]                    
+        >>> iso.isochrone[-1]
         >>> iso.isochrone['log_age=9']          # MIST
         >>> iso.isochrone['logAge=9']           # Padova
-        >>> iso.isochrone['[Fe/H]_init=0.015']  # MIST: initial metallicity        
+        >>> iso.isochrone['[Fe/H]_init=0.015']  # MIST: initial metallicity
         >>> iso.isochrone['Zini=0.015']         # Padova: initial metallicity
         """
         return _IsochroneIndex(self)
@@ -1052,7 +1050,7 @@ class Isochrone:
     def initial_metallicity(self):
         """Initial metallicity column."""
         return self._resolve_alias("initial_metallicity")
-    
+
     @property
     def metallicity(self):
         """Metallicity column."""

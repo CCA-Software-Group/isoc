@@ -568,8 +568,8 @@ def get_isochrones(
     Parameters
     ----------
     age : float, tuple of (low, high, step), list or None
-            Age in years or log10(years). A single float queries one isochrone; a tuple of 
-            length 3 sets a min, max and step size to query over the corresponding age grid, 
+            Age in years or log10(years). A single float queries one isochrone; a tuple of
+            length 3 sets a min, max and step size to query over the corresponding age grid,
             and a list queries over an age grid.
     FeH : float
         [Fe/H] metallicity value.
@@ -581,7 +581,7 @@ def get_isochrones(
         The name of a photometric system to retrieve synthetic photometry for.
         If None, MIST output is set to "theory".
     extinction_Av : float
-        Extinction A_V to apply to photometry.  Has no effect if *photometry* is 
+        Extinction A_V to apply to photometry.  Has no effect if *photometry* is
         ``None``.
     version : ``"MIST1"`` or ``"MIST2"``, optional
         MIST version to query.

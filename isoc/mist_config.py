@@ -2,7 +2,7 @@
 
 Scrapes the MIST isochrone interpolation webform at
 https://mist.science/interp_isos.html to keep option lists and default
-values current. 
+values current.
 
 .. note::
 
@@ -19,7 +19,6 @@ import re
 import requests
 from bs4 import BeautifulSoup, NavigableString, Tag
 from bs4.element import ResultSet
-
 
 # default config
 _FALLBACK_DEFAULTS: dict[str, str] = {

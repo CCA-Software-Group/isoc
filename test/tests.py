@@ -529,7 +529,7 @@ class TestIsochroneIndex:
 
     def test_subset_photometry_row_count(self, mist_grid):
         sub = mist_grid.isochrone[0]
-        for full_name, tbl in sub.photometry._tables.items():
+        for _full_name, tbl in sub.photometry._tables.items():
             assert len(tbl) == len(sub)
 
     def test_string_key_exact_label(self, padova_grid):

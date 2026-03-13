@@ -1,6 +1,7 @@
 name: Coding standards
 on: 
-  push
+  push:
+  workflow_dispatch:
 
 jobs:
   check_code_standards:
