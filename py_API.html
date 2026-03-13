@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=00be04d8" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=517f35c4" />
     <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
   <!-- So that users can add custom icons -->
@@ -219,6 +219,10 @@
   
 
   
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
 
     </header>
@@ -230,7 +234,7 @@
       
       
       <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
         
 
   
@@ -309,15 +313,6 @@
       </div>
     
   </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-<nav class="bd-docs-nav bd-links"
-     aria-label="Section Navigation">
-  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"></div>
-</nav></div>
-    </div>
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
@@ -1451,6 +1446,125 @@ returned as raw bytes.</p>
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-isoc">isoc</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Isochrone"><code class="docutils literal notranslate"><span class="pre">Isochrone</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Isochrone.columns"><code class="docutils literal notranslate"><span class="pre">Isochrone.columns</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Isochrone.data"><code class="docutils literal notranslate"><span class="pre">Isochrone.data</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Isochrone.database"><code class="docutils literal notranslate"><span class="pre">Isochrone.database</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Isochrone.default_values"><code class="docutils literal notranslate"><span class="pre">Isochrone.default_values()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Isochrone.from_mist"><code class="docutils literal notranslate"><span class="pre">Isochrone.from_mist()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Isochrone.from_padova"><code class="docutils literal notranslate"><span class="pre">Isochrone.from_padova()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Isochrone.get_photometry_system_title"><code class="docutils literal notranslate"><span class="pre">Isochrone.get_photometry_system_title()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Isochrone.header"><code class="docutils literal notranslate"><span class="pre">Isochrone.header</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Isochrone.initial_mass"><code class="docutils literal notranslate"><span class="pre">Isochrone.initial_mass</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Isochrone.initial_metallicity"><code class="docutils literal notranslate"><span class="pre">Isochrone.initial_metallicity</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Isochrone.isochrone"><code class="docutils literal notranslate"><span class="pre">Isochrone.isochrone</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Isochrone.log_L"><code class="docutils literal notranslate"><span class="pre">Isochrone.log_L</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Isochrone.log_Teff"><code class="docutils literal notranslate"><span class="pre">Isochrone.log_Teff</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Isochrone.log_age"><code class="docutils literal notranslate"><span class="pre">Isochrone.log_age</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Isochrone.log_g"><code class="docutils literal notranslate"><span class="pre">Isochrone.log_g</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Isochrone.mass"><code class="docutils literal notranslate"><span class="pre">Isochrone.mass</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Isochrone.metallicity"><code class="docutils literal notranslate"><span class="pre">Isochrone.metallicity</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Isochrone.metallicity_type"><code class="docutils literal notranslate"><span class="pre">Isochrone.metallicity_type</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Isochrone.n_isochrones"><code class="docutils literal notranslate"><span class="pre">Isochrone.n_isochrones</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Isochrone.parameter_descriptions"><code class="docutils literal notranslate"><span class="pre">Isochrone.parameter_descriptions()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Isochrone.photometry"><code class="docutils literal notranslate"><span class="pre">Isochrone.photometry</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Isochrone.query_ezpadova"><code class="docutils literal notranslate"><span class="pre">Isochrone.query_ezpadova()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Isochrone.query_parameters"><code class="docutils literal notranslate"><span class="pre">Isochrone.query_parameters</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Photometry"><code class="docutils literal notranslate"><span class="pre">Photometry</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Photometry.add_photometry"><code class="docutils literal notranslate"><span class="pre">Photometry.add_photometry()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Photometry.available_systems"><code class="docutils literal notranslate"><span class="pre">Photometry.available_systems</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Photometry.columns"><code class="docutils literal notranslate"><span class="pre">Photometry.columns</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Photometry.data"><code class="docutils literal notranslate"><span class="pre">Photometry.data</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Photometry.get_color"><code class="docutils literal notranslate"><span class="pre">Photometry.get_color()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Photometry.header"><code class="docutils literal notranslate"><span class="pre">Photometry.header</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.Photometry.systems"><code class="docutils literal notranslate"><span class="pre">Photometry.systems</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.plot_color_magnitude"><code class="docutils literal notranslate"><span class="pre">plot_color_magnitude()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.plot_isochrone"><code class="docutils literal notranslate"><span class="pre">plot_isochrone()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-isoc.isochrone">isoc.isochrone</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Isochrone"><code class="docutils literal notranslate"><span class="pre">Isochrone</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Isochrone.columns"><code class="docutils literal notranslate"><span class="pre">Isochrone.columns</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Isochrone.data"><code class="docutils literal notranslate"><span class="pre">Isochrone.data</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Isochrone.database"><code class="docutils literal notranslate"><span class="pre">Isochrone.database</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Isochrone.default_values"><code class="docutils literal notranslate"><span class="pre">Isochrone.default_values()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Isochrone.from_mist"><code class="docutils literal notranslate"><span class="pre">Isochrone.from_mist()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Isochrone.from_padova"><code class="docutils literal notranslate"><span class="pre">Isochrone.from_padova()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Isochrone.get_photometry_system_title"><code class="docutils literal notranslate"><span class="pre">Isochrone.get_photometry_system_title()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Isochrone.header"><code class="docutils literal notranslate"><span class="pre">Isochrone.header</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Isochrone.initial_mass"><code class="docutils literal notranslate"><span class="pre">Isochrone.initial_mass</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Isochrone.initial_metallicity"><code class="docutils literal notranslate"><span class="pre">Isochrone.initial_metallicity</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Isochrone.isochrone"><code class="docutils literal notranslate"><span class="pre">Isochrone.isochrone</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Isochrone.log_L"><code class="docutils literal notranslate"><span class="pre">Isochrone.log_L</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Isochrone.log_Teff"><code class="docutils literal notranslate"><span class="pre">Isochrone.log_Teff</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Isochrone.log_age"><code class="docutils literal notranslate"><span class="pre">Isochrone.log_age</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Isochrone.log_g"><code class="docutils literal notranslate"><span class="pre">Isochrone.log_g</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Isochrone.mass"><code class="docutils literal notranslate"><span class="pre">Isochrone.mass</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Isochrone.metallicity"><code class="docutils literal notranslate"><span class="pre">Isochrone.metallicity</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Isochrone.metallicity_type"><code class="docutils literal notranslate"><span class="pre">Isochrone.metallicity_type</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Isochrone.n_isochrones"><code class="docutils literal notranslate"><span class="pre">Isochrone.n_isochrones</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Isochrone.parameter_descriptions"><code class="docutils literal notranslate"><span class="pre">Isochrone.parameter_descriptions()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Isochrone.photometry"><code class="docutils literal notranslate"><span class="pre">Isochrone.photometry</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Isochrone.query_ezpadova"><code class="docutils literal notranslate"><span class="pre">Isochrone.query_ezpadova()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Isochrone.query_parameters"><code class="docutils literal notranslate"><span class="pre">Isochrone.query_parameters</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Photometry"><code class="docutils literal notranslate"><span class="pre">Photometry</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Photometry.add_photometry"><code class="docutils literal notranslate"><span class="pre">Photometry.add_photometry()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Photometry.available_systems"><code class="docutils literal notranslate"><span class="pre">Photometry.available_systems</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Photometry.columns"><code class="docutils literal notranslate"><span class="pre">Photometry.columns</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Photometry.data"><code class="docutils literal notranslate"><span class="pre">Photometry.data</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Photometry.get_color"><code class="docutils literal notranslate"><span class="pre">Photometry.get_color()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Photometry.header"><code class="docutils literal notranslate"><span class="pre">Photometry.header</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.isochrone.Photometry.systems"><code class="docutils literal notranslate"><span class="pre">Photometry.systems</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-isoc.plot">isoc.plot</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.plot.plot_color_magnitude"><code class="docutils literal notranslate"><span class="pre">plot_color_magnitude()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.plot.plot_isochrone"><code class="docutils literal notranslate"><span class="pre">plot_isochrone()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-isoc.mist">isoc.mist</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.mist.get_isochrones"><code class="docutils literal notranslate"><span class="pre">get_isochrones()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.mist.parse_result"><code class="docutils literal notranslate"><span class="pre">parse_result()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.mist.query"><code class="docutils literal notranslate"><span class="pre">query()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-isoc.mist_config">isoc.mist_config</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.mist_config.reload_config"><code class="docutils literal notranslate"><span class="pre">reload_config()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.mist_config.update_config"><code class="docutils literal notranslate"><span class="pre">update_config()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-isoc.file_io">isoc.file_io</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.file_io.extract_zip"><code class="docutils literal notranslate"><span class="pre">extract_zip()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#isoc.file_io.load_isochrone"><code class="docutils literal notranslate"><span class="pre">load_isochrone()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-isoc.units">isoc.units</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
