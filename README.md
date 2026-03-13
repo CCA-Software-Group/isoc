@@ -16,6 +16,4 @@ API. If you have any questions or suggestions, please open an issue.
 
 Install `isoc` with *pip*:
 
-- .. code-block:: bash
-
     pip install isoc-astro
