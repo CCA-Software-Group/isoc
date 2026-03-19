@@ -6,7 +6,8 @@ isoc
 [![Docs](https://github.com/CCA-Software-Group/isoc/actions/workflows/docs.yml/badge.svg)](https://cca-software-group.github.io/isoc/)
 
 `isoc` is a Python package for querying and retrieving 
-isochrones from the MIST/MESA and Padova/PARSEC databases (or from local files
+isochrones from the [MIST/MESA](https://mist.science/interp_isos.html) and [Padova/PARSEC](https://stev.oapd.inaf.it/cgi-bin/cmd)
+databases (or from local files
 obtained from these databases). It has a simple user interface and relies on 
 [ezpadova](https://github.com/mfouesneau/ezpadova/tree/master) as a backend for 
 queries to the Padova PARSEC database, and a custom backend for queries to the MIST database.
